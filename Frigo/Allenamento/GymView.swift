@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum GymTab: String, CaseIterable {
-    case esercizi = "Esercizi", schede = "START", storico = "Storico"
+    case esercizi = "Le Mie Schede", schede = "START", storico = "Storico"
 }
 
 struct GymView: View {
@@ -83,11 +83,10 @@ struct GymView: View {
             VStack(spacing: 16) {
                 switch selectedTab {
                 case .schede: 
-                    // TODO: Implementare sezione di Start Allenamento
-                    Text("Area START Allenamento (Coming Soon)")
-                        .padding(.top, 40)
-                        .foregroundColor(.secondary)
-                case .esercizi: eserciziZone
+                    // Il nostro fantastico banner dinamico!
+                    startZone
+                case .esercizi: 
+                    eserciziZone
                 case .storico: 
                     // TODO: Implementare Storico
                     Text("Storico Allenamenti (Coming Soon)")
@@ -102,6 +101,20 @@ struct GymView: View {
     }
     
     // MARK: - Zone Content
+
+    @ViewBuilder
+    private var startZone: some View {
+        VStack(spacing: 24) {
+            // Il banner logico che abbiamo appena creato
+            HeroWorkoutBanner()
+            
+            // Qui in futuro metteremo gli altri moduli (Calorie e Streak)
+            // ...
+            
+            Spacer()
+        }
+        .padding(.top, 8)
+    }
     
     @ViewBuilder
     private var eserciziZone: some View {

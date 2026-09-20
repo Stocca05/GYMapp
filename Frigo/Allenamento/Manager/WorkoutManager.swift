@@ -16,15 +16,40 @@ class WorkoutManager {
     /// Le schede di allenamento create e salvate (per ora in memoria) dall'utente.
     var myPlans: [WorkoutPlan] = []
     
+    // MARK: - Gestione Rotazione e Banner
+    
+    /// ID dell'ultima scheda completata. Aggiornato automaticamente su persistenza (UserDefaults).
+    var lastCompletedPlanId: UUID? {
+        didSet {
+            if let lastCompletedPlanId {
+                UserDefaults.standard.set(lastCompletedPlanId.uuidString, forKey: "lastCompletedPlanId")
+            } else {
+                UserDefaults.standard.removeObject(forKey: "lastCompletedPlanId")
+            }
+        }
+    }
+    
+    /// Data dell'ultimo allenamento, usata per capire se l'utente si è già allenato oggi.
+    var lastWorkoutDate: Date? {
+        didSet {
+            UserDefaults.standard.set(lastWorkoutDate, forKey: "lastWorkoutDate")
+        }
+    }
+    
     /// Inizializzatore del Manager.
     /// In un'app vera qui andremo a caricare i dati da una memoria persistente
     /// (SwiftData, CoreData o UserDefaults). Per questa primissima fase, lo usiamo 
     /// per "iniettare" dei dati finti (Mock Data) di modo da poter vedere la UI funzionare subito.
     init() {
+        // Ripristino i valori per la logica del banner dal salvataggio locale (UserDefaults)
+        if let uuidString = UserDefaults.standard.string(forKey: "lastCompletedPlanId") {
+            self.lastCompletedPlanId = UUID(uuidString: uuidString)
+        }
+        self.lastWorkoutDate = UserDefaults.standard.object(forKey: "lastWorkoutDate") as? Date
+        
         setupMockData()
     }
     
-    /// Prepariamo dei dati spalla-a-spalla con i nostri nuovi modelli senza inquinare l'init principale.
     private func setupMockData() {
         // 1. Popoliamo l'exercise database con le informazioni enciclopediche.
         let panca = ExerciseModel(
@@ -91,13 +116,42 @@ class WorkoutManager {
         myPlans.append(planMock)
     }
     
+    // MARK: - Funzioni Logiche di Rotazione & Completamento
+    
+    /// Verifica se nella giornata odierna (mezzanotte-mezzanotte) è stato già registrato un allenamento.
+    var hasWorkedOutToday: Bool {
+        guard let lastWorkoutDate else { return false }
+        return Calendar.current.isDateInToday(lastWorkoutDate)
+    }
+    
+    /// Macchina a Stati del Banner. Calcola quale scheda suggerire:
+    /// - Nil, se non ci sono schede.
+    /// - La Prossima, seguendo l'approccio Rotazionale e analizzando l'ultimo ID salvato.
+    func suggestedWorkoutForToday() -> WorkoutPlan? {
+        // Nessuna scheda esistente (Stato A)
+        guard !myPlans.isEmpty else { return nil }
+        
+        // Se c'è un tracciamento pregresso, proviamo a trovare a che indice si trovava l'ultima scheda
+        guard let lastId = lastCompletedPlanId,
+              let lastIndex = myPlans.firstIndex(where: { $0.id == lastId }) else {
+            // Seleziona la prima scheda in assoluto se non ci sono progressi o la vecchia scheda è stata rimossa
+            return myPlans.first!
+        }
+        
+        // Approccio Rotazionale: seleziona quella seguente, con ritorno alla prima una volta finito il ciclo
+        let nextIndex = (lastIndex + 1) % myPlans.count
+        return myPlans[nextIndex]
+    }
+    
+    /// Chiude un allenamento: salva il traguardo odierno e fa ruotare di conseguenza la proposta.
+    func markWorkoutAsCompleted(_ plan: WorkoutPlan) {
+        lastCompletedPlanId = plan.id
+        lastWorkoutDate = Date()
+    }
+    
     // MARK: - Funzioni di Utilità (Helpers)
     
     /// Salva o aggiorna una scheda utente in memoria.
-    ///
-    /// Se la scheda esiste già (cerchiamo il suo `id` in `myPlans`), SwiftUI e la logica se ne accorgono,
-    /// e andiamo a rimpiazzarla. Se il match `.firstIndex(where:)` ritorna nil, si tratta di 
-    /// una scheda appena creata, e invochiamo fieri un semplice `.append`. Pulitissimo!
     func savePlan(_ plan: WorkoutPlan) {
         if let index = myPlans.firstIndex(where: { $0.id == plan.id }) {
             // Aggiorna l'esistente
@@ -109,22 +163,17 @@ class WorkoutManager {
     }
     
     /// Rimuove comodamente le schede dalla struttura dati, ideale per l'integrazione
-    /// col modifier `.onDelete(perform:)` della SwiftUI List, che restituisce appunto un IndexSet.
+    /// col modifier `.onDelete(perform:)` della SwiftUI List.
     func deletePlan(at offsets: IndexSet) {
         myPlans.remove(atOffsets: offsets)
     }
     
     /// Analizza logicamente una Scheda per estrarne i gruppi muscolari allenati, senza duplicati.
-    ///
-    /// Utilissima ad esempio per scrivere sulle Card esterne della Home "Petto, Gambe".
-    /// Utilizzando un Array preserviamo l'ordine in cui i muscoli vengono attaccati
-    /// (cosa che un Set, ad esempio, ci farebbe perdere).
     func extractTargetMuscleGroups(from plan: WorkoutPlan) -> [MuscleGroup] {
         var unqiueGroups: [MuscleGroup] = []
         
         for element in plan.exercises {
             let targetMuscle = element.baseExercise.primaryMuscle
-            // Selezioniamo solo i muscoli non ancora inseriti
             if !unqiueGroups.contains(targetMuscle) {
                 unqiueGroups.append(targetMuscle)
             }
