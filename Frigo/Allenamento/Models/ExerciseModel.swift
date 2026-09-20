@@ -56,16 +56,29 @@ struct ExerciseModel: Identifiable, Codable, Hashable {
     /// Qualsiasi equipaggiamento che serve per l'esercizio (es. "Manubri", "Bilanciere", "A corpo libero").
     /// Per ora è una stringa semplice, in futuro potremmo espanderla in un altro Enum se lo ritenessimo utile!
     let equipmentRequirement: String?
+
+    /// Nome del file immagine (es. da Assets) per l'esercizio.
+    /// Inserito per supportare la nuova veste grafica "Pazzesca". È opzionale (`String?`)
+    /// e di default è `nil`, così potremo agganciare bellissime foto fotografiche appena saranno disponibili!
+    let imageName: String?
     
     /// Costruttore di default.
     /// 
     /// Generiamo automaticamente l'id, così chi usa questa struct deve solo preoccuparsi
     /// di fornire le informazioni rilevanti dell'esercizio.
-    init(id: UUID = UUID(), name: String, description: String? = nil, primaryMuscle: MuscleGroup, equipmentRequirement: String? = nil) {
+    init(
+        id: UUID = UUID(),
+        name: String,
+        description: String? = nil,
+        primaryMuscle: MuscleGroup,
+        equipmentRequirement: String? = nil,
+        imageName: String? = nil
+    ) {
         self.id = id
         self.name = name
         self.description = description
         self.primaryMuscle = primaryMuscle
         self.equipmentRequirement = equipmentRequirement
+        self.imageName = imageName
     }
 }

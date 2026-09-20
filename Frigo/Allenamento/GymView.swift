@@ -6,14 +6,13 @@ enum GymTab: String, CaseIterable {
 
 struct GymView: View {
     @Environment(ThemeManager.self) private var themeManager
-    
     @State private var workoutManager = WorkoutManager()
+    
     @State private var selectedTab: GymTab = .schede
     @State private var showCalendar = false
     
-    // Per creare una NUOVA scheda
+    // Gestione editor schede
     @State private var showCreator = false
-    // Per MODIFICARE una scheda esistente
     @State private var planToEdit: WorkoutPlan? = nil
     
     var body: some View {
@@ -31,7 +30,6 @@ struct GymView: View {
                 .environment(workoutManager)
                 .environment(themeManager) 
         }
-        // NUOVO: Apriamo la form precompilata quando premiamo su una scheda
         .fullScreenCover(item: $planToEdit) { plan in
             WorkoutCreatorView(planToEdit: plan)
                 .environment(workoutManager)
@@ -44,13 +42,21 @@ struct GymView: View {
     
     private var headerView: some View {
         HStack {
-            Text("Gym").font(.system(.largeTitle, design: .serif)).italic().bold().foregroundStyle(themeManager.currentTheme.textColor)
+            Text("Gym")
+                .font(.system(.largeTitle, design: .serif))
+                .italic()
+                .bold()
+                .foregroundStyle(themeManager.currentTheme.textColor)
             Spacer()
             Button(action: { showCalendar = true }) {
-                Image(systemName: "calendar").font(.title2).foregroundStyle(themeManager.currentTheme.primaryColor)
+                Image(systemName: "calendar")
+                    .font(.title2)
+                    .foregroundStyle(themeManager.currentTheme.primaryColor)
             }
         }
-        .padding(.horizontal).padding(.top, 8).padding(.bottom, 16)
+        .padding(.horizontal)
+        .padding(.top, 8)
+        .padding(.bottom, 16)
     }
     
     private var pickerView: some View {
@@ -59,40 +65,48 @@ struct GymView: View {
                 let isActive = selectedTab == tab
                 Button(action: { withAnimation(.easeInOut(duration: 0.2)) { selectedTab = tab } }) {
                     Text(tab.rawValue)
-                        .font(.subheadline).fontWeight(.semibold)
-                        .padding(.vertical, 8).padding(.horizontal, 16)
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                        .padding(.vertical, 8)
+                        .padding(.horizontal, 16)
                         .foregroundStyle(isActive ? themeManager.currentTheme.backgroundColor : themeManager.currentTheme.textColor)
                         .background(Capsule().fill(isActive ? themeManager.currentTheme.primaryColor : .clear))
                 }
             }
         }
-        .padding(.horizontal).padding(.bottom, 16)
+        .padding(.horizontal)
+        .padding(.bottom, 16)
     }
     
     @ViewBuilder private var contentView: some View {
         ScrollView {
             VStack(spacing: 16) {
                 switch selectedTab {
-                case .schede: schedeZone
+                case .schede: 
+                    // TODO: Implementare sezione di Start Allenamento
+                    Text("Area START Allenamento (Coming Soon)")
+                        .padding(.top, 40)
+                        .foregroundColor(.secondary)
                 case .esercizi: eserciziZone
-                case .storico: storicoZone
+                case .storico: 
+                    // TODO: Implementare Storico
+                    Text("Storico Allenamenti (Coming Soon)")
+                        .padding(.top, 40)
+                        .foregroundColor(.secondary)
                 }
             }
-            .padding(.horizontal).padding(.top, 8).padding(.bottom, 32)
+            .padding(.horizontal)
+            .padding(.top, 8)
+            .padding(.bottom, 32)
         }
     }
     
     // MARK: - Zone Content
     
-    private var schedeZone: some View { VStack(spacing: 16) {} }
-    
     @ViewBuilder
     private var eserciziZone: some View {
         VStack(spacing: 16) {
-            
-            Button(action: {
-                showCreator = true
-            }) {
+            Button(action: { showCreator = true }) {
                 Label("Crea Nuova Scheda", systemImage: "plus")
                     .font(.headline)
                     .foregroundColor(.white)
@@ -112,7 +126,6 @@ struct GymView: View {
                         .padding(.top, 24)
                 } else {
                     ForEach(workoutManager.myPlans) { plan in
-                        // Il tap apre la scheda in modalità modifica, senza toccare il bottone play interno
                         WorkoutPlanCard(plan: plan)
                             .onTapGesture {
                                 planToEdit = plan
@@ -122,8 +135,6 @@ struct GymView: View {
             }
         }
     }
-    
-    private var storicoZone: some View { VStack(spacing: 16) {} }
 }
 
 #Preview { 

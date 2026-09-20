@@ -1,15 +1,12 @@
 import SwiftUI
 
 struct WorkoutCreatorView: View {
-    // MARK: - Environment
     @Environment(\.dismiss) private var dismiss
     @Environment(WorkoutManager.self) private var workoutManager
     @Environment(ThemeManager.self) private var themeManager
     
-    // MARK: - Properties
     var planToEdit: WorkoutPlan?
     
-    // MARK: - State
     @State private var planTitle: String
     @State private var planExercises: [WorkoutExercise]
     @State private var showPicker: Bool = false
@@ -20,15 +17,23 @@ struct WorkoutCreatorView: View {
         _planExercises = State(initialValue: planToEdit?.exercises ?? [])
     }
     
+    // DRY: Sfruttiamo la logica già presente nel modello WorkoutPlan
+    private var liveEstimatedDurationInMinutes: Int {
+        WorkoutPlan(title: "Temp", exercises: planExercises).estimatedDurationInMinutes
+    }
+    
     var body: some View {
         NavigationStack {
             Form {
-                // SEZIONE 1: Info Base
                 Section {
                     TextField("Nome Scheda (es. Dorso)", text: $planTitle)
+                } footer: {
+                    if liveEstimatedDurationInMinutes > 0 {
+                        Text("Tempo stimato: ~\(liveEstimatedDurationInMinutes) min")
+                            .font(.caption)
+                    }
                 }
                 
-                // SEZIONE 2: Dettaglio Esercizi
                 Section {
                     ForEach($planExercises) { $exercise in
                         EditableExerciseRow(exercise: $exercise)
@@ -37,16 +42,11 @@ struct WorkoutCreatorView: View {
                         planExercises.remove(atOffsets: offsets)
                     }
                 } header: {
-                    if !planExercises.isEmpty {
-                        Text("Esercizi")
-                    }
+                    if !planExercises.isEmpty { Text("Esercizi") }
                 }
                 
-                // SEZIONE 3: Azioni
                 Section {
-                    Button(action: {
-                        showPicker = true
-                    }) {
+                    Button(action: { showPicker = true }) {
                         HStack {
                             Image(systemName: "plus.circle.fill")
                             Text("Aggiungi Esercizio")
@@ -62,7 +62,6 @@ struct WorkoutCreatorView: View {
                 ExercisePickerView(onExerciseSelected: { selectedExercise in
                     let defaultSet = WorkoutSet(targetReps: 10, targetWeight: nil, restTimeInSeconds: 90)
                     let newWorkoutExercise = WorkoutExercise(baseExercise: selectedExercise, sets: [defaultSet])
-                    
                     withAnimation {
                         planExercises.append(newWorkoutExercise)
                     }
@@ -70,24 +69,18 @@ struct WorkoutCreatorView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Annulla") {
-                        dismiss()
-                    }
-                    .foregroundStyle(themeManager.currentTheme.primaryColor)
+                    Button("Annulla") { dismiss() }
+                        .foregroundStyle(themeManager.currentTheme.primaryColor)
                 }
                 
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Salva") {
                         guard !planTitle.isEmpty, !planExercises.isEmpty else { return }
-                        
-                        // Passiamo esplicitamente l'id precedente (se stiamo modificando) o uno nuovo (se la creiamo)
                         let newPlan = WorkoutPlan(
                             id: planToEdit?.id ?? UUID(),
                             title: planTitle,
                             exercises: planExercises
                         )
-                        
-                        // Il manager con "savePlan" è intelligente: se l'ID esiste, sovrascrive!
                         workoutManager.savePlan(newPlan)
                         dismiss()
                     }
@@ -99,8 +92,6 @@ struct WorkoutCreatorView: View {
     }
 }
 
-// MARK: - SubViews
-
 struct EditableExerciseRow: View {
     @Binding var exercise: WorkoutExercise
     @Environment(ThemeManager.self) private var themeManager
@@ -109,37 +100,35 @@ struct EditableExerciseRow: View {
         VStack(alignment: .leading, spacing: 16) {
             
             ExerciseRowView(exercise: exercise)
-            
             Divider()
             
             VStack(spacing: 12) {
                 ForEach($exercise.sets) { $set in
                     let setIndex = exercise.sets.firstIndex(where: { $0.id == set.id }) ?? 0
                     
-                    HStack(alignment: .center, spacing: 8) {
-                        Text("Set \(setIndex + 1)")
+                    HStack(alignment: .center, spacing: 6) {
+                        Text("\(setIndex + 1)")
                             .font(.subheadline.bold())
                             .foregroundStyle(.secondary)
-                            .frame(width: 50, alignment: .leading)
+                            .frame(width: 14, alignment: .leading)
                         
                         TextField("Kg", value: $set.targetWeight, format: .number)
                             .keyboardType(.decimalPad)
                             .textFieldStyle(.roundedBorder)
-                            .frame(maxWidth: 70)
-                        
-                        Text("Kg")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                            .padding(.trailing, 4)
+                            .frame(maxWidth: 55)
+                        Text("Kg").font(.system(size: 10)).foregroundStyle(.secondary)
                         
                         TextField("Reps", value: $set.targetReps, format: .number)
                             .keyboardType(.numberPad)
                             .textFieldStyle(.roundedBorder)
-                            .frame(maxWidth: 60)
+                            .frame(maxWidth: 45)
+                        Text("Reps").font(.system(size: 10)).foregroundStyle(.secondary)
                         
-                        Text("Reps")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
+                        TextField("Sec", value: $set.restTimeInSeconds, format: .number)
+                            .keyboardType(.numberPad)
+                            .textFieldStyle(.roundedBorder)
+                            .frame(maxWidth: 50)
+                        Image(systemName: "timer").font(.system(size: 10)).foregroundStyle(.secondary)
                         
                         Spacer(minLength: 0)
                         
@@ -151,7 +140,7 @@ struct EditableExerciseRow: View {
                             }
                         }) {
                             Image(systemName: "xmark.circle.fill")
-                                .font(.title3)
+                                .font(.body)
                                 .foregroundColor(.red.opacity(0.8))
                         }
                         .buttonStyle(.borderless)
@@ -161,7 +150,7 @@ struct EditableExerciseRow: View {
             
             Button(action: {
                 withAnimation {
-                    // Mantieni i kg per la prossima serie (reattività base per comodità)
+                    // Imposta gli attributi copiandoli dall'ultimo set, se disponibile
                     let lastSet = exercise.sets.last
                     let newSet = WorkoutSet(
                         targetReps: lastSet?.targetReps ?? 10,

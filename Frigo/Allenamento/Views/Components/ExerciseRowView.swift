@@ -1,70 +1,74 @@
 import SwiftUI
 
-/// Componente riutilizzabile: la singola riga di un esercizio per la vista di dettaglio della scheda.
-///
-/// Mettendo il layout in moduli piccolini come `ExerciseRowView`, ci assicuriamo 
-/// prestazioni SwiftUI eccezionali in fase di scroll, visto che ogni riga è a sé stante e valuta
-/// lo stato proprio strettamente necessario per disegnare le sue informazioni!
+/// Componente riutilizzabile: la singola riga di un esercizio.
+/// Totalmente ridisegnata in chiave minimal e lussuosa!
 struct ExerciseRowView: View {
     
-    /// Peschiamo sempre il ThemeManager globale e universale
     @Environment(ThemeManager.self) private var themeManager
     
-    /// Il modello Dati in input, strettamente in let. Questo componente legge e renderizza, non modifica!
     let exercise: WorkoutExercise
     
     var body: some View {
         HStack(spacing: 16) {
-            // 1. Blocco grafico di testa
-            muscleIcon
+            // 1. Immagine reale o Icona Placeholder Decorata
+            if let imageName = exercise.baseExercise.imageName, !imageName.isEmpty {
+                Image(imageName)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 64, height: 64)
+                    .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+            } else {
+                muscleIcon
+            }
             
             // 2. Info nucleari centrali
             textContent
             
-            // Costringe i precedenti ad allinearsi a Sinistra ("leading") spingendoli via.
             Spacer()
             
-            // 3. Indicatore visivo di "puoi tappare per andare nel dettaglio!"
+            // 3. Indicatore minimale
             Image(systemName: "chevron.right")
-                .font(.footnote.weight(.semibold))
-                // Diamo un colore spento per dire "sono un interattabile timido, l'azione è qua ma non sono la star"
-                .foregroundColor(themeManager.currentTheme.secondaryColor.opacity(0.4))
+                .font(.footnote.weight(.bold))
+                .foregroundColor(themeManager.currentTheme.secondaryColor.opacity(0.3))
         }
-        // Il padding verticale mantiene ogni cella ariosa in un ipotetico List ()
-        .padding(.vertical, 8)
+        // Niente padding verticale eccessivo qui, perché la Card ospitante o la ScrollView globale
+        // si occuperà di gestire il respiro del contesto circostante.
     }
 }
 
 // MARK: - Rendering Logics (Sub-Views)
 extension ExerciseRowView {
     
-    /// Costruiamo il quadratino iconico che rappresenta con colore e disegno la tipologia di muscolo.
+    /// Il quadratino grafico sostitutivo se l'immagine fotografica non è disponibile.
+    /// Bello, arrotondato e "pastello", super pulito!
     private var muscleIcon: some View {
         ZStack {
-            // Fondo pastello molto figo e contemporaneo.
-            RoundedRectangle(cornerRadius: 12, style: .continuous)
+            RoundedRectangle(cornerRadius: 14, style: .continuous)
                 .fill(themeManager.currentTheme.primaryColor.opacity(0.12))
-                .frame(width: 48, height: 48)
+                .frame(width: 64, height: 64) // Esattamente dimensionato come le potenziali foto!
             
-            // Mappatura fantastica ai simboli integrati di Apple, gli "SF Symbols"
             Image(systemName: iconName(for: exercise.baseExercise.primaryMuscle))
-                .font(.body.weight(.semibold))
+                .font(.title2.weight(.medium))
                 .foregroundColor(themeManager.currentTheme.primaryColor)
         }
     }
     
-    /// Informazioni testuali.
+    /// Informazioni testuali eleganti, dirette, senza distrazioni.
     private var textContent: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            // Nome vigoroso dell'esercizio
+        VStack(alignment: .leading, spacing: 6) {
             Text(exercise.baseExercise.name)
-                .font(.body)
-                .fontWeight(.semibold)
+                .font(.headline)
                 .foregroundColor(themeManager.currentTheme.textColor)
             
-            // Una pillola di informazione tecnica sotto.
-            Text("\(exercise.sets.count) serie previste")
-                .font(.caption)
+            // "Pillola" compatta per il gruppo muscolare
+            Text(exercise.baseExercise.primaryMuscle.rawValue)
+                .font(.caption2.weight(.bold))
+                .textCase(.uppercase)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 4)
+                // Sfondo morbido per esaltare il testo
+                .background(themeManager.currentTheme.secondaryColor.opacity(0.1))
+                .clipShape(Capsule())
                 .foregroundColor(themeManager.currentTheme.secondaryColor)
         }
     }
@@ -74,16 +78,14 @@ extension ExerciseRowView {
 extension ExerciseRowView {
     
     /// Sceglie un'icona ad-hoc fornita gratuitamente dal sistema (SF Symbols) per ogni distretto.
-    /// Potremmo salvarlo anche a livello Modello, ma se è un mero decoro testuale ha senso
-    /// gestirlo interamente nella logica della View.
     private func iconName(for muscle: MuscleGroup) -> String {
         switch muscle {
         case .chest: return "figure.strengthtraining.traditional"
-        case .back: return "figure.core.training" // Una schienata?
-        case .legs: return "figure.walk" // Gambe in movimento!
+        case .back: return "figure.core.training"
+        case .legs: return "figure.walk"
         case .shoulders: return "figure.mixed.cardio"
         case .arms: return "hand.raised.fill"
-        case .core: return "figure.mind.and.body" // Il centro di gravità
+        case .core: return "figure.mind.and.body"
         case .fullBody: return "figure.highintensity.intervaltraining"
         case .cardio: return "heart.fill"
         }
@@ -92,18 +94,13 @@ extension ExerciseRowView {
 
 // MARK: - Render Preview (Spingiamo in Canvas)
 #Preview {
-    // Prepariamo 2-3 mock per far renderizzare questa chicca.
     let mockEx = ExerciseModel(name: "Lento Avanti Seduto", primaryMuscle: .shoulders)
     let set1 = WorkoutSet(targetReps: 8, targetWeight: 40.0)
     let set2 = WorkoutSet(targetReps: 8, targetWeight: 42.5)
     
     let mockWorkEx = WorkoutExercise(baseExercise: mockEx, sets: [set1, set2])
     
-    // Inseriamo in List per vedere come si comporta nel suo habitat naturale
-    return List {
-        ExerciseRowView(exercise: mockWorkEx)
-        ExerciseRowView(exercise: mockWorkEx)
-    }
-    .listStyle(.plain)
-    .environment(ThemeManager())
+    return ExerciseRowView(exercise: mockWorkEx)
+        .padding()
+        .environment(ThemeManager())
 }
