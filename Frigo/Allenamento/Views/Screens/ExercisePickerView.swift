@@ -6,6 +6,7 @@ struct ExercisePickerView: View {
     @Environment(ThemeManager.self) private var themeManager
     
     @State private var searchText: String = ""
+    @State private var showAddCustom: Bool = false
     var onExerciseSelected: ((ExerciseModel) -> Void)
     
     // Raggruppiamo per muscolo per rendere la UI più lussuosa
@@ -58,6 +59,70 @@ struct ExercisePickerView: View {
                     Button("Annulla") { dismiss() }
                         .foregroundStyle(themeManager.currentTheme.primaryColor)
                 }
+                ToolbarItem(placement: .primaryAction) {
+                    Button(action: { showAddCustom = true }) {
+                        Image(systemName: "plus")
+                            .fontWeight(.bold)
+                    }
+                    .foregroundStyle(themeManager.currentTheme.primaryColor)
+                }
+            }
+            .sheet(isPresented: $showAddCustom) {
+                AddCustomExerciseView()
+            }
+        }
+    }
+}
+
+// MARK: - Add Custom Exercise View
+struct AddCustomExerciseView: View {
+    @Environment(\.dismiss) private var dismiss
+    @Environment(WorkoutManager.self) private var workoutManager
+    @Environment(ThemeManager.self) private var themeManager
+    
+    @State private var name = ""
+    @State private var description = ""
+    @State private var equipment = ""
+    @State private var primaryMuscle: MuscleGroup = .chest
+    
+    var body: some View {
+        NavigationStack {
+            Form {
+                Section("Dettagli") {
+                    TextField("Nome Esercizio", text: $name)
+                    TextField("Equipaggiamento (es. Manubri)", text: $equipment)
+                    TextField("Note / Descrizione (Opzionale)", text: $description)
+                }
+                
+                Section("Gruppo Muscolare") {
+                    Picker("Muscolo Principale", selection: $primaryMuscle) {
+                        ForEach(MuscleGroup.allCases, id: \.self) { muscle in
+                            Text(muscle.rawValue).tag(muscle)
+                        }
+                    }
+                }
+            }
+            .navigationTitle("Nuovo Esercizio")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Annulla") { dismiss() }
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Salva") {
+                        let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
+                        guard !trimmed.isEmpty else { return }
+                        let newEx = ExerciseModel(
+                            name: trimmed,
+                            description: description.isEmpty ? "Esercizio personalizzato" : description,
+                            primaryMuscle: primaryMuscle,
+                            equipmentRequirement: equipment.isEmpty ? "Nessuno" : equipment
+                        )
+                        workoutManager.addCustomExercise(newEx)
+                        dismiss()
+                    }
+                    .disabled(name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                }
             }
         }
     }
@@ -86,7 +151,7 @@ struct CatalogExerciseRow: View {
                         .fill(themeManager.currentTheme.primaryColor.opacity(0.12))
                         .frame(width: 60, height: 60)
                     
-                    Image(systemName: iconName(for: exercise.primaryMuscle))
+                    Image(systemName: exercise.primaryMuscle.iconName)
                         .font(.title2.weight(.medium))
                         .foregroundColor(themeManager.currentTheme.primaryColor)
                 }
@@ -119,19 +184,6 @@ struct CatalogExerciseRow: View {
             RoundedRectangle(cornerRadius: 20, style: .continuous)
                 .fill(Color(UIColor.secondarySystemGroupedBackground).opacity(0.5))
         )
-    }
-    
-    private func iconName(for muscle: MuscleGroup) -> String {
-        switch muscle {
-        case .chest: return "figure.strengthtraining.traditional"
-        case .back: return "figure.core.training"
-        case .legs: return "figure.walk"
-        case .shoulders: return "figure.mixed.cardio"
-        case .arms: return "hand.raised.fill"
-        case .core: return "figure.mind.and.body"
-        case .fullBody: return "figure.highintensity.intervaltraining"
-        case .cardio: return "heart.fill"
-        }
     }
 }
 

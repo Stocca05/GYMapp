@@ -47,7 +47,7 @@ extension ExerciseRowView {
                 .fill(themeManager.currentTheme.primaryColor.opacity(0.12))
                 .frame(width: 64, height: 64) // Esattamente dimensionato come le potenziali foto!
             
-            Image(systemName: iconName(for: exercise.baseExercise.primaryMuscle))
+            Image(systemName: exercise.baseExercise.primaryMuscle.iconName)
                 .font(.title2.weight(.medium))
                 .foregroundColor(themeManager.currentTheme.primaryColor)
         }
@@ -74,23 +74,7 @@ extension ExerciseRowView {
     }
 }
 
-// MARK: - Helpers
-extension ExerciseRowView {
-    
-    /// Sceglie un'icona ad-hoc fornita gratuitamente dal sistema (SF Symbols) per ogni distretto.
-    private func iconName(for muscle: MuscleGroup) -> String {
-        switch muscle {
-        case .chest: return "figure.strengthtraining.traditional"
-        case .back: return "figure.core.training"
-        case .legs: return "figure.walk"
-        case .shoulders: return "figure.mixed.cardio"
-        case .arms: return "hand.raised.fill"
-        case .core: return "figure.mind.and.body"
-        case .fullBody: return "figure.highintensity.intervaltraining"
-        case .cardio: return "heart.fill"
-        }
-    }
-}
+// MARK: - Helpers (iconName ora condiviso in MuscleGroup.iconName)
 
 // MARK: - Render Preview (Spingiamo in Canvas)
 #Preview {

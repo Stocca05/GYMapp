@@ -1,14 +1,16 @@
 import SwiftUI
 
 struct HomeView: View {
+    @Environment(ThemeManager.self) private var themeManager
+    
     var body: some View {
         NavigationStack {
-            Color.white
+            themeManager.currentTheme.backgroundColor
                 .ignoresSafeArea()
                 .navigationTitle("")
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
-                        Button(action: {}) {
+                        NavigationLink(destination: ProfileView()) {
                             Image(systemName: "person.crop.circle")
                                 .font(.subheadline)
                                 .foregroundStyle(.primary)
@@ -21,4 +23,5 @@ struct HomeView: View {
 
 #Preview {
     HomeView()
+        .environment(ThemeManager())
 }

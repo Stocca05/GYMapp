@@ -75,10 +75,11 @@ struct WorkoutCreatorView: View {
                 
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Salva") {
-                        guard !planTitle.isEmpty, !planExercises.isEmpty else { return }
+                        let trimmedTitle = planTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+                        guard !trimmedTitle.isEmpty, !planExercises.isEmpty else { return }
                         let newPlan = WorkoutPlan(
                             id: planToEdit?.id ?? UUID(),
-                            title: planTitle,
+                            title: trimmedTitle,
                             exercises: planExercises
                         )
                         workoutManager.savePlan(newPlan)
@@ -102,35 +103,39 @@ struct EditableExerciseRow: View {
             ExerciseRowView(exercise: exercise)
             Divider()
             
-            VStack(spacing: 12) {
+            Grid(alignment: .center, horizontalSpacing: 8, verticalSpacing: 12) {
                 ForEach($exercise.sets) { $set in
                     let setIndex = exercise.sets.firstIndex(where: { $0.id == set.id }) ?? 0
                     
-                    HStack(alignment: .center, spacing: 6) {
+                    GridRow {
                         Text("\(setIndex + 1)")
                             .font(.subheadline.bold())
                             .foregroundStyle(.secondary)
-                            .frame(width: 14, alignment: .leading)
+                            .gridColumnAlignment(.leading)
                         
-                        TextField("Kg", value: $set.targetWeight, format: .number)
-                            .keyboardType(.decimalPad)
-                            .textFieldStyle(.roundedBorder)
-                            .frame(maxWidth: 55)
-                        Text("Kg").font(.system(size: 10)).foregroundStyle(.secondary)
+                        HStack(spacing: 4) {
+                            TextField("Kg", value: $set.targetWeight, format: .number)
+                                .keyboardType(.decimalPad)
+                                .textFieldStyle(.roundedBorder)
+                                .frame(minWidth: 40)
+                            Text("Kg").font(.system(size: 10)).foregroundStyle(.secondary)
+                        }
                         
-                        TextField("Reps", value: $set.targetReps, format: .number)
-                            .keyboardType(.numberPad)
-                            .textFieldStyle(.roundedBorder)
-                            .frame(maxWidth: 45)
-                        Text("Reps").font(.system(size: 10)).foregroundStyle(.secondary)
+                        HStack(spacing: 4) {
+                            TextField("Reps", value: $set.targetReps, format: .number)
+                                .keyboardType(.numberPad)
+                                .textFieldStyle(.roundedBorder)
+                                .frame(minWidth: 40)
+                            Text("Reps").font(.system(size: 10)).foregroundStyle(.secondary)
+                        }
                         
-                        TextField("Sec", value: $set.restTimeInSeconds, format: .number)
-                            .keyboardType(.numberPad)
-                            .textFieldStyle(.roundedBorder)
-                            .frame(maxWidth: 50)
-                        Image(systemName: "timer").font(.system(size: 10)).foregroundStyle(.secondary)
-                        
-                        Spacer(minLength: 0)
+                        HStack(spacing: 4) {
+                            TextField("Sec", value: $set.restTimeInSeconds, format: .number)
+                                .keyboardType(.numberPad)
+                                .textFieldStyle(.roundedBorder)
+                                .frame(minWidth: 40)
+                            Image(systemName: "timer").font(.system(size: 10)).foregroundStyle(.secondary)
+                        }
                         
                         Button(action: {
                             withAnimation {
@@ -147,6 +152,7 @@ struct EditableExerciseRow: View {
                     }
                 }
             }
+
             
             Button(action: {
                 withAnimation {

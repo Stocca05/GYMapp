@@ -4,11 +4,24 @@ struct WorkoutPlanCard: View {
     @Environment(ThemeManager.self) private var themeManager
     let plan: WorkoutPlan
     
+    var onEdit: () -> Void = {}
+    var onPlay: () -> Void = {}
+    
     var body: some View {
         HStack(spacing: 16) {
-            textContent
-            Spacer()
-            playButton
+            Button(action: onEdit) {
+                HStack {
+                    textContent
+                    Spacer()
+                }
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            
+            Button(action: onPlay) {
+                playIcon
+            }
+            .buttonStyle(.plain)
         }
         .padding(16)
         .background(themeManager.currentTheme.primaryColor.opacity(0.1))
@@ -36,7 +49,7 @@ extension WorkoutPlanCard {
         }
     }
     
-    private var playButton: some View {
+    private var playIcon: some View {
         Image(systemName: "play.fill")
             .font(.title3)
             .foregroundColor(.white)
@@ -63,7 +76,7 @@ extension WorkoutPlanCard {
     let w1 = WorkoutExercise(baseExercise: m1, sets: [WorkoutSet(targetReps: 10)])
     let plan = WorkoutPlan(title: "Forza Bruta", exercises: [w1])
     
-    return WorkoutPlanCard(plan: plan)
+    return WorkoutPlanCard(plan: plan, onEdit: {}, onPlay: {})
         .padding()
         .environment(ThemeManager())
 }

@@ -5,6 +5,7 @@ struct WorkoutPlan: Identifiable, Codable, Hashable {
     let id: UUID
     var title: String
     var exercises: [WorkoutExercise]
+    // TODO: Collegare colorTheme a un colore reale nella UI (attualmente non utilizzato)
     var colorTheme: String
     
     var estimatedDurationInMinutes: Int {

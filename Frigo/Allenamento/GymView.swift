@@ -1,12 +1,12 @@
 import SwiftUI
 
 enum GymTab: String, CaseIterable {
-    case esercizi = "Le Mie Schede", schede = "START", storico = "Storico"
+    case mieSchede = "Le Mie Schede", schede = "START", storico = "Storico"
 }
 
 struct GymView: View {
     @Environment(ThemeManager.self) private var themeManager
-    @State private var workoutManager = WorkoutManager()
+    @Environment(WorkoutManager.self) private var workoutManager
     
     @State private var selectedTab: GymTab = .schede
     @State private var showCalendar = false
@@ -14,6 +14,7 @@ struct GymView: View {
     // Gestione editor schede
     @State private var showCreator = false
     @State private var planToEdit: WorkoutPlan? = nil
+    @State private var planToPlay: WorkoutPlan? = nil
     
     var body: some View {
         ZStack {
@@ -27,15 +28,18 @@ struct GymView: View {
         .sheet(isPresented: $showCalendar) { GymCalendarView() }
         .fullScreenCover(isPresented: $showCreator) { 
             WorkoutCreatorView()
-                .environment(workoutManager)
-                .environment(themeManager) 
         }
         .fullScreenCover(item: $planToEdit) { plan in
             WorkoutCreatorView(planToEdit: plan)
-                .environment(workoutManager)
-                .environment(themeManager)
         }
-        .environment(workoutManager)
+        .fullScreenCover(item: $planToPlay) { plan in
+            WorkoutActiveView()
+                .onAppear {
+                    if workoutManager.ongoingWorkout?.plan.id != plan.id {
+                        workoutManager.startOrResumeWorkout(plan: plan)
+                    }
+                }
+        }
     }
     
     // MARK: - UI Components
@@ -60,56 +64,65 @@ struct GymView: View {
     }
     
     private var pickerView: some View {
-        HStack(spacing: 8) {
-            ForEach(GymTab.allCases, id: \.self) { tab in
-                let isActive = selectedTab == tab
-                Button(action: { withAnimation(.easeInOut(duration: 0.2)) { selectedTab = tab } }) {
-                    Text(tab.rawValue)
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .padding(.vertical, 8)
-                        .padding(.horizontal, 16)
-                        .foregroundStyle(isActive ? themeManager.currentTheme.backgroundColor : themeManager.currentTheme.textColor)
-                        .background(Capsule().fill(isActive ? themeManager.currentTheme.primaryColor : .clear))
-                }
-            }
-        }
-        .padding(.horizontal)
-        .padding(.bottom, 16)
-    }
-    
-    @ViewBuilder private var contentView: some View {
-        ScrollView {
-            VStack(spacing: 16) {
-                switch selectedTab {
-                case .schede: 
-                    // Il nostro fantastico banner dinamico!
-                    startZone
-                case .esercizi: 
-                    eserciziZone
-                case .storico: 
-                    // TODO: Implementare Storico
-                    Text("Storico Allenamenti (Coming Soon)")
-                        .padding(.top, 40)
-                        .foregroundColor(.secondary)
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                ForEach(GymTab.allCases, id: \.self) { tab in
+                    let isActive = selectedTab == tab
+                    Button(action: { withAnimation(.easeInOut(duration: 0.2)) { selectedTab = tab } }) {
+                        Text(tab.rawValue)
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
+                            .fixedSize(horizontal: true, vertical: false)
+                            .padding(.vertical, 8)
+                            .padding(.horizontal, 16)
+                            .foregroundStyle(isActive ? themeManager.currentTheme.backgroundColor : themeManager.currentTheme.textColor)
+                            .background(Capsule().fill(isActive ? themeManager.currentTheme.primaryColor : .clear))
+                    }
                 }
             }
             .padding(.horizontal)
-            .padding(.top, 8)
-            .padding(.bottom, 32)
+            .padding(.bottom, 16)
         }
+        .fixedSize(horizontal: false, vertical: true)
     }
     
+    @ViewBuilder private var contentView: some View {
+        if selectedTab == .storico {
+            StoricoView()
+        } else {
+            ScrollView {
+                VStack(spacing: 16) {
+                    switch selectedTab {
+                    case .schede:
+                        startZone
+                    case .mieSchede:
+                        eserciziZone
+                    case .storico:
+                        EmptyView()
+                    }
+                }
+                .padding(.horizontal)
+                .padding(.top, 8)
+                .padding(.bottom, 32)
+            }
+        }
+    }
+
     // MARK: - Zone Content
 
-    @ViewBuilder
+    
     private var startZone: some View {
         VStack(spacing: 24) {
             // Il banner logico che abbiamo appena creato
             HeroWorkoutBanner()
             
-            // Qui in futuro metteremo gli altri moduli (Calorie e Streak)
-            // ...
+            HStack(spacing: 16) {
+                StreakWidgetView()
+                CaloriesWidgetView()
+            }
+            .frame(height: 170)
+            
+            VolumeWidgetView()
             
             Spacer()
         }
@@ -139,10 +152,7 @@ struct GymView: View {
                         .padding(.top, 24)
                 } else {
                     ForEach(workoutManager.myPlans) { plan in
-                        WorkoutPlanCard(plan: plan)
-                            .onTapGesture {
-                                planToEdit = plan
-                            }
+                        WorkoutPlanCard(plan: plan, onEdit: { planToEdit = plan }, onPlay: { workoutManager.startOrResumeWorkout(plan: plan); planToPlay = plan })
                     }
                 }
             }

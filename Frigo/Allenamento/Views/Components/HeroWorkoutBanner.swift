@@ -8,6 +8,8 @@ struct HeroWorkoutBanner: View {
     @Environment(ThemeManager.self) private var themeManager
     
     @State private var isShowingCreator = false
+    @State private var forceShowNext = false
+    @State private var planToPlay: WorkoutPlan? = nil
     
     var body: some View {
         ZStack {
@@ -16,7 +18,7 @@ struct HeroWorkoutBanner: View {
             
             // Corpo e logica display in base allo stato
             VStack(alignment: .leading, spacing: 16) {
-                if workoutManager.hasWorkedOutToday {
+                if workoutManager.hasWorkedOutToday && !forceShowNext {
                     // STATO C: Allenamento della giornata completato.
                     stateCDoneView
                 } else if let suggestedPlan = workoutManager.suggestedWorkoutForToday() {
@@ -35,8 +37,19 @@ struct HeroWorkoutBanner: View {
         .shadow(color: shadowColor, radius: 15, x: 0, y: 10)
         .fullScreenCover(isPresented: $isShowingCreator) {
             WorkoutCreatorView()
-                .environment(workoutManager)
-                .environment(themeManager)
+        }
+        .fullScreenCover(item: $planToPlay) { plan in
+            WorkoutActiveView()
+                .onAppear {
+                    if workoutManager.ongoingWorkout?.plan.id != plan.id {
+                        workoutManager.startOrResumeWorkout(plan: plan)
+                    }
+                }
+        }
+        .onChange(of: planToPlay) { _, newValue in
+            if newValue == nil {
+                forceShowNext = false
+            }
         }
     }
     
@@ -94,16 +107,11 @@ struct HeroWorkoutBanner: View {
             Spacer(minLength: 24)
             
             Button {
-                // TODO: in un ambiente reale apriremmo una "WorkoutActiveView".
-                // Per testare il passaggio allo stato C simuliamo il completamento!
-                let generator = UINotificationFeedbackGenerator()
-                generator.notificationOccurred(.success)
-                
-                withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
-                    workoutManager.markWorkoutAsCompleted(plan)
-                }
+                let generator = UIImpactFeedbackGenerator(style: .heavy)
+                generator.impactOccurred()
+                workoutManager.startOrResumeWorkout(plan: plan); planToPlay = plan
             } label: {
-                Text("Inizia l'Allenamento")
+                Text(workoutManager.ongoingWorkout != nil ? "Riprendi Allenamento" : "Inizia l'Allenamento")
                     .font(.headline)
                     .foregroundColor(.white)
                     .padding(.vertical, 18)
@@ -137,6 +145,19 @@ struct HeroWorkoutBanner: View {
                 .foregroundColor(.white.opacity(0.9))
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.horizontal, 8)
+                
+            Button(action: {
+                withAnimation { forceShowNext = true }
+            }) {
+                Text("Inizia un altro allenamento")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 24)
+                    .padding(.vertical, 12)
+                    .background(Color.white.opacity(0.2))
+                    .clipShape(Capsule())
+            }
+            .padding(.top, 8)
         }
         .frame(maxWidth: .infinity, alignment: .center)
         .padding(.vertical, 16)
@@ -146,7 +167,7 @@ struct HeroWorkoutBanner: View {
     
     @ViewBuilder
     private var backgroundView: some View {
-        if workoutManager.hasWorkedOutToday {
+        if workoutManager.hasWorkedOutToday && !forceShowNext {
             // Colori Verde/Oro Pastello per il giorno libero
             LinearGradient(
                 colors: [Color.mint.opacity(0.9), Color.green.opacity(0.85)],
@@ -174,7 +195,7 @@ struct HeroWorkoutBanner: View {
     }
     
     private var shadowColor: Color {
-        if workoutManager.hasWorkedOutToday {
+        if workoutManager.hasWorkedOutToday && !forceShowNext {
             return Color.green.opacity(0.3)
         } else if workoutManager.suggestedWorkoutForToday() != nil {
             return themeManager.currentTheme.primaryColor.opacity(0.4)

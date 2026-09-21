@@ -2,11 +2,57 @@ import SwiftUI
 
 struct GymCalendarView: View {
     @Environment(ThemeManager.self) private var themeManager
+    @Environment(WorkoutManager.self) private var workoutManager
     @Environment(\.dismiss) private var dismiss
     
-    // MARK: - Mock Data
-    private let weekDays = ["L", "M", "M", "G", "V", "S", "D"]
-    private let daysInMonth = Array(1...30)
+    @State private var displayedMonth = Date()
+    
+    private var calendar: Calendar { Calendar.current }
+    
+    // Giorni della settimana con ID unici (per evitare duplicati con "M" per Martedì e Mercoledì)
+    private let weekDayLabels: [(id: Int, label: String)] = [
+        (0, "L"), (1, "Ma"), (2, "Me"), (3, "G"), (4, "V"), (5, "S"), (6, "D")
+    ]
+    
+    // Calcola i giorni del mese visualizzato
+    private var daysInMonth: [Int] {
+        guard let range = calendar.range(of: .day, in: .month, for: displayedMonth) else {
+            return Array(1...30)
+        }
+        return Array(range)
+    }
+    
+    // Set di giorni con allenamento nel mese visualizzato
+    private var workoutDaysInMonth: Set<Int> {
+        let components = calendar.dateComponents([.year, .month], from: displayedMonth)
+        var days = Set<Int>()
+        for session in workoutManager.completedSessions {
+            let sessionComponents = calendar.dateComponents([.year, .month, .day], from: session.date)
+            if sessionComponents.year == components.year && sessionComponents.month == components.month {
+                if let day = sessionComponents.day { days.insert(day) }
+            }
+        }
+        return days
+    }
+    
+    // Titolo del mese formattato in italiano
+    private var monthTitle: String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "it_IT")
+        formatter.dateFormat = "MMMM yyyy"
+        return formatter.string(from: displayedMonth).capitalized
+    }
+    
+    // Giorno odierno (nil se il mese visualizzato non è quello corrente)
+    private var todayDay: Int? {
+        let today = Date()
+        if calendar.isDate(today, equalTo: displayedMonth, toGranularity: .month) {
+            return calendar.component(.day, from: today)
+        }
+        return nil
+    }
+    
+    private var workoutCountInMonth: Int { workoutDaysInMonth.count }
     
     var body: some View {
         NavigationStack {
@@ -29,11 +75,17 @@ struct GymCalendarView: View {
     
     private var monthHeader: some View {
         HStack {
-            Text("Settembre 2026").font(.title2).bold().foregroundStyle(themeManager.currentTheme.textColor)
+            Text(monthTitle)
+                .font(.title2).bold()
+                .foregroundStyle(themeManager.currentTheme.textColor)
             Spacer()
             HStack(spacing: 16) {
-                Button(action: {}) { Image(systemName: "chevron.left") }
-                Button(action: {}) { Image(systemName: "chevron.right") }
+                Button(action: { changeMonth(by: -1) }) {
+                    Image(systemName: "chevron.left")
+                }
+                Button(action: { changeMonth(by: 1) }) {
+                    Image(systemName: "chevron.right")
+                }
             }
             .font(.headline).foregroundStyle(themeManager.currentTheme.primaryColor)
         }
@@ -42,29 +94,48 @@ struct GymCalendarView: View {
     
     private var calendarGrid: some View {
         LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7), spacing: 16) {
-            ForEach(weekDays, id: \.self) { Text($0).font(.subheadline).bold().foregroundStyle(themeManager.currentTheme.secondaryColor) }
+            // Intestazioni dei giorni della settimana (con ID unici)
+            ForEach(weekDayLabels, id: \.id) { item in
+                Text(item.label)
+                    .font(.subheadline).bold()
+                    .foregroundStyle(themeManager.currentTheme.secondaryColor)
+            }
+            // Celle dei giorni
             ForEach(daysInMonth, id: \.self) { dayCell(for: $0) }
         }
         .padding(.horizontal)
     }
     
     private func dayCell(for day: Int) -> some View {
-        let hasWorkout = day % 5 == 0
-        let isToday = day == 19
+        let hasWorkout = workoutDaysInMonth.contains(day)
+        let isToday = todayDay == day
         return VStack(spacing: 4) {
             Text("\(day)")
                 .font(.system(size: 16, weight: isToday ? .bold : .regular))
                 .foregroundStyle(isToday ? themeManager.currentTheme.backgroundColor : themeManager.currentTheme.textColor)
                 .frame(width: 36, height: 36)
                 .background(Circle().fill(isToday ? themeManager.currentTheme.primaryColor : .clear))
-            Circle().fill(hasWorkout ? themeManager.currentTheme.primaryColor : .clear).frame(width: 6, height: 6)
+            Circle()
+                .fill(hasWorkout ? themeManager.currentTheme.primaryColor : .clear)
+                .frame(width: 6, height: 6)
         }
     }
     
     private var summaryBox: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Riepilogo Mese").font(.headline).foregroundStyle(themeManager.currentTheme.textColor)
-            Text("Hai completato 6 allenamenti questo mese. Ottimo lavoro per mantenere la costanza!").font(.subheadline).foregroundStyle(themeManager.currentTheme.secondaryColor)
+            Text("Riepilogo Mese")
+                .font(.headline)
+                .foregroundStyle(themeManager.currentTheme.textColor)
+            
+            if workoutCountInMonth > 0 {
+                Text("Hai completato \(workoutCountInMonth) allenament\(workoutCountInMonth == 1 ? "o" : "i") questo mese. \(workoutCountInMonth >= 8 ? "Ottimo lavoro per mantenere la costanza!" : "Continua così!")")
+                    .font(.subheadline)
+                    .foregroundStyle(themeManager.currentTheme.secondaryColor)
+            } else {
+                Text("Nessun allenamento registrato questo mese.")
+                    .font(.subheadline)
+                    .foregroundStyle(themeManager.currentTheme.secondaryColor)
+            }
         }
         .frame(maxWidth: .infinity, alignment: .leading).padding()
         .background(RoundedRectangle(cornerRadius: 12).fill(themeManager.currentTheme.primaryColor.opacity(0.1)))
@@ -72,8 +143,25 @@ struct GymCalendarView: View {
     }
     
     private var closeButton: some View {
-        Button(action: { dismiss() }) { Image(systemName: "xmark.circle.fill").foregroundStyle(themeManager.currentTheme.secondaryColor) }
+        Button(action: { dismiss() }) {
+            Image(systemName: "xmark.circle.fill")
+                .foregroundStyle(themeManager.currentTheme.secondaryColor)
+        }
+    }
+    
+    // MARK: - Helpers
+    
+    private func changeMonth(by value: Int) {
+        if let newDate = calendar.date(byAdding: .month, value: value, to: displayedMonth) {
+            withAnimation(.easeInOut(duration: 0.2)) {
+                displayedMonth = newDate
+            }
+        }
     }
 }
 
-#Preview { GymCalendarView().environment(ThemeManager()) }
+#Preview {
+    GymCalendarView()
+        .environment(ThemeManager())
+        .environment(WorkoutManager())
+}

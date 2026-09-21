@@ -1,16 +1,20 @@
 import SwiftUI
+import Combine
 
 struct ContentView: View {
     @Environment(ThemeManager.self) private var themeManager
     
     // MARK: - LOGICA DI STATO
+    @Environment(WorkoutManager.self) private var workoutManager
+    
     // Variabile che tiene traccia della scheda aperta (0, 1 o 2).
     @State private var selectedTab = 1
     
-    init() {
-        // Nasconde la tab bar standard di iOS per mostrare la nostra custom
-        UITabBar.appearance().isHidden = true
-    }
+    // Variabile per mostrare l'allenamento in corso in full screen
+    @State private var showActiveWorkout = false
+    
+    // Timer per inattività
+    let inactivityTimer = Timer.publish(every: 60, on: .main, in: .common).autoconnect()
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -23,23 +27,91 @@ struct ContentView: View {
                 HomeView().tag(1)
                 GymView().tag(2)
             }
+            .onAppear { UITabBar.appearance().isHidden = true }
+            .onDisappear { UITabBar.appearance().isHidden = false }
+            .onReceive(inactivityTimer) { _ in
+                workoutManager.checkInactivityAndCancelIfNeeded()
+            }
             
             // MARK: - COMPONENTE TAB BAR CUSTOM
-            customTabBar
+            VStack(spacing: 0) {
+                if workoutManager.ongoingWorkout != nil {
+                    miniWorkoutPlayer
+                        .padding(.horizontal, 20)
+                        .padding(.bottom, 10)
+                        .transition(.move(edge: .bottom).combined(with: .opacity))
+                }
+                customTabBar
+            }
+
         }
         .ignoresSafeArea(.keyboard)
+        .fullScreenCover(isPresented: $showActiveWorkout) {
+            WorkoutActiveView()
+        }
     }
     
+    
+    // MARK: - MINI WORKOUT PLAYER (IN-APP BANNER)
+    private var miniWorkoutPlayer: some View {
+        Button(action: {
+            showActiveWorkout = true
+        }) {
+            HStack(spacing: 12) {
+                // Icona animata
+                Image(systemName: workoutManager.ongoingWorkout!.isResting ? "timer" : "flame.fill")
+                    .foregroundColor(workoutManager.ongoingWorkout!.isResting ? .orange : .white)
+                    .font(.title3)
+                
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(workoutManager.ongoingWorkout!.plan.title)
+                        .font(.subheadline)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                    
+                    if workoutManager.ongoingWorkout!.isResting {
+                        Text("Recupero in corso...")
+                            .font(.caption)
+                            .foregroundColor(.white.opacity(0.8))
+                    } else {
+                        Text("Esercizio in corso")
+                            .font(.caption)
+                            .foregroundColor(.white.opacity(0.8))
+                    }
+                }
+                
+                Spacer()
+                
+                Image(systemName: "chevron.up")
+                    .foregroundColor(.white)
+                    .font(.subheadline.bold())
+            }
+            .padding(.vertical, 12)
+            .padding(.horizontal, 16)
+            .background(
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                    .fill(Color.orange.opacity(workoutManager.ongoingWorkout!.isResting ? 1.0 : 0.0))
+                    .background(
+                        RoundedRectangle(cornerRadius: 16, style: .continuous)
+                            .fill(themeManager.currentTheme.primaryColor)
+                            .opacity(workoutManager.ongoingWorkout!.isResting ? 0 : 1)
+                    )
+                    .shadow(color: themeManager.currentTheme.primaryColor.opacity(0.3), radius: 10, x: 0, y: 5)
+            )
+        }
+        .buttonStyle(.plain)
+    }
+
     private var customTabBar: some View {
         // MARK: - BOTTONI DELLA TAB BAR (LOGICA ORDINAMENTO E SCELTA ICONE)
         // Per aggiungere una schermata: metti un tabButton qui, assicurandoti 
         // di agganciarlo a un nuovo index, e aggiungi la view corrispondente nel TabView in alto col nuovo .tag().
         HStack {
-            tabButton(icon: "fork.knife", title: "Cibo", index: 0)
+            tabButton(icon: "fork.knife", iconFilled: "fork.knife", title: "Cibo", index: 0)
             Spacer() // Mantiene le icone equamente distanziate
-            tabButton(icon: "house.circle.fill", title: "Home", index: 1)
+            tabButton(icon: "house.circle", iconFilled: "house.circle.fill", title: "Home", index: 1)
             Spacer()
-            tabButton(icon: "dumbbell.fill", title: "Palestra", index: 2)
+            tabButton(icon: "dumbbell", iconFilled: "dumbbell.fill", title: "Palestra", index: 2)
         }
         .padding(.horizontal, 30)
         .padding(.vertical, 15)
@@ -57,7 +129,7 @@ struct ContentView: View {
     
     // MARK: - GRAFICA DEI SINGOLI TASTI
     // Funzione che gestisce e "disegna" dinamicamente ogni singolo tasto specificato nel blocco HStack sovrastante.
-    private func tabButton(icon: String, title: String, index: Int) -> some View {
+    private func tabButton(icon: String, iconFilled: String, title: String, index: Int) -> some View {
         let isSelected = selectedTab == index
         let themeColor = themeManager.currentTheme.primaryColor
         
@@ -69,8 +141,8 @@ struct ContentView: View {
         } label: {
             VStack(spacing: 4) {
                 // GRAFICA ICONE
-                // Seleziona fra la variante "piena" (.fill) se selezionata, e toglie .fill se deselezionata
-                Image(systemName: isSelected ? icon : icon.replacingOccurrences(of: ".fill", with: ""))
+                // Usa la variante "piena" se selezionata, e quella outline se deselezionata
+                Image(systemName: isSelected ? iconFilled : icon)
                     .font(.system(size: isSelected ? 28 : 24, weight: isSelected ? .bold : .medium))
                     .foregroundStyle(isSelected ? themeColor : themeManager.currentTheme.secondaryColor)
                 
@@ -92,4 +164,5 @@ struct ContentView: View {
 #Preview {
     ContentView()
         .environment(ThemeManager())
+        .environment(WorkoutManager())
 }

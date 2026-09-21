@@ -16,6 +16,21 @@ enum MuscleGroup: String, Codable, CaseIterable {
     case core = "Addome"
     case fullBody = "Full Body"
     case cardio = "Cardio"
+    
+    /// Icona SF Symbol condivisa per ogni gruppo muscolare.
+    /// Usata da tutte le view che mostrano un'icona per il muscolo.
+    var iconName: String {
+        switch self {
+        case .chest: return "figure.strengthtraining.traditional"
+        case .back: return "figure.cross.training"
+        case .legs: return "figure.step.training"
+        case .shoulders: return "figure.arms.open"
+        case .arms: return "figure.gymnastics"
+        case .core: return "figure.core.training"
+        case .fullBody: return "figure.mind.and.body"
+        case .cardio: return "figure.run"
+        }
+    }
 }
 
 /// Il modello base per un esercizio del nostro catalogo.
