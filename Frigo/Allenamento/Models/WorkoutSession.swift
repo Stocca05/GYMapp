@@ -1,6 +1,6 @@
 import Foundation
 
-struct WorkoutSession: Identifiable, Codable {
+struct WorkoutSession: Identifiable, Codable, Equatable, Hashable {
     let id: UUID
     let planId: UUID
     let date: Date
@@ -29,9 +29,8 @@ struct WorkoutSession: Identifiable, Codable {
         id = try container.decode(UUID.self, forKey: .id)
         planId = try container.decode(UUID.self, forKey: .planId)
         date = try container.decode(Date.self, forKey: .date)
-        totalVolume = try container.decode(Int.self, forKey: .totalVolume)
-        durationSeconds = try container.decode(Int.self, forKey: .durationSeconds)
-        // Le sessioni precedenti non contengono il dettaglio degli esercizi.
+        totalVolume = try container.decodeIfPresent(Int.self, forKey: .totalVolume) ?? 0
+        durationSeconds = try container.decodeIfPresent(Int.self, forKey: .durationSeconds) ?? 0
         completedExercises = try container.decodeIfPresent(
             [WorkoutExercise].self, forKey: .completedExercises
         ) ?? []
