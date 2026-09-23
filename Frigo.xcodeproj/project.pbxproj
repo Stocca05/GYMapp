@@ -20,6 +20,13 @@
 			remoteGlobalIDString = 6912865130615FB90001AB5B;
 			remoteInfo = FrigoWidgetExtension;
 		};
+		6951AE003061DA2400AD49E3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 000000000000000000000000 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 000000000000000100000000;
+			remoteInfo = Frigo;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -39,6 +46,7 @@
 		6912865230615FB90001AB5B /* FrigoWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FrigoWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		6912865430615FB90001AB5B /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		6912865630615FBA0001AB5B /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		6951ADFC3061DA2400AD49E3 /* FrigoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FrigoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -73,6 +81,11 @@
 			path = FrigoWidget;
 			sourceTree = "<group>";
 		};
+		6951ADFD3061DA2400AD49E3 /* FrigoTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = FrigoTests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +101,11 @@
 				6912865530615FBA0001AB5B /* WidgetKit.framework in Frameworks */,
 			);
 		};
+		6951ADF93061DA2400AD49E3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+			);
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -96,6 +114,7 @@
 			children = (
 				000000000000000000000010 /* Frigo */,
 				6912865830615FBA0001AB5B /* FrigoWidget */,
+				6951ADFD3061DA2400AD49E3 /* FrigoTests */,
 				6912865330615FB90001AB5B /* Frameworks */,
 				000000000000000000000020 /* Products */,
 			);
@@ -106,6 +125,7 @@
 			children = (
 				000000000000000000000120 /* Frigo.app */,
 				6912865230615FB90001AB5B /* FrigoWidgetExtension.appex */,
+				6951ADFC3061DA2400AD49E3 /* FrigoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -162,6 +182,27 @@
 			productReference = 6912865230615FB90001AB5B /* FrigoWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		6951ADFB3061DA2400AD49E3 /* FrigoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6951AE023061DA2400AD49E3 /* Build configuration list for PBXNativeTarget "FrigoTests" */;
+			buildPhases = (
+				6951ADF83061DA2400AD49E3 /* Sources */,
+				6951ADF93061DA2400AD49E3 /* Frameworks */,
+				6951ADFA3061DA2400AD49E3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6951AE013061DA2400AD49E3 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				6951ADFD3061DA2400AD49E3 /* FrigoTests */,
+			);
+			name = FrigoTests;
+			productName = FrigoTests;
+			productReference = 6951ADFC3061DA2400AD49E3 /* FrigoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -177,6 +218,10 @@
 					};
 					6912865130615FB90001AB5B = {
 						CreatedOnToolsVersion = 27.0;
+					};
+					6951ADFB3061DA2400AD49E3 = {
+						CreatedOnToolsVersion = 27.0;
+						TestTargetID = 000000000000000100000000;
 					};
 				};
 			};
@@ -196,6 +241,7 @@
 			targets = (
 				000000000000000100000000 /* Frigo */,
 				6912865130615FB90001AB5B /* FrigoWidgetExtension */,
+				6951ADFB3061DA2400AD49E3 /* FrigoTests */,
 			);
 		};
 /* End PBXProject section */
@@ -207,6 +253,11 @@
 			);
 		};
 		6912865030615FB90001AB5B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
+		6951ADFA3061DA2400AD49E3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			files = (
 			);
@@ -224,6 +275,11 @@
 			files = (
 			);
 		};
+		6951ADF83061DA2400AD49E3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -231,6 +287,11 @@
 			isa = PBXTargetDependency;
 			target = 6912865130615FB90001AB5B /* FrigoWidgetExtension */;
 			targetProxy = 6912866230615FBB0001AB5B /* PBXContainerItemProxy */;
+		};
+		6951AE013061DA2400AD49E3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 000000000000000100000000 /* Frigo */;
+			targetProxy = 6951AE003061DA2400AD49E3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -372,10 +433,12 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6RTK6U5F9B;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Consenti l'accesso alla fotocamera per aggiungere foto ai prodotti del frigorifero.";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -390,7 +453,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "devplaceholder.$(PROJECT_UNIQUE_VALUE:identifier).$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lucaraonapersonalteam.Frigo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
@@ -410,10 +473,12 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6RTK6U5F9B;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Consenti l'accesso alla fotocamera per aggiungere foto ai prodotti del frigorifero.";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -428,7 +493,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "devplaceholder.$(PROJECT_UNIQUE_VALUE:identifier).$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lucaraonapersonalteam.Frigo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
@@ -450,6 +515,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6RTK6U5F9B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FrigoWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = FrigoWidget;
@@ -460,9 +526,9 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = devplaceholder.LMRGODVP.Frigo.FrigoWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lucaraonapersonalteam.Frigo.WidgetExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = xros;
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -470,7 +536,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 7;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -481,6 +547,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6RTK6U5F9B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FrigoWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = FrigoWidget;
@@ -491,9 +558,9 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = devplaceholder.LMRGODVP.Frigo.FrigoWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lucaraonapersonalteam.Frigo.WidgetExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = xros;
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -501,7 +568,52 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 7;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6951AE033061DA2400AD49E3 /* Debug configuration for PBXNativeTarget "FrigoTests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6RTK6U5F9B;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lucaraonapersonalteam.FrigoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Frigo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Frigo";
+			};
+			name = Debug;
+		};
+		6951AE043061DA2400AD49E3 /* Release configuration for PBXNativeTarget "FrigoTests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6RTK6U5F9B;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lucaraonapersonalteam.FrigoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Frigo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Frigo";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -530,6 +642,14 @@
 			buildConfigurations = (
 				6912866730615FBB0001AB5B /* Debug configuration for PBXNativeTarget "FrigoWidgetExtension" */,
 				6912866830615FBB0001AB5B /* Release configuration for PBXNativeTarget "FrigoWidgetExtension" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		6951AE023061DA2400AD49E3 /* Build configuration list for PBXNativeTarget "FrigoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6951AE033061DA2400AD49E3 /* Debug configuration for PBXNativeTarget "FrigoTests" */,
+				6951AE043061DA2400AD49E3 /* Release configuration for PBXNativeTarget "FrigoTests" */,
 			);
 			defaultConfigurationName = Release;
 		};

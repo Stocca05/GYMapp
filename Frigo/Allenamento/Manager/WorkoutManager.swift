@@ -1,3 +1,4 @@
+import ActivityKit
 import SwiftUI
 
 /// Il "Cervello Globale" della sezione Allenamento (Manager / Data Controller).
@@ -7,6 +8,7 @@ import SwiftUI
 /// Ora, con `@Observable` (introdotto in iOS 17), Swift fa tutto il tracciamento delle dipendenze
 /// sotto il cofano, automaticamente. Si scrive meno codice, ci sono meno bug, ed è molto più
 /// performante nel ri-disegnare la UI!
+@MainActor
 @Observable
 class WorkoutManager {
 
@@ -27,93 +29,54 @@ class WorkoutManager {
 
   // MARK: - Streak & Analytics
 
-  /// Un punto per seduta, in ordine cronologico, usando l'ID dell'esercizio di catalogo.
-  func progressionHistory(for exerciseId: UUID)
-    -> [(date: Date, maxWeight: Double, totalVolume: Double)]
-  {
-    completedSessions.sorted { $0.date < $1.date }.compactMap { session in
-      let sets = session.completedExercises
-        .filter { $0.baseExercise.id == exerciseId }
-        .flatMap(\.sets)
-
-      guard !sets.isEmpty else { return nil }
-
-      let maxWeight = sets.compactMap(\.targetWeight).max() ?? 0
-      let totalVolume = sets.reduce(0.0) { volume, set in
-        volume + (set.targetWeight ?? 0) * Double(set.targetReps)
-      }
-      return (date: session.date, maxWeight: maxWeight, totalVolume: totalVolume)
-    }
-  }
-
   var currentStreak: Int {
     let calendar = Calendar.current
     let today = calendar.startOfDay(for: Date())
-    var streak = 0
-
-    let uniqueWorkoutDates = Array(Set(completedSessions.map { calendar.startOfDay(for: $0.date) }))
-      .sorted(by: >)
-    guard let firstDate = uniqueWorkoutDates.first else { return 0 }
-
+    let workoutDates = Set(completedSessions.map { calendar.startOfDay(for: $0.date) })
+    
     var dateToCheck = today
-    // Se oggi non c'è allenamento, controlliamo se c'è stato ieri.
-    if firstDate != today {
-      if let yesterday = calendar.date(byAdding: .day, value: -1, to: today), firstDate == yesterday
-      {
-        dateToCheck = firstDate
+    if !workoutDates.contains(today) {
+      if let yesterday = calendar.date(byAdding: .day, value: -1, to: today), workoutDates.contains(yesterday) {
+        dateToCheck = yesterday
       } else {
         return 0
       }
     }
-
-    for workoutDate in uniqueWorkoutDates {
-      if workoutDate == dateToCheck {
-        streak += 1
-        if let previousDay = calendar.date(byAdding: .day, value: -1, to: dateToCheck) {
-          dateToCheck = previousDay
-        }
-      } else if workoutDate < dateToCheck {
-        break
-      }
+    
+    var streak = 0
+    while workoutDates.contains(dateToCheck) {
+      streak += 1
+      guard let previousDay = calendar.date(byAdding: .day, value: -1, to: dateToCheck) else { break }
+      dateToCheck = previousDay
     }
-
+    
     return streak
   }
 
   var currentWeekStatus: [Bool] {
     var calendar = Calendar.current
     calendar.firstWeekday = 2  // Lunedì
-    let today = Date()
-
-    guard
-      let startOfWeek = calendar.date(
-        from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: today))
-    else {
+    
+    guard let startOfWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date())) else {
       return Array(repeating: false, count: 7)
     }
 
-    var status = Array(repeating: false, count: 7)
     let workoutDates = Set(completedSessions.map { calendar.startOfDay(for: $0.date) })
-
-    for i in 0..<7 {
-      if let day = calendar.date(byAdding: .day, value: i, to: startOfWeek) {
-        let dayStart = calendar.startOfDay(for: day)
-        if workoutDates.contains(dayStart) {
-          status[i] = true
-        }
-      }
+    
+    return (0..<7).map { i in
+      guard let day = calendar.date(byAdding: .day, value: i, to: startOfWeek) else { return false }
+      return workoutDates.contains(calendar.startOfDay(for: day))
     }
-
-    return status
   }
   
   // MARK: - Analytics for Widgets
   
   var caloriesBurnedToday: Int {
-    let today = Calendar.current.startOfDay(for: Date())
-    let todaySessions = completedSessions.filter { Calendar.current.startOfDay(for: $0.date) == today }
-    // Stimiamo approssimativamente 400 kcal l'ora (molto basico, ma verosimile)
-    let totalSeconds = todaySessions.reduce(0) { $0 + $1.durationSeconds }
+    let calendar = Calendar.current
+    let today = calendar.startOfDay(for: Date())
+    let totalSeconds = completedSessions.reduce(0) { total, session in
+      calendar.startOfDay(for: session.date) == today ? total + session.durationSeconds : total
+    }
     return Int((Double(totalSeconds) / 3600.0) * 400.0)
   }
   
@@ -187,41 +150,214 @@ class WorkoutManager {
         name: "Panca Piana con Bilanciere",
         description: "Esercizio multiarticolare per la costruzione del gran pettorale.",
         primaryMuscle: .chest,
-        equipmentRequirement: "Panca e Bilanciere"
+        equipmentRequirement: "Panca e Bilanciere",
+        imageName: "bench_press_anim"
       ),
       ExerciseModel(
         name: "Squat",
         description: "Il re della parte inferiore. Sviluppa quadricipiti e glutei potenti.",
         primaryMuscle: .legs,
-        equipmentRequirement: "Rack e Bilanciere"
+        equipmentRequirement: "Rack e Bilanciere",
+        imageName: "squat_anim"
       ),
       ExerciseModel(
         name: "Trazioni alla Sbarra",
         description: "Esercizio base a corpo libero per l'ipertrofia del gran dorsale.",
         primaryMuscle: .back,
-        equipmentRequirement: "Sbarra per Trazioni"
+        equipmentRequirement: "Sbarra per Trazioni",
+        imageName: "pull_ups_anim"
       ),
       ExerciseModel(
         name: "Military Press",
         description: "Spinte verticali con bilanciere per rinforzare i deltoidi.",
         primaryMuscle: .shoulders,
-        equipmentRequirement: "Bilanciere"
+        equipmentRequirement: "Bilanciere",
+        imageName: "military_press_anim"
       ),
       ExerciseModel(
         name: "Curl Bicipiti con Manubri",
         description: "Classico esercizio di isolamento delle braccia.",
         primaryMuscle: .arms,
-        equipmentRequirement: "Manubri"
+        equipmentRequirement: "Manubri",
+        imageName: "bicep_curl_anim"
+      ),
+            ExerciseModel(
+        name: "Spinte con manubri su panca piana",
+        description: "Esercizio per il petto con manubri.",
+        primaryMuscle: .chest,
+        equipmentRequirement: "Manubri e Panca",
+        imageName: "dumbbell_bench_press_anim"
+      ),
+      ExerciseModel(
+        name: "Chest Press macchinario",
+        description: "Esercizio al macchinario per il grande pettorale.",
+        primaryMuscle: .chest,
+        equipmentRequirement: "Macchinario",
+        imageName: "chest_press_anim"
+      ),
+      ExerciseModel(
+        name: "Lento avanti con manubri da seduti",
+        description: "Schiena ben appoggiata allo schienale. Per le spalle.",
+        primaryMuscle: .shoulders,
+        equipmentRequirement: "Manubri e Panca",
+        imageName: "seated_press_anim"
+      ),
+      ExerciseModel(
+        name: "Alzate laterali con manubri",
+        description: "Esercizio di isolamento per i deltoidi laterali.",
+        primaryMuscle: .shoulders,
+        equipmentRequirement: "Manubri",
+        imageName: "lateral_raises_anim"
+      ),
+      ExerciseModel(
+        name: "Lat machine avanti",
+        description: "Trazione verticale per il dorso.",
+        primaryMuscle: .back,
+        equipmentRequirement: "Lat Machine",
+        imageName: "lat_pulldown_anim"
+      ),
+      ExerciseModel(
+        name: "Pushdown ai cavi",
+        description: "Esercizio di isolamento per i tricipiti.",
+        primaryMuscle: .arms,
+        equipmentRequirement: "Cavi",
+        imageName: "tricep_pushdown_anim"
+      ),
+      ExerciseModel(
+        name: "Leg Press a 45 gradi",
+        description: "Non staccare MAI il sedere e la parte bassa della schiena dallo schienale.",
+        primaryMuscle: .legs,
+        equipmentRequirement: "Leg Press",
+        imageName: "leg_press_anim"
+      ),
+      ExerciseModel(
+        name: "Leg Extension",
+        description: "Esercizio di isolamento per i quadricipiti.",
+        primaryMuscle: .legs,
+        equipmentRequirement: "Macchinario",
+        imageName: "leg_extension_anim"
+      ),
+      ExerciseModel(
+        name: "Leg Curl da seduto",
+        description: "Isolamento per i femorali da seduto.",
+        primaryMuscle: .legs,
+        equipmentRequirement: "Macchinario",
+        imageName: "seated_leg_curl_anim"
+      ),
+      ExerciseModel(
+        name: "Calf alla pressa",
+        description: "Esercizio per i polpacci alla pressa.",
+        primaryMuscle: .legs,
+        equipmentRequirement: "Leg Press",
+        imageName: "calf_press_anim"
+      ),
+      ExerciseModel(
+        name: "Plank",
+        description: "Esercizio statico per il core. Fermati non appena perdi la postura corretta.",
+        primaryMuscle: .core,
+        equipmentRequirement: "Corpo libero",
+        imageName: "bird_dog_anim"
+      ),
+      ExerciseModel(
+        name: "Bird-Dog",
+        description: "Esercizio per stabilità L4-L5.",
+        primaryMuscle: .core,
+        equipmentRequirement: "Corpo libero",
+        imageName: "bird_dog_anim"
+      ),
+      ExerciseModel(
+        name: "Iperestensioni su panca",
+        description: "A corpo libero, con esecuzione lenta e controllata.",
+        primaryMuscle: .core,
+        equipmentRequirement: "Panca per lombari",
+        imageName: "bird_dog_anim"
+      ),
+      ExerciseModel(
+        name: "Rematore al macchinario con appoggio",
+        description: "Tieni il petto saldamente in appoggio per proteggere la bassa schiena.",
+        primaryMuscle: .back,
+        equipmentRequirement: "Macchinario",
+        imageName: "lat_pulldown_anim"
+      ),
+      ExerciseModel(
+        name: "Lat machine con presa inversa",
+        description: "Variante per dorso e bicipiti.",
+        primaryMuscle: .back,
+        equipmentRequirement: "Lat Machine",
+        imageName: "lat_pulldown_anim"
+      ),
+      ExerciseModel(
+        name: "Pectoral Machine",
+        description: "Esercizio di isolamento per il petto (croci al macchinario).",
+        primaryMuscle: .chest,
+        equipmentRequirement: "Macchinario",
+        imageName: "chest_press_anim"
+      ),
+      ExerciseModel(
+        name: "Alzate laterali ai cavi",
+        description: "Tensione continua per i deltoidi.",
+        primaryMuscle: .shoulders,
+        equipmentRequirement: "Cavi",
+        imageName: "lateral_raises_anim"
+      ),
+      ExerciseModel(
+        name: "Curl con manubri su panca inclinata",
+        description: "Isolamento per bicipiti in massimo allungamento.",
+        primaryMuscle: .arms,
+        equipmentRequirement: "Manubri e Panca",
+        imageName: "bicep_curl_anim"
+      ),
+      ExerciseModel(
+        name: "Curl a martello ai cavi",
+        description: "Per bicipiti e brachioradiale.",
+        primaryMuscle: .arms,
+        equipmentRequirement: "Cavi",
+        imageName: "bicep_curl_anim"
+      ),
+      ExerciseModel(
+        name: "Leg Press (Pedana Alta)",
+        description: "Versione della Leg Press per massimizzare il focus sui glutei/femorali. Tieni i piedi posizionati in alto.",
+        primaryMuscle: .legs,
+        equipmentRequirement: "Leg Press",
+        imageName: "leg_press_anim"
+      ),
+      ExerciseModel(
+        name: "Affondi con manubri (Split Squat)",
+        description: "Esercizio per gambe e glutei (o Bulgarian Split Squat).",
+        primaryMuscle: .legs,
+        equipmentRequirement: "Manubri",
+        imageName: "squat_anim"
+      ),
+      ExerciseModel(
+        name: "Leg Curl disteso",
+        description: "Isolamento femorali da posizione prona.",
+        primaryMuscle: .legs,
+        equipmentRequirement: "Macchinario",
+        imageName: "seated_leg_curl_anim"
+      ),
+      ExerciseModel(
+        name: "Calf seduto",
+        description: "Polpacci da seduto (stimolo sul soleo).",
+        primaryMuscle: .legs,
+        equipmentRequirement: "Macchinario",
+        imageName: "calf_press_anim"
+      ),
+      ExerciseModel(
+        name: "Crunch inverso",
+        description: "Esercizio dinamico per l'addome.",
+        primaryMuscle: .core,
+        equipmentRequirement: "Corpo libero",
+        imageName: "bird_dog_anim"
       ),
       ExerciseModel(
         name: "Crunch a terra",
         description: "Flessioni del busto per stimolare il retto dell'addome.",
         primaryMuscle: .core,
-        equipmentRequirement: "Tappetino"
+        equipmentRequirement: "Tappetino",
+        imageName: "bird_dog_anim"
       ),
     ]
   }
-
 
   // MARK: - Funzioni Logiche di Rotazione & Completamento
 
@@ -271,31 +407,10 @@ class WorkoutManager {
     savePlansToDisk()
   }
 
-  /// Rimuove comodamente le schede dalla struttura dati, ideale per l'integrazione
-  /// col modifier `.onDelete(perform:)` della SwiftUI List.
-  func deletePlan(at offsets: IndexSet) {
-    myPlans.remove(atOffsets: offsets)
-    savePlansToDisk()
-  }
-
   /// Aggiunge una sessione completata e la salva su disco.
   func addCompletedSession(_ session: WorkoutSession) {
     completedSessions.append(session)
     saveSessionsToDisk()
-  }
-
-  /// Analizza logicamente una Scheda per estrarne i gruppi muscolari allenati, senza duplicati.
-  func extractTargetMuscleGroups(from plan: WorkoutPlan) -> [MuscleGroup] {
-    var uniqueGroups: [MuscleGroup] = []
-
-    for element in plan.exercises {
-      let targetMuscle = element.baseExercise.primaryMuscle
-      if !uniqueGroups.contains(targetMuscle) {
-        uniqueGroups.append(targetMuscle)
-      }
-    }
-
-    return uniqueGroups
   }
 
   func startOrResumeWorkout(plan: WorkoutPlan) {
@@ -318,50 +433,47 @@ class WorkoutManager {
 
   // MARK: - Persistenza Dati
 
-  private func getDocumentsDirectory() -> URL {
-    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-    return paths[0]
-  }
-
   private var plansFilePath: URL {
-    getDocumentsDirectory().appendingPathComponent("myPlans.json")
+    URL.documentsDirectory.appending(path: "myPlans.json")
   }
 
   private var sessionsFilePath: URL {
-    getDocumentsDirectory().appendingPathComponent("mySessions.json")
+    URL.documentsDirectory.appending(path: "mySessions.json")
   }
 
   private var exercisesFilePath: URL {
-    getDocumentsDirectory().appendingPathComponent("myExercises.json")
+    URL.documentsDirectory.appending(path: "myExercises.json")
   }
 
-  private func savePlansToDisk() {
+  // MARK: - Generic Persistence Helpers
+
+  private func saveToDisk<T: Encodable>(_ object: T, to url: URL) {
     do {
-      let data = try JSONEncoder().encode(myPlans)
-      try data.write(to: plansFilePath, options: [.atomic, .completeFileProtection])
+      let data = try JSONEncoder().encode(object)
+      Task.detached(priority: .background) {
+        do {
+          try data.write(to: url, options: [.atomic, .completeFileProtection])
+        } catch {
+          print("Impossibile salvare su disco (\(url.lastPathComponent)): \(error.localizedDescription)")
+        }
+      }
     } catch {
-      print("Impossibile salvare i piani su disco: \(error.localizedDescription)")
+      print("Errore di codifica: \(error.localizedDescription)")
     }
   }
 
-  private func saveSessionsToDisk() {
+  private func loadFromDisk<T: Decodable>(from url: URL, as type: T.Type) -> T? {
     do {
-      let data = try JSONEncoder().encode(completedSessions)
-      try data.write(to: sessionsFilePath, options: [.atomic, .completeFileProtection])
+      let data = try Data(contentsOf: url)
+      return try JSONDecoder().decode(T.self, from: data)
     } catch {
-      print("Impossibile salvare le sessioni su disco: \(error.localizedDescription)")
+      return nil
     }
   }
 
-  private func saveExercisesToDisk() {
-    do {
-      let data = try JSONEncoder().encode(exerciseDatabase)
-      try data.write(to: exercisesFilePath, options: [.atomic, .completeFileProtection])
-    } catch {
-      print("Impossibile salvare gli esercizi su disco: \(error.localizedDescription)")
-    }
-  }
-
+  private func savePlansToDisk() { saveToDisk(myPlans, to: plansFilePath) }
+  private func saveSessionsToDisk() { saveToDisk(completedSessions, to: sessionsFilePath) }
+  private func saveExercisesToDisk() { saveToDisk(exerciseDatabase, to: exercisesFilePath) }
 
   // MARK: - Inactivity Tracking
   
@@ -380,34 +492,90 @@ class WorkoutManager {
   @MainActor
   func cancelWorkoutGlobally() {
     stopGlobalRestTimer()
+    endWorkoutLiveActivity()
     ongoingWorkout = nil
     NotificationCenter.default.post(name: Notification.Name("ForceCloseActivity"), object: nil)
   }
 
   private var restTask: Task<Void, Never>?
 
+  /// Keeps exactly one Live Activity for the current workout and updates it only
+  /// when the workout state changes. The system renders the countdown itself.
+  @MainActor
+  func updateWorkoutLiveActivity(for ongoing: OngoingWorkoutState) {
+    let endTime = ongoing.restingEndTime ?? Date()
+    let state = WorkoutTimerAttributes.ContentState(
+      startTime: Date(),
+      restingEndTime: endTime,
+      exerciseName: nextExerciseTitle(for: ongoing),
+      isResting: ongoing.isResting
+    )
+
+    let activities = Activity<WorkoutTimerAttributes>.activities
+    if let activity = activities.first {
+      for duplicate in activities.dropFirst() {
+        Task { @MainActor in
+          await duplicate.end(
+            ActivityContent(state: duplicate.content.state, staleDate: nil),
+            dismissalPolicy: .immediate
+          )
+        }
+      }
+
+      Task { @MainActor in
+        await activity.update(ActivityContent(state: state, staleDate: nil))
+      }
+      return
+    }
+
+    guard ActivityAuthorizationInfo().areActivitiesEnabled else { return }
+
+    do {
+      let attributes = WorkoutTimerAttributes(planName: ongoing.plan.title)
+      _ = try Activity<WorkoutTimerAttributes>.request(
+        attributes: attributes,
+        content: ActivityContent(state: state, staleDate: nil),
+        pushType: nil
+      )
+    } catch {
+      print("Impossibile avviare la Live Activity: \(error.localizedDescription)")
+    }
+  }
+
+  @MainActor
+  func endWorkoutLiveActivity() {
+    for activity in Activity<WorkoutTimerAttributes>.activities {
+      Task { @MainActor in
+        await activity.end(
+          ActivityContent(state: activity.content.state, staleDate: nil),
+          dismissalPolicy: .immediate
+        )
+      }
+    }
+  }
 
   @MainActor
   func startGlobalRestTimer() {
     stopGlobalRestTimer()
     restTask = Task {
-      while true {
-        try? await Task.sleep(nanoseconds: 1_000_000_000)
-        if Task.isCancelled { break }
-
-        // Re-leggiamo lo stato FRESCO per non sovrascrivere modifiche dell'utente (kg/reps)
-        guard var ongoing = self.ongoingWorkout,
+      while !Task.isCancelled {
+        try? await Task.sleep(for: .seconds(1))
+        guard !Task.isCancelled,
+              var ongoing = self.ongoingWorkout,
               ongoing.isResting,
-              ongoing.remainingRestSeconds > 0 else {
+              let endTime = ongoing.restingEndTime
+        else {
           stopGlobalRestTimer()
           break
         }
 
-        // Modifichiamo SOLO il campo del timer
-        ongoing.remainingRestSeconds -= 1
-        self.ongoingWorkout = ongoing
+        let remainingSeconds = max(0, Int(ceil(endTime.timeIntervalSinceNow)))
+        if ongoing.remainingRestSeconds != remainingSeconds {
+          ongoing.remainingRestSeconds = remainingSeconds
+          self.ongoingWorkout = ongoing
+        }
 
-        if ongoing.remainingRestSeconds <= 0 {
+        if remainingSeconds == 0 {
           NotificationCenter.default.post(
             name: Notification.Name("RestFinishedGlobally"), object: nil)
           stopGlobalRestTimer()
@@ -423,44 +591,34 @@ class WorkoutManager {
     restTask = nil
   }
 
+  private func nextExerciseTitle(for ongoing: OngoingWorkoutState) -> String {
+    let currentExercise = ongoing.activeExercises[ongoing.currentExIndex]
+    if ongoing.currentSetIndex < currentExercise.sets.count - 1 {
+      return "Serie \(ongoing.currentSetIndex + 2)"
+    }
+    if ongoing.currentExIndex < ongoing.activeExercises.count - 1 {
+      return ongoing.activeExercises[ongoing.currentExIndex + 1].baseExercise.name
+    }
+    return "Fine allenamento"
+  }
+
   private func loadPlansFromDisk() -> Bool {
-    do {
-      let data = try Data(contentsOf: plansFilePath)
-      let decodedPlans = try JSONDecoder().decode([WorkoutPlan].self, from: data)
-      if !decodedPlans.isEmpty {
-        self.myPlans = decodedPlans
-        return true
-      }
-    } catch {
-      print("Nessun piano salvato: \(error.localizedDescription)")
+    if let decoded = loadFromDisk(from: plansFilePath, as: [WorkoutPlan].self), !decoded.isEmpty {
+      self.myPlans = decoded; return true
     }
     return false
   }
 
   private func loadSessionsFromDisk() -> Bool {
-    do {
-      let data = try Data(contentsOf: sessionsFilePath)
-      let decoded = try JSONDecoder().decode([WorkoutSession].self, from: data)
-      if !decoded.isEmpty {
-        self.completedSessions = decoded
-        return true
-      }
-    } catch {
-      print("Nessuna sessione salvata: \(error.localizedDescription)")
+    if let decoded = loadFromDisk(from: sessionsFilePath, as: [WorkoutSession].self), !decoded.isEmpty {
+      self.completedSessions = decoded; return true
     }
     return false
   }
 
   private func loadExercisesFromDisk() -> Bool {
-    do {
-      let data = try Data(contentsOf: exercisesFilePath)
-      let decoded = try JSONDecoder().decode([ExerciseModel].self, from: data)
-      if !decoded.isEmpty {
-        self.exerciseDatabase = decoded
-        return true
-      }
-    } catch {
-      print("Nessun esercizio salvato: \(error.localizedDescription)")
+    if let decoded = loadFromDisk(from: exercisesFilePath, as: [ExerciseModel].self), !decoded.isEmpty {
+      self.exerciseDatabase = decoded; return true
     }
     return false
   }

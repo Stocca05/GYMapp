@@ -4,4 +4,14 @@
    <FileRef
       location = "self:">
    </FileRef>
+   <Group
+      location = "group:Tests"
+      name = "Tests">
+      <FileRef
+         location = "group:WorkoutProgressAnalyticsChecks.swift">
+      </FileRef>
+      <FileRef
+         location = "group:run-progress-checks.sh">
+      </FileRef>
+   </Group>
 </Workspace>
