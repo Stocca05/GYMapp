@@ -22,10 +22,11 @@ struct ContentView: View {
             // MARK: - LOGICA DI NAVIGAZIONE
             // Inserisci qui le tue schermate (View). 
             // Il numero passato in .tag() deve corrispondere all'index assegnato al tasto!
-            TabView(selection: $selectedTab) {
+                        TabView(selection: $selectedTab) {
                 FoodView().tag(0)
                 HomeView().tag(1)
                 GymView().tag(2)
+                ProfileView().tag(3)
             }
             .onAppear { UITabBar.appearance().isHidden = true }
             .onDisappear { UITabBar.appearance().isHidden = false }
@@ -107,11 +108,13 @@ struct ContentView: View {
         // Per aggiungere una schermata: metti un tabButton qui, assicurandoti 
         // di agganciarlo a un nuovo index, e aggiungi la view corrispondente nel TabView in alto col nuovo .tag().
         HStack {
-            tabButton(icon: "fork.knife", iconFilled: "fork.knife", title: "Cibo", index: 0)
+                        tabButton(icon: "fork.knife", iconFilled: "fork.knife", title: "Cibo", index: 0)
             Spacer() // Mantiene le icone equamente distanziate
             tabButton(icon: "house.circle", iconFilled: "house.circle.fill", title: "Home", index: 1)
             Spacer()
             tabButton(icon: "dumbbell", iconFilled: "dumbbell.fill", title: "Palestra", index: 2)
+            Spacer()
+            tabButton(icon: "person.crop.circle", iconFilled: "person.crop.circle.fill", title: "Profilo", index: 3)
         }
         .padding(.horizontal, 30)
         .padding(.vertical, 15)
