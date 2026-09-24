@@ -1,16 +1,14 @@
-import ActivityKit
 import SwiftUI
 
 struct WorkoutActiveView: View {
   @Environment(\.dismiss) private var dismiss
   @Environment(WorkoutManager.self) private var workoutManager
   @Environment(ThemeManager.self) private var themeManager
+    @Environment(HealthManager.self) private var healthManager
+  @State private var viewModel: ActiveWorkoutViewModel? 
   @State private var progressExercise: ExerciseModel?
   @State private var showConcludeAlert = false
-
-  // Non abbiamo un `@State` separato qui!
-  // Tutta l'UI legge in diretta dal WorkoutManager per assicurare che
-  // uscendo e rientrando nulla venga perso.
+  @State private var showPlateCalculator = false
 
   @ViewBuilder
   var body: some View {
@@ -59,7 +57,7 @@ struct WorkoutActiveView: View {
       .alert("Termina Allenamento", isPresented: $showConcludeAlert) {
         Button("Termina", role: .destructive) {
           if let ongoing = workoutManager.ongoingWorkout {
-            concludeWorkout(ongoing: ongoing)
+            viewModel?.concludeWorkout(ongoing: ongoing) { dismiss() }
           }
         }
         Button("Annulla", role: .cancel) {}
@@ -69,22 +67,28 @@ struct WorkoutActiveView: View {
       .onReceive(
         NotificationCenter.default.publisher(for: Notification.Name("ForceCloseActivity"))
       ) { _ in
-        endLiveActivity()
+        workoutManager.endWorkoutLiveActivity()
         dismiss()
       }
       .onReceive(
         NotificationCenter.default.publisher(for: Notification.Name("RestFinishedGlobally"))
       ) { _ in
-        playSoundAndVibrate()
-        advanceWorkoutState()
+        viewModel?.playSoundAndVibrate()
+        viewModel?.advanceWorkoutState()
       }
       .onAppear {
-        if let o = workoutManager.ongoingWorkout {
-          if o.isResting && o.remainingRestSeconds <= 0 {
-            advanceWorkoutState()
-          } else {
-            startOrUpdateLiveActivity(ongoing: o)
+        if viewModel == nil { viewModel = ActiveWorkoutViewModel(workoutManager: workoutManager, healthManager: healthManager) }
+        guard let ongoing = workoutManager.ongoingWorkout else { return }
+
+        if ongoing.isResting,
+           let endTime = ongoing.restingEndTime,
+           endTime <= Date() {
+          viewModel?.advanceWorkoutState()
+        } else {
+          if ongoing.isResting {
+            workoutManager.startGlobalRestTimer()
           }
+          workoutManager.updateWorkoutLiveActivity(for: ongoing)
         }
       }
     } else {
@@ -101,8 +105,6 @@ struct WorkoutActiveView: View {
   private func headerView(ongoing: OngoingWorkoutState) -> some View {
     HStack {
       Button(action: {
-        // Il dismiss chiude semplicemente la finestra.
-        // L'allenamento vivo riposa pavidamente (o audacemente) nel WorkoutManager!
         dismiss()
       }) {
         Image(systemName: "chevron.down")
@@ -137,7 +139,6 @@ struct WorkoutActiveView: View {
           .clipShape(Capsule())
       }
 
-      // Orologio Globale
       Text(ongoing.startTime, style: .timer)
         .font(.system(.title3, design: .rounded).monospacedDigit().weight(.bold))
         .foregroundColor(themeManager.currentTheme.primaryColor)
@@ -156,26 +157,42 @@ struct WorkoutActiveView: View {
   ) -> some View {
     VStack(spacing: 24) {
 
-      // Icona Stilizzata dell'Esercizio
-      ZStack {
-        Circle()
-          .fill(themeManager.currentTheme.primaryColor.opacity(0.15))
-          .frame(width: 130, height: 130)
+      if let imageName = exercise.baseExercise.imageName, !imageName.isEmpty {
+        Image(imageName)
+          .resizable()
+          .scaledToFill()
+          .frame(width: 150, height: 150)
+          .clipShape(Circle())
+          .overlay(Circle().stroke(themeManager.currentTheme.primaryColor.opacity(0.3), lineWidth: 4))
+          .padding(.top, 16)
+      } else {
+        ZStack {
+          Circle()
+            .fill(themeManager.currentTheme.primaryColor.opacity(0.15))
+            .frame(width: 130, height: 130)
 
-        Image(systemName: exercise.baseExercise.primaryMuscle.iconName)
-          .font(.system(size: 55))
-          .foregroundColor(themeManager.currentTheme.primaryColor)
+          Image(systemName: exercise.baseExercise.primaryMuscle.iconName)
+            .font(.system(size: 55))
+            .foregroundColor(themeManager.currentTheme.primaryColor)
+        }
+        .padding(.top, 16)
       }
-      .padding(.top, 16)
 
-      // Titolo Esercizio Massiccio e Badge
       VStack(spacing: 6) {
-        Text(exercise.baseExercise.name.uppercased())
-          .font(.system(size: 32, weight: .heavy, design: .rounded))
-          .multilineTextAlignment(.center)
-          .foregroundColor(themeManager.currentTheme.textColor)
-          .lineLimit(2)
-          .minimumScaleFactor(0.5)
+        HStack(spacing: 8) {
+          Text(exercise.baseExercise.name.uppercased())
+            .font(.system(size: 32, weight: .heavy, design: .rounded))
+            .multilineTextAlignment(.center)
+            .foregroundColor(themeManager.currentTheme.textColor)
+            .lineLimit(2)
+            .minimumScaleFactor(0.5)
+
+          if ongoing.activeExercises.indices.contains(ongoing.currentExIndex - 1) && ongoing.activeExercises[ongoing.currentExIndex - 1].isLinkedToNext || exercise.isLinkedToNext {
+              Image(systemName: "link")
+                  .font(.title2.weight(.bold))
+                  .foregroundColor(.purple)
+          }
+        }
 
         Text(exercise.baseExercise.primaryMuscle.rawValue.uppercased())
           .font(.caption2.bold())
@@ -183,7 +200,6 @@ struct WorkoutActiveView: View {
       }
       .padding(.horizontal, 24)
 
-      // Badge Set Corrente
       Text("SERIE \(setIndex + 1) DI \(totalSets)")
         .font(.callout.weight(.black))
         .tracking(2)
@@ -192,15 +208,66 @@ struct WorkoutActiveView: View {
         .padding(.vertical, 6)
         .background(Color.black.opacity(0.8))
         .clipShape(Capsule())
+        
+      HStack(spacing: 12) {
+          Menu {
+              ForEach(SetType.allCases) { type in
+                  Button(action: { viewModel?.changeSetType(to: type) }) {
+                      Label(type.rawValue, systemImage: type.iconName)
+                  }
+              }
+          } label: {
+              HStack {
+                  Image(systemName: set.setType.iconName)
+                  Text(set.setType.rawValue)
+              }
+              .font(.subheadline.bold())
+              .padding(.horizontal, 12)
+              .padding(.vertical, 8)
+              .foregroundColor(.white)
+              .background(set.setType.color)
+              .clipShape(Capsule())
+          }
+          
+          Menu {
+              Button("Nessun RPE", action: { viewModel?.changeRPE(to: nil) })
+              ForEach(5...10, id: \.self) { val in
+                  Button("RPE \(val)", action: { viewModel?.changeRPE(to: val) })
+              }
+          } label: {
+              HStack {
+                  Text(set.rpe != nil ? "RPE \(set.rpe!)" : "+ RPE")
+              }
+              .font(.subheadline.bold())
+              .padding(.horizontal, 12)
+              .padding(.vertical, 8)
+              .foregroundColor(set.rpe != nil ? .white : themeManager.currentTheme.primaryColor)
+              .background(set.rpe != nil ? Color.blue : themeManager.currentTheme.primaryColor.opacity(0.15))
+              .clipShape(Capsule())
+          }
+      }
+      .padding(.top, 4)
 
-      // Regolatori KG e REPS Impilati in Verticale
       HStack(spacing: 50) {
-        // KG Area
         VStack(spacing: 12) {
-          Text("KG").font(.caption.weight(.black)).foregroundColor(.gray)
+          HStack {
+              Text("KG").font(.caption.weight(.black)).foregroundColor(.gray)
+              if let equipment = exercise.baseExercise.equipmentRequirement, equipment.lowercased().contains("bilanciere") {
+                  Button(action: { showPlateCalculator.toggle() }) {
+                      Image(systemName: "circle.grid.2x1.fill")
+                          .foregroundColor(themeManager.currentTheme.primaryColor)
+                  }
+                  .popover(isPresented: $showPlateCalculator) {
+                      if let target = set.targetWeight {
+                          PlateCalculatorView(targetWeight: target)
+                              .presentationCompactAdaptation(.popover)
+                      }
+                  }
+              }
+          }
 
           Button {
-            adjustWeight(by: 2.5)
+            viewModel?.adjustWeight(by: 2.5)
           } label: {
             stepVerticalButton("chevron.up")
           }
@@ -213,18 +280,17 @@ struct WorkoutActiveView: View {
             .frame(width: 110, height: 50)
 
           Button {
-            adjustWeight(by: -2.5)
+            viewModel?.adjustWeight(by: -2.5)
           } label: {
             stepVerticalButton("chevron.down")
           }
         }
 
-        // REPS Area
         VStack(spacing: 12) {
           Text("REPS").font(.caption.weight(.black)).foregroundColor(.gray)
 
           Button {
-            adjustReps(by: 1)
+            viewModel?.adjustReps(by: 1)
           } label: {
             stepVerticalButton("chevron.up")
           }
@@ -234,13 +300,27 @@ struct WorkoutActiveView: View {
             .frame(width: 80, height: 50)
 
           Button {
-            adjustReps(by: -1)
+            viewModel?.adjustReps(by: -1)
           } label: {
             stepVerticalButton("chevron.down")
           }
         }
       }
       .padding(.top, 8)
+      
+      TextField("Aggiungi note (es. set up, dolore...)", text: Binding(
+          get: { exercise.notes },
+          set: { newValue in
+              guard let ongoing = workoutManager.ongoingWorkout else { return }
+              viewModel?.updateNote(for: ongoing.currentExIndex, text: newValue)
+          }
+      ), axis: .vertical)
+      .font(.body)
+      .padding(12)
+      .background(Color.gray.opacity(0.15))
+      .cornerRadius(12)
+      .padding(.horizontal, 24)
+      .padding(.top, 16)
     }
     .transition(
       .asymmetric(insertion: .scale(scale: 0.9).combined(with: .opacity), removal: .opacity))
@@ -254,8 +334,6 @@ struct WorkoutActiveView: View {
       .background(themeManager.currentTheme.primaryColor.opacity(0.15))
       .clipShape(RoundedRectangle(cornerRadius: 12))
   }
-
-
 
   private func restView(ongoing: OngoingWorkoutState) -> some View {
     VStack(spacing: 40) {
@@ -288,7 +366,7 @@ struct WorkoutActiveView: View {
       .frame(width: 280, height: 280)
       
       HStack(spacing: 32) {
-          Button(action: { adjustTimer(by: -30) }) {
+          Button(action: { viewModel?.adjustTimer(by: -30) }) {
               Text("-30s")
                   .font(.headline)
                   .foregroundStyle(themeManager.currentTheme.primaryColor)
@@ -298,7 +376,7 @@ struct WorkoutActiveView: View {
                   .clipShape(Capsule())
           }
           
-          Button(action: { adjustTimer(by: 30) }) {
+          Button(action: { viewModel?.adjustTimer(by: 30) }) {
               Text("+30s")
                   .font(.headline)
                   .foregroundStyle(themeManager.currentTheme.primaryColor)
@@ -309,8 +387,7 @@ struct WorkoutActiveView: View {
           }
       }
 
-      // Dimostrazione di cosa c'è dopo
-      if let nextInfo = peekNextSet(ongoing: ongoing) {
+      if let nextInfo = viewModel?.peekNextSet(ongoing: ongoing) {
         Text("Prossimo: \(nextInfo)")
           .font(.subheadline.weight(.medium))
           .foregroundColor(.secondary)
@@ -321,50 +398,38 @@ struct WorkoutActiveView: View {
         insertion: .scale(scale: 1.1).combined(with: .opacity),
         removal: .scale(scale: 0.9).combined(with: .opacity)))
   }
-  
-  private func adjustTimer(by seconds: Int) {
-    guard var ongoing = workoutManager.ongoingWorkout else { return }
-    let newTime = max(1, ongoing.remainingRestSeconds + seconds)
-    
-    // Aggiorniamo sia il totale (per non sballare il cerchio) sia il rimanente
-    ongoing.totalRestSeconds = max(ongoing.totalRestSeconds, newTime)
-    ongoing.remainingRestSeconds = newTime
-    ongoing.restingEndTime = Date().addingTimeInterval(TimeInterval(newTime))
-    
-    withAnimation(.spring()) {
-        workoutManager.ongoingWorkout = ongoing
-    }
-    
-    // Aggiorna la Live Activity in background per riflettere il nuovo tempo
-    startOrUpdateLiveActivity(ongoing: ongoing)
-  }
 
   private func footerCTA(ongoing: OngoingWorkoutState, currentSet: WorkoutSet) -> some View {
-    // Logica per sapere se siamo all'ultimissimo set dell'ultimissimo esercizio
-    let isAbsoluteLast =
-      (ongoing.currentExIndex == ongoing.activeExercises.count - 1)
-      && (ongoing.currentSetIndex == ongoing.activeExercises[ongoing.currentExIndex].sets.count - 1)
+    let nextPos = (viewModel?.findNextSequencePosition(fromEx: ongoing.currentExIndex, fromSet: ongoing.currentSetIndex, ongoing: ongoing) ?? nil)
+    let isAbsoluteLast = (nextPos == nil)
+
+    // Se fa parte di un superset ed è linked, non si salta il riposo, NON C'È PROPRIO IL RIPOSO!
+    // Salta a pie' pari al prossimo ex
+    let isSupersetLink = ongoing.activeExercises[ongoing.currentExIndex].isLinkedToNext
 
     let buttonLabel =
       ongoing.isResting
-      ? "SALTA RIPOSO" : (isAbsoluteLast ? "TERMINA ALLENAMENTO" : "COMPLETA SERIE")
-    let buttonColor = ongoing.isResting ? Color.orange : themeManager.currentTheme.primaryColor
+      ? "SALTA RIPOSO" : (isAbsoluteLast ? "TERMINA ALLENAMENTO" : (isSupersetLink ? "VAI AL SUPERSET" : "COMPLETA SERIE E RIPOSA"))
+    
+    let buttonColor = ongoing.isResting ? Color.orange : (isSupersetLink ? Color.purple : themeManager.currentTheme.primaryColor)
 
     return Button(action: {
       if ongoing.isResting {
-        // Salta Riposo
-        playSoundAndVibrate()
-        advanceWorkoutState()
+        viewModel?.playSoundAndVibrate()
+        viewModel?.advanceWorkoutState()
       } else {
-        // Completa Set
         let generator = UIImpactFeedbackGenerator(style: .heavy)
         generator.impactOccurred()
-        completeCurrentSetAndRest(
-          setId: currentSet.id, restSeconds: currentSet.restTimeInSeconds, isLast: isAbsoluteLast)
+        viewModel?.completeCurrentSetAndRest(
+          setId: currentSet.id, restSeconds: currentSet.restTimeInSeconds, isLast: isAbsoluteLast, isSupersetLink: isSupersetLink, nextPos: nextPos, onConclude: {
+              if let ongoing = workoutManager.ongoingWorkout {
+                  viewModel?.concludeWorkout(ongoing: ongoing) { dismiss() }
+              }
+          })
       }
     }) {
       Text(buttonLabel)
-        .font(.title3.weight(.black))
+        .font(.subheadline.weight(.black))
         .foregroundColor(.white)
         .frame(maxWidth: .infinity)
         .padding(.vertical, 24)
@@ -376,191 +441,5 @@ struct WorkoutActiveView: View {
     .padding(.bottom, 32)
   }
 
-  // MARK: - Live Activity Helpers
 
-  @State private var currentActivity: Activity<WorkoutTimerAttributes>? = nil
-
-  private func startOrUpdateLiveActivity(ongoing: OngoingWorkoutState) {
-    let restSeconds = ongoing.isResting ? ongoing.remainingRestSeconds : 0
-    let futureEnd = ongoing.isResting ? Date().addingTimeInterval(TimeInterval(restSeconds)) : Date()
-    let nextExerciseTitle = peekNextSet(ongoing: ongoing) ?? "Fine Allenamento"
-
-    let state = WorkoutTimerAttributes.ContentState(
-      startTime: Date(), restingEndTime: futureEnd, exerciseName: nextExerciseTitle, isResting: ongoing.isResting)
-
-    if let activity = currentActivity {
-      // Aggiorna la Live Activity esistente
-      Task {
-        await activity.update(ActivityContent(state: state, staleDate: nil))
-      }
-    } else {
-      // Crea una nuova Live Activity
-      let attributes = WorkoutTimerAttributes(planName: ongoing.plan.title)
-      if ActivityAuthorizationInfo().areActivitiesEnabled {
-        do {
-          let activity = try Activity<WorkoutTimerAttributes>.request(
-            attributes: attributes,
-            content: ActivityContent(state: state, staleDate: nil),
-            pushType: nil
-          )
-          self.currentActivity = activity
-        } catch {
-          print("Impossibile lanciare Live Activity: \(error.localizedDescription)")
-        }
-      }
-    }
-  }
-
-  private func endLiveActivity() {
-    workoutManager.stopGlobalRestTimer()
-    if let activity = currentActivity {
-      Task {
-        await activity.end(ActivityContent(state: activity.content.state, staleDate: nil), dismissalPolicy: .immediate)
-      }
-      currentActivity = nil
-    } else {
-      // Fallback: chiudi tutte le activity del tipo
-      Task {
-        for activity in Activity<WorkoutTimerAttributes>.activities {
-          await activity.end(ActivityContent(state: activity.content.state, staleDate: nil), dismissalPolicy: .immediate)
-        }
-      }
-    }
-  }
-
-  // MARK: - Logic
-
-  private func completeCurrentSetAndRest(setId: UUID, restSeconds: Int, isLast: Bool) {
-    workoutManager.registerInteraction()
-    guard var ongoing = workoutManager.ongoingWorkout else { return }
-
-    ongoing.completedSetIDs.insert(setId)
-
-    if isLast {
-      // Fine dell'allenamento!
-      concludeWorkout(ongoing: ongoing)
-    } else {
-      // Entriamo in Rest Mode
-      ongoing.totalRestSeconds = restSeconds
-      ongoing.remainingRestSeconds = restSeconds
-      ongoing.isResting = true
-      ongoing.restingEndTime = Date().addingTimeInterval(TimeInterval(restSeconds))
-      withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
-        workoutManager.ongoingWorkout = ongoing
-      }
-
-      // Avviamo il timer globale in background!
-      workoutManager.startGlobalRestTimer()
-
-      // Lancia o aggiorna la Live Activity!
-      startOrUpdateLiveActivity(ongoing: ongoing)
-    }
-
-  }
-
-  private func advanceWorkoutState() {
-    workoutManager.registerInteraction()
-
-    guard var ongoing = workoutManager.ongoingWorkout else { return }
-
-    // Fine riposo, andiamo avanti al prossimo set logico
-    ongoing.isResting = false
-
-    let totalSetsInCurrentEx = ongoing.activeExercises[ongoing.currentExIndex].sets.count
-
-    if ongoing.currentSetIndex < totalSetsInCurrentEx - 1 {
-      // C'è un altro set in questo esercizio
-      ongoing.currentSetIndex += 1
-    } else if ongoing.currentExIndex < ongoing.activeExercises.count - 1 {
-      // Lavoriamo sull'esercizio successivo, set 0
-      ongoing.currentExIndex += 1
-      ongoing.currentSetIndex = 0
-    }
-
-    withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) {
-      workoutManager.ongoingWorkout = ongoing
-    }
-    startOrUpdateLiveActivity(ongoing: ongoing)
-  }
-
-  private func concludeWorkout(ongoing: OngoingWorkoutState) {
-    endLiveActivity()
-    let completedExercises = ongoing.activeExercises.compactMap { exercise -> WorkoutExercise? in
-      var completedExercise = exercise
-      completedExercise.sets = exercise.sets
-        .filter { ongoing.completedSetIDs.contains($0.id) }
-        .map { set in
-          var completedSet = set
-          completedSet.isCompleted = true
-          return completedSet
-        }
-      return completedExercise.sets.isEmpty ? nil : completedExercise
-    }
-    let calcVolume = completedExercises.flatMap(\.sets).reduce(0.0) { volume, set in
-      volume + (set.targetWeight ?? 0) * Double(set.targetReps)
-    }
-
-    // SALVATAGGIO PROGRESSIVE OVERLOAD
-    // Modifichiamo la scheda originaria del Manager con i nuovi dati salvati
-    if let idx = workoutManager.myPlans.firstIndex(where: { $0.id == ongoing.plan.id }) {
-      var updatedPlan = workoutManager.myPlans[idx]
-      updatedPlan.exercises = ongoing.activeExercises
-      workoutManager.savePlan(updatedPlan)  // savePlan scatena già il salvataggio su disco
-    }
-
-    let session = WorkoutSession(
-      planId: ongoing.plan.id,
-      date: ongoing.startTime,
-      totalVolume: Int(calcVolume),
-      durationSeconds: Int(Date().timeIntervalSince(ongoing.startTime)),
-      completedExercises: completedExercises
-    )
-
-    let generator = UINotificationFeedbackGenerator()
-    generator.notificationOccurred(.success)
-
-    workoutManager.addCompletedSession(session)
-    workoutManager.markWorkoutAsCompleted(ongoing.plan)  // Fallback al vecchio mark
-
-    // Annienta l'allenamento in corso! Abbiamo finito.
-    workoutManager.ongoingWorkout = nil
-    dismiss()
-  }
-
-  private func playSoundAndVibrate() {
-    let feedback = UINotificationFeedbackGenerator()
-    feedback.notificationOccurred(.warning)  // Un buon punch pattern!
-  }
-
-  private func adjustWeight(by amount: Double) {
-    workoutManager.registerInteraction()
-    guard var ongoing = workoutManager.ongoingWorkout else { return }
-    let exIdx = ongoing.currentExIndex
-    let setIdx = ongoing.currentSetIndex
-    let current = ongoing.activeExercises[exIdx].sets[setIdx].targetWeight ?? 0.0
-    let newValue = max(0.0, current + amount)
-    ongoing.activeExercises[exIdx].sets[setIdx].targetWeight = newValue > 0 ? newValue : nil
-    workoutManager.ongoingWorkout = ongoing
-  }
-
-  private func adjustReps(by amount: Int) {
-    workoutManager.registerInteraction()
-    guard var ongoing = workoutManager.ongoingWorkout else { return }
-    let exIdx = ongoing.currentExIndex
-    let setIdx = ongoing.currentSetIndex
-    let current = ongoing.activeExercises[exIdx].sets[setIdx].targetReps
-    ongoing.activeExercises[exIdx].sets[setIdx].targetReps = max(1, current + amount)
-    workoutManager.ongoingWorkout = ongoing
-  }
-
-  private func peekNextSet(ongoing: OngoingWorkoutState) -> String? {
-    let totalSets = ongoing.activeExercises[ongoing.currentExIndex].sets.count
-
-    if ongoing.currentSetIndex < totalSets - 1 {
-      return "Serie \(ongoing.currentSetIndex + 2)"
-    } else if ongoing.currentExIndex < ongoing.activeExercises.count - 1 {
-      return ongoing.activeExercises[ongoing.currentExIndex + 1].baseExercise.name
-    }
-    return nil
-  }
 }

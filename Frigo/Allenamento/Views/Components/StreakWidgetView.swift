@@ -2,7 +2,7 @@ import SwiftUI
 
 struct StreakWidgetView: View {
     @Environment(ThemeManager.self) private var themeManager
-    @Environment(WorkoutManager.self) private var workoutManager
+    @Environment(HealthManager.self) private var healthManager
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -20,8 +20,8 @@ struct StreakWidgetView: View {
             }
             
             VStack(alignment: .leading, spacing: 4) {
-                Text("\(workoutManager.currentStreak) Giorni")
-                    .font(.system(.title2, design: .rounded, weight: .heavy))
+                Text("\(healthManager.workoutStreak) Allenam.")
+                    .font(.system(.title3, design: .rounded, weight: .heavy)).minimumScaleFactor(0.8).lineLimit(1)
                     .foregroundStyle(themeManager.currentTheme.textColor)
                 Text("Costanza")
                     .font(.subheadline)
@@ -32,7 +32,7 @@ struct StreakWidgetView: View {
             Spacer(minLength: 0)
             
             HStack(spacing: 6) {
-                let weekStatus = workoutManager.currentWeekStatus
+                let weekStatus = healthManager.getWeekStatus()
                 ForEach(0..<7, id: \.self) { index in
                     Circle()
                         .fill(weekStatus[index] ? .orange : themeManager.currentTheme.secondaryColor.opacity(0.3))
@@ -51,7 +51,7 @@ struct StreakWidgetView: View {
 #Preview {
     StreakWidgetView()
         .environment(ThemeManager())
-        .environment(WorkoutManager())
+        .environment(HealthManager())
         .frame(width: 170, height: 170)
         .padding()
         .background(Color(uiColor: .systemGroupedBackground))

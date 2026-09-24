@@ -439,6 +439,8 @@
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Consenti l'accesso alla fotocamera per aggiungere foto ai prodotti del frigorifero.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Consenti l'accesso ai dati Salute per mostrare i progressi dei tuoi allenamenti.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Consenti il salvataggio degli allenamenti e delle calorie nell'app Salute.";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -479,6 +481,8 @@
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Consenti l'accesso alla fotocamera per aggiungere foto ai prodotti del frigorifero.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Consenti l'accesso ai dati Salute per mostrare i progressi dei tuoi allenamenti.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Consenti il salvataggio degli allenamenti e delle calorie nell'app Salute.";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;

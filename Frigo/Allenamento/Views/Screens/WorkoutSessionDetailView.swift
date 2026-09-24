@@ -19,6 +19,12 @@ struct WorkoutSessionDetailView: View {
       }
       ForEach(session.completedExercises) { exercise in
         Section(exercise.baseExercise.name) {
+          if !exercise.notes.isEmpty {
+            Text("Note: \(exercise.notes)")
+              .font(.footnote)
+              .foregroundColor(.secondary)
+              .italic()
+          }
           WorkoutSetHistoryRows(sets: exercise.sets)
         }
       }

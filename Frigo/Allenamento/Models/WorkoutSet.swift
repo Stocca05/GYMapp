@@ -28,7 +28,7 @@ enum SetType: String, Codable, CaseIterable, Hashable, Identifiable {
     }
 }
 
-struct WorkoutSet: Identifiable, Codable, Hashable {
+struct WorkoutSet: Identifiable, Codable, Hashable, Sendable {
     let id: UUID
     var targetReps: Int
     var targetWeight: Double?

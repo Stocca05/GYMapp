@@ -1,15 +1,11 @@
 import SwiftUI
 
 struct FoodView: View {
-    @Environment(ThemeManager.self) private var themeManager
-    
     var body: some View {
-        themeManager.currentTheme.backgroundColor
-            .ignoresSafeArea()
+        CiboRootView()
     }
 }
 
 #Preview {
     FoodView()
-        .environment(ThemeManager())
 }

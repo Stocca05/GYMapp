@@ -6,10 +6,11 @@ import SwiftUI
 struct HeroWorkoutBanner: View {
     @Environment(WorkoutManager.self) private var workoutManager
     @Environment(ThemeManager.self) private var themeManager
-    
-    @State private var isShowingCreator = false
+
+    var onCreate: () -> Void
+    var onPlay: (WorkoutPlan) -> Void
+
     @State private var forceShowNext = false
-    @State private var planToPlay: WorkoutPlan? = nil
     
     var body: some View {
         ZStack {
@@ -35,24 +36,8 @@ struct HeroWorkoutBanner: View {
         // Clip continuo per un effetto smussato senza spigoli rigidi
         .clipShape(RoundedRectangle(cornerRadius: 32, style: .continuous))
         .shadow(color: shadowColor, radius: 15, x: 0, y: 10)
-        .fullScreenCover(isPresented: $isShowingCreator) {
-            WorkoutCreatorView()
-        }
-        .fullScreenCover(item: $planToPlay) { plan in
-            WorkoutActiveView()
-                .onAppear {
-                    if workoutManager.ongoingWorkout?.plan.id != plan.id {
-                        workoutManager.startOrResumeWorkout(plan: plan)
-                    }
-                }
-        }
-        .onChange(of: planToPlay) { _, newValue in
-            if newValue == nil {
-                forceShowNext = false
-            }
-        }
     }
-    
+
     // MARK: - Componenti di Stato (Macchina a Stati)
     
     /// STATO A: L'utente non ha memorizzato alcun piano.
@@ -69,7 +54,7 @@ struct HeroWorkoutBanner: View {
                 .padding(.bottom, 10)
             
             Button {
-                isShowingCreator = true
+                onCreate()
             } label: {
                 HStack {
                     Image(systemName: "plus.circle.fill")
@@ -109,7 +94,7 @@ struct HeroWorkoutBanner: View {
             Button {
                 let generator = UIImpactFeedbackGenerator(style: .heavy)
                 generator.impactOccurred()
-                workoutManager.startOrResumeWorkout(plan: plan); planToPlay = plan
+                onPlay(plan)
             } label: {
                 Text(workoutManager.ongoingWorkout != nil ? "Riprendi Allenamento" : "Inizia l'Allenamento")
                     .font(.headline)
@@ -206,7 +191,7 @@ struct HeroWorkoutBanner: View {
 }
 
 #Preview {
-    HeroWorkoutBanner()
+    HeroWorkoutBanner(onCreate: {}, onPlay: { _ in })
         .environment(WorkoutManager())
         .environment(ThemeManager())
         .padding()

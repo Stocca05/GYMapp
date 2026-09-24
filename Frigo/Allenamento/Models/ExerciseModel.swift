@@ -1,6 +1,6 @@
 import Foundation
 
-enum MuscleGroup: String, Codable, CaseIterable {
+enum MuscleGroup: String, Codable, CaseIterable, Sendable {
     case chest = "Petto"
     case back = "Dorso"
     case legs = "Gambe"
@@ -24,7 +24,7 @@ enum MuscleGroup: String, Codable, CaseIterable {
     }
 }
 
-struct ExerciseModel: Identifiable, Codable, Hashable {
+struct ExerciseModel: Identifiable, Codable, Hashable, Sendable {
     let id: UUID
     let name: String
     let description: String?

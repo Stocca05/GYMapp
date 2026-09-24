@@ -35,6 +35,11 @@ struct ExerciseProgressDay: Identifiable {
   var id: Date { date }
   var sets: [WorkoutSet] { sessions.flatMap(\.sets) }
   var maxWeight: Double? { sets.compactMap(\.targetWeight).max() }
+  var estimated1RM: Double? {
+    let validSets = sets.filter { $0.targetWeight != nil && $0.targetReps > 0 }
+    return validSets.map { $0.targetWeight! * (1.0 + Double($0.targetReps) / 30.0) }.max()
+  }
+
   var totalReps: Int { sets.reduce(0) { $0 + $1.targetReps } }
   var missingWeightCount: Int { sets.filter { $0.targetWeight == nil }.count }
 
@@ -66,6 +71,7 @@ struct ExerciseProgressHistory: Identifiable {
 }
 
 enum ProgressMetric: String, CaseIterable, Identifiable {
+  case estimated1RM = "Stima 1RM"
   case maxWeight = "Carico"
   case volume = "Volume"
   case repsAtWeight = "Ripetizioni al carico"
@@ -75,7 +81,7 @@ enum ProgressMetric: String, CaseIterable, Identifiable {
   var id: Self { self }
   var unit: String {
     switch self {
-    case .maxWeight: return "kg"
+    case .estimated1RM, .maxWeight: return "kg"
     case .volume: return "kg × rip."
     case .repsAtWeight, .reps: return "rip."
     case .sets: return "serie"
@@ -84,6 +90,7 @@ enum ProgressMetric: String, CaseIterable, Identifiable {
 
   var explanation: String {
     switch self {
+    case .estimated1RM: return "Massimale stimato tramite formula Epley per tenere traccia della progressione di carico nel tempo."
     case .maxWeight: return "Il carico massimo registrato in ogni giornata."
     case .volume: return "Peso × ripetizioni, sommati sulle serie della giornata."
     case .repsAtWeight: return "Il massimo di ripetizioni in una singola serie al carico scelto."
@@ -96,6 +103,7 @@ enum ProgressMetric: String, CaseIterable, Identifiable {
 
   func value(for day: ExerciseProgressDay, weight: Double? = nil) -> Double? {
     switch self {
+    case .estimated1RM: return day.estimated1RM
     case .maxWeight: return day.maxWeight
     case .volume: return day.totalVolume
     case .repsAtWeight:
@@ -134,8 +142,10 @@ extension WorkoutManager {
   {
     var exercises: [UUID: ExerciseModel] = [:]
     var samples: [UUID: [ExerciseProgressSession]] = [:]
+    
+    let relevantSessions = completedSessions.filter { $0.date <= now }.sorted(by: { $0.date < $1.date })
 
-    for session in completedSessions.sorted(by: { $0.date < $1.date }) where session.date <= now {
+    for session in relevantSessions {
       let grouped = Dictionary(grouping: session.completedExercises, by: { $0.baseExercise.id })
       for (exerciseID, entries) in grouped {
         let sets = entries.flatMap(\.sets)

@@ -7,7 +7,7 @@ struct ContentView: View {
     // MARK: - LOGICA DI STATO
     @Environment(WorkoutManager.self) private var workoutManager
     
-    // Variabile che tiene traccia della scheda aperta (0, 1 o 2).
+    // Variabile che tiene traccia della scheda aperta.
     @State private var selectedTab = 1
     
     // Variabile per mostrare l'allenamento in corso in full screen
@@ -26,7 +26,6 @@ struct ContentView: View {
                 FoodView().tag(0)
                 HomeView().tag(1)
                 GymView().tag(2)
-                ProfileView().tag(3)
             }
             .onAppear { UITabBar.appearance().isHidden = true }
             .onDisappear { UITabBar.appearance().isHidden = false }
@@ -113,8 +112,6 @@ struct ContentView: View {
             tabButton(icon: "house.circle", iconFilled: "house.circle.fill", title: "Home", index: 1)
             Spacer()
             tabButton(icon: "dumbbell", iconFilled: "dumbbell.fill", title: "Palestra", index: 2)
-            Spacer()
-            tabButton(icon: "person.crop.circle", iconFilled: "person.crop.circle.fill", title: "Profilo", index: 3)
         }
         .padding(.horizontal, 30)
         .padding(.vertical, 15)

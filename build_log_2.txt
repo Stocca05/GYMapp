@@ -1,0 +1,994 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -project Frigo.xcodeproj -scheme Frigo -destination "platform=iOS Simulator,name=iPhone 17" build
+
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (2 targets)
+    Target 'Frigo' in project 'Frigo'
+        ➜ Explicit dependency on target 'FrigoWidgetExtension' in project 'Frigo'
+    Target 'FrigoWidgetExtension' in project 'Frigo' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator27.0.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/usr/bin/actool --version --output-format xml1
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/usr/bin/actool --print-asset-tag-combinations --output-format xml1 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Assets.xcassets
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc --version
+
+ExecuteExternalTool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld -version_details
+
+Build description signature: 5610f4645c18914212a35d6f1c7d0845
+Build description path: /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/XCBuildData/5610f4645c18914212a35d6f1c7d0845.xcbuilddata
+ClangStatCache /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator27.0.sdk /Users/stocca/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator27.0-24A430-8dc58220667be655e1bcc261a7455254.sdkstatcache
+    cd /Users/stocca/Documents/Programmazione/Frigo/Frigo.xcodeproj
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator27.0.sdk -o /Users/stocca/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator27.0-24A430-8dc58220667be655e1bcc261a7455254.sdkstatcache
+
+CreateBuildDirectory /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator
+    cd /Users/stocca/Documents/Programmazione/Frigo/Frigo.xcodeproj
+    builtin-create-build-directory /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator
+
+CreateBuildDirectory /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator
+    cd /Users/stocca/Documents/Programmazione/Frigo/Frigo.xcodeproj
+    builtin-create-build-directory /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo-4dea718f4a5f51ef685cc979232cebbe-VFS-iphonesimulator/all-product-headers.yaml
+    cd /Users/stocca/Documents/Programmazione/Frigo/Frigo.xcodeproj
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo-4dea718f4a5f51ef685cc979232cebbe-VFS-iphonesimulator/all-product-headers.yaml
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-project-headers.hmap (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-project-headers.hmap
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension.hmap (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension.hmap
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-DebugDylibInstallName-normal-arm64.txt (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-DebugDylibInstallName-normal-arm64.txt
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-all-non-framework-target-headers.hmap (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-all-non-framework-target-headers.hmap
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension.SwiftConstValuesFileList (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension.SwiftConstValuesFileList
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension-OutputFileMap.json (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension-OutputFileMap.json
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension_const_extract_protocols.json (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension_const_extract_protocols.json
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension.SwiftFileList (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension.SwiftFileList
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension.LinkFileList (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension.LinkFileList
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension.DependencyStaticMetadataFileList (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension.DependencyStaticMetadataFileList
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension.DependencyMetadataFileList (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension.DependencyMetadataFileList
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-own-target-headers.hmap (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-own-target-headers.hmap
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-generated-files.hmap (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-generated-files.hmap
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-all-target-headers.hmap (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-all-target-headers.hmap
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-DebugEntryPoint-normal-arm64.txt (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-DebugEntryPoint-normal-arm64.txt
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-DebugDylibPath-normal-arm64.txt (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-DebugDylibPath-normal-arm64.txt
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/DerivedSources/Entitlements-Simulated.plist (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/DerivedSources/Entitlements-Simulated.plist
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/empty-Frigo.plist (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/empty-Frigo.plist
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo_const_extract_protocols.json (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo_const_extract_protocols.json
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo.SwiftFileList (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo.SwiftFileList
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo.SwiftConstValuesFileList (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo.SwiftConstValuesFileList
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo.LinkFileList (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo.LinkFileList
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo-OutputFileMap.json (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo-OutputFileMap.json
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo.DependencyStaticMetadataFileList (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo.DependencyStaticMetadataFileList
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo.hmap (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo.hmap
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo.DependencyMetadataFileList (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo.DependencyMetadataFileList
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo-project-headers.hmap (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo-project-headers.hmap
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo-own-target-headers.hmap (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo-own-target-headers.hmap
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo-generated-files.hmap (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo-generated-files.hmap
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo-all-target-headers.hmap (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo-all-target-headers.hmap
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo-all-non-framework-target-headers.hmap (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo-all-non-framework-target-headers.hmap
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo-DebugDylibPath-normal-arm64.txt (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo-DebugDylibPath-normal-arm64.txt
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo-DebugDylibInstallName-normal-arm64.txt (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo-DebugDylibInstallName-normal-arm64.txt
+
+MkDir /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.appex (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    /bin/mkdir -p /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.appex
+
+WriteAuxiliaryFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/DerivedSources/Entitlements-Simulated.plist (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    write-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/DerivedSources/Entitlements-Simulated.plist
+
+MkDir /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    /bin/mkdir -p /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app
+
+MkDir /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/PlugIns (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    /bin/mkdir -p /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/PlugIns
+
+ProcessProductPackaging "" /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension.appex-Simulated.xcent (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    
+    Entitlements:
+    
+    {
+    "application-identifier" = "6RTK6U5F9B.com.lucaraonapersonalteam.Frigo.WidgetExtension";
+}
+    
+    builtin-productPackagingUtility -entitlements -format xml -o /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension.appex-Simulated.xcent
+
+ProcessProductPackagingDER /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension.appex-Simulated.xcent /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension.appex-Simulated.xcent.der (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    /usr/bin/derq query -f xml -i /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension.appex-Simulated.xcent -o /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension.appex-Simulated.xcent.der --raw
+
+Ld /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.appex/__preview.dylib normal (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios27.0-simulator -dynamiclib -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator27.0.sdk -O0 -Xlinker -no_warn_duplicate_libraries -L/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator -F/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator -install_name @rpath/FrigoWidgetExtension.debug.dylib -Xlinker -dead_strip -rdynamic -Xlinker -no_deduplicate -Xlinker -objc_abi_version -Xlinker 2 -Xlinker -debug_variant -Xlinker -dependency_info -Xlinker /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension_dependency_info.dat -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __entitlements -Xlinker /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension.appex-Simulated.xcent -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __ents_der -Xlinker /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension.appex-Simulated.xcent.der -Xlinker -no_adhoc_codesign -o /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.appex/__preview.dylib
+
+GenerateAssetSymbols /Users/stocca/Documents/Programmazione/Frigo/FrigoWidget/Assets.xcassets (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    /Applications/Xcode.app/Contents/Developer/usr/bin/actool /Users/stocca/Documents/Programmazione/Frigo/FrigoWidget/Assets.xcassets --compile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.appex --output-format human-readable-text --notices --warnings --export-dependency-info /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/assetcatalog_dependencies --output-partial-info-plist /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/assetcatalog_generated_info.plist --accent-color AccentColor --widget-background-color WidgetBackground --compress-pngs --enable-on-demand-resources NO --standalone-icon-behavior all --development-region en --target-device iphone --target-device ipad --minimum-deployment-target 27.0 --platform iphonesimulator --bundle-identifier com.lucaraonapersonalteam.Frigo.WidgetExtension --generate-swift-asset-symbols /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/DerivedSources/GeneratedAssetSymbols.swift --generate-objc-asset-symbols /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/DerivedSources/GeneratedAssetSymbols.h --generate-asset-symbol-index /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/DerivedSources/GeneratedAssetSymbols-Index.plist
+/* com.apple.actool.compilation-results */
+/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/DerivedSources/GeneratedAssetSymbols-Index.plist
+/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/DerivedSources/GeneratedAssetSymbols.h
+/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/DerivedSources/GeneratedAssetSymbols.swift
+
+
+MkDir /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/assetcatalog_output/thinned (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    /bin/mkdir -p /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/assetcatalog_output/thinned
+
+MkDir /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/assetcatalog_output/unthinned (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    /bin/mkdir -p /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/assetcatalog_output/unthinned
+
+CompileAssetCatalogVariant thinned /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.appex /Users/stocca/Documents/Programmazione/Frigo/FrigoWidget/Assets.xcassets (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    /Applications/Xcode.app/Contents/Developer/usr/bin/actool /Users/stocca/Documents/Programmazione/Frigo/FrigoWidget/Assets.xcassets --compile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/assetcatalog_output/thinned --output-format human-readable-text --notices --warnings --export-dependency-info /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/assetcatalog_dependencies_thinned --output-partial-info-plist /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/assetcatalog_generated_info.plist_thinned --accent-color AccentColor --widget-background-color WidgetBackground --compress-pngs --enable-on-demand-resources NO --standalone-icon-behavior all --filter-for-thinning-device-configuration iPhone18,3 --filter-for-device-os-version 27.0 --development-region en --target-device iphone --target-device ipad --minimum-deployment-target 27.0 --platform iphonesimulator
+/* com.apple.actool.compilation-results */
+/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/assetcatalog_generated_info.plist_thinned
+
+
+SwiftDriver FrigoWidgetExtension normal arm64 com.apple.xcode.tools.swift.compiler (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftDriver -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name FrigoWidgetExtension -Onone @/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension.SwiftFileList -DDEBUG -enable-bare-slash-regex -enable-upcoming-feature DisableOutwardActorInference -enable-upcoming-feature InferSendableFromCaptures -enable-upcoming-feature GlobalActorIsolatedTypesUsability -enable-upcoming-feature MemberImportVisibility -enable-upcoming-feature InferIsolatedConformances -enable-upcoming-feature NonisolatedNonsendingByDefault -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator27.0.sdk -target arm64-apple-ios27.0-simulator -g -module-cache-path /Users/stocca/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -application-extension -profile-coverage-mapping -profile-generate -enable-testing -index-store-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator -F /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator -emit-localized-strings -emit-localized-strings-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64 -c -j10 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/stocca/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator27.0-24A430-8dc58220667be655e1bcc261a7455254.sdkstatcache -output-file-map /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension-OutputFileMap.json -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/stocca/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/stocca/Library/Developer/Xcode/DerivedData/SDKExplicitPrecompiledModules -emit-dependencies -emit-module -emit-module-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension.swiftmodule -serialize-diagnostics -dependency-scan-serialize-diagnostics-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension-dependency-scan.dia -validate-clang-modules-once -clang-build-session-file /Users/stocca/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -fmodules-prune-interval\=86400 -Xcc -fmodules-prune-after\=345600 -emit-const-values -const-gather-protocols-list /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension_const_extract_protocols.json -Xcc -iquote -Xcc /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-generated-files.hmap -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-own-target-headers.hmap -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-all-target-headers.hmap -Xcc -iquote -Xcc /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-project-headers.hmap -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/include -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/DerivedSources-normal/arm64 -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/DerivedSources/arm64 -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension-Swift.h -working-directory /Users/stocca/Documents/Programmazione/Frigo -experimental-emit-module-separately -disable-cmo
+
+LinkAssetCatalog /Users/stocca/Documents/Programmazione/Frigo/FrigoWidget/Assets.xcassets (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-linkAssetCatalog --thinned /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/assetcatalog_output/thinned --thinned-dependencies /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/assetcatalog_dependencies_thinned --thinned-info-plist-content /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/assetcatalog_generated_info.plist_thinned --unthinned /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/assetcatalog_output/unthinned --unthinned-dependencies /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/assetcatalog_dependencies_unthinned --unthinned-info-plist-content /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/assetcatalog_generated_info.plist_unthinned --output /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.appex --plist-output /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/assetcatalog_generated_info.plist
+
+ProcessInfoPlistFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.appex/Info.plist /Users/stocca/Documents/Programmazione/Frigo/FrigoWidget/Info.plist (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-infoPlistUtility /Users/stocca/Documents/Programmazione/Frigo/FrigoWidget/Info.plist -producttype com.apple.product-type.app-extension -expandbuildsettings -format binary -platform iphonesimulator -additionalcontentfile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/assetcatalog_generated_info.plist -o /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.appex/Info.plist
+
+SwiftCompile normal arm64 Compiling\ FrigoWidget.swift /Users/stocca/Documents/Programmazione/Frigo/FrigoWidget/FrigoWidget.swift (in target 'FrigoWidgetExtension' from project 'Frigo')
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/FrigoWidget/FrigoWidget.swift (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile FrigoWidget.swift
+
+SwiftCompile normal arm64 Compiling\ FrigoWidgetBundle.swift /Users/stocca/Documents/Programmazione/Frigo/FrigoWidget/FrigoWidgetBundle.swift (in target 'FrigoWidgetExtension' from project 'Frigo')
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/FrigoWidget/FrigoWidgetBundle.swift (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile FrigoWidgetBundle.swift
+
+SwiftCompile normal arm64 Compiling\ WorkoutTimerAttributes.swift /Users/stocca/Documents/Programmazione/Frigo/FrigoWidget/WorkoutTimerAttributes.swift (in target 'FrigoWidgetExtension' from project 'Frigo')
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/FrigoWidget/WorkoutTimerAttributes.swift (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile WorkoutTimerAttributes.swift
+
+SwiftCompile normal arm64 Compiling\ GeneratedAssetSymbols.swift /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/DerivedSources/GeneratedAssetSymbols.swift (in target 'FrigoWidgetExtension' from project 'Frigo')
+
+SwiftCompile normal arm64 /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/DerivedSources/GeneratedAssetSymbols.swift (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile GeneratedAssetSymbols.swift
+
+SwiftEmitModule normal arm64 Emitting\ module\ for\ FrigoWidgetExtension (in target 'FrigoWidgetExtension' from project 'Frigo')
+
+SwiftCompile normal arm64 (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    
+
+SwiftDriverJobDiscovery normal arm64 Emitting module for FrigoWidgetExtension (in target 'FrigoWidgetExtension' from project 'Frigo')
+
+SwiftDriver\ Compilation\ Requirements FrigoWidgetExtension normal arm64 com.apple.xcode.tools.swift.compiler (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-Swift-Compilation-Requirements -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name FrigoWidgetExtension -Onone @/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension.SwiftFileList -DDEBUG -enable-bare-slash-regex -enable-upcoming-feature DisableOutwardActorInference -enable-upcoming-feature InferSendableFromCaptures -enable-upcoming-feature GlobalActorIsolatedTypesUsability -enable-upcoming-feature MemberImportVisibility -enable-upcoming-feature InferIsolatedConformances -enable-upcoming-feature NonisolatedNonsendingByDefault -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator27.0.sdk -target arm64-apple-ios27.0-simulator -g -module-cache-path /Users/stocca/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -application-extension -profile-coverage-mapping -profile-generate -enable-testing -index-store-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator -F /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator -emit-localized-strings -emit-localized-strings-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64 -c -j10 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/stocca/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator27.0-24A430-8dc58220667be655e1bcc261a7455254.sdkstatcache -output-file-map /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension-OutputFileMap.json -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/stocca/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/stocca/Library/Developer/Xcode/DerivedData/SDKExplicitPrecompiledModules -emit-dependencies -emit-module -emit-module-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension.swiftmodule -serialize-diagnostics -dependency-scan-serialize-diagnostics-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension-dependency-scan.dia -validate-clang-modules-once -clang-build-session-file /Users/stocca/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -fmodules-prune-interval\=86400 -Xcc -fmodules-prune-after\=345600 -emit-const-values -const-gather-protocols-list /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension_const_extract_protocols.json -Xcc -iquote -Xcc /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-generated-files.hmap -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-own-target-headers.hmap -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-all-target-headers.hmap -Xcc -iquote -Xcc /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-project-headers.hmap -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/include -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/DerivedSources-normal/arm64 -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/DerivedSources/arm64 -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension-Swift.h -working-directory /Users/stocca/Documents/Programmazione/Frigo -experimental-emit-module-separately -disable-cmo
+
+SwiftMergeGeneratedHeaders /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/DerivedSources/FrigoWidgetExtension-Swift.h /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension-Swift.h (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-swiftHeaderTool -arch arm64 /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension-Swift.h -o /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/DerivedSources/FrigoWidgetExtension-Swift.h
+
+Copy /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.swiftmodule/arm64-apple-ios-simulator.swiftdoc /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension.swiftdoc (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension.swiftdoc /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.swiftmodule/arm64-apple-ios-simulator.swiftdoc
+
+Copy /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.swiftmodule/arm64-apple-ios-simulator.swiftmodule /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension.swiftmodule (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension.swiftmodule /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.swiftmodule/arm64-apple-ios-simulator.swiftmodule
+
+Copy /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.swiftmodule/arm64-apple-ios-simulator.abi.json /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension.abi.json (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension.abi.json /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.swiftmodule/arm64-apple-ios-simulator.abi.json
+
+Copy /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension.swiftsourceinfo (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension.swiftsourceinfo /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo
+
+ProcessProductPackaging "" /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo.app-Simulated.xcent (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    
+    Entitlements:
+    
+    {
+    "application-identifier" = "6RTK6U5F9B.com.lucaraonapersonalteam.Frigo";
+}
+    
+    builtin-productPackagingUtility -entitlements -format xml -o /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo.app-Simulated.xcent
+
+ProcessProductPackagingDER /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo.app-Simulated.xcent /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo.app-Simulated.xcent.der (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    /usr/bin/derq query -f xml -i /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo.app-Simulated.xcent -o /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo.app-Simulated.xcent.der --raw
+
+GenerateAssetSymbols /Users/stocca/Documents/Programmazione/Frigo/Frigo/Assets.xcassets (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    /Applications/Xcode.app/Contents/Developer/usr/bin/actool /Users/stocca/Documents/Programmazione/Frigo/Frigo/Assets.xcassets --compile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app --output-format human-readable-text --notices --warnings --export-dependency-info /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/assetcatalog_dependencies --output-partial-info-plist /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/assetcatalog_generated_info.plist --compress-pngs --enable-on-demand-resources YES --development-region en --target-device iphone --target-device ipad --minimum-deployment-target 27.0 --platform iphonesimulator --bundle-identifier com.lucaraonapersonalteam.Frigo --generate-swift-asset-symbols /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/DerivedSources/GeneratedAssetSymbols.swift --generate-objc-asset-symbols /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/DerivedSources/GeneratedAssetSymbols.h --generate-asset-symbol-index /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/DerivedSources/GeneratedAssetSymbols-Index.plist
+/* com.apple.actool.compilation-results */
+/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/DerivedSources/GeneratedAssetSymbols-Index.plist
+/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/DerivedSources/GeneratedAssetSymbols.h
+/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/DerivedSources/GeneratedAssetSymbols.swift
+
+
+MkDir /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/assetcatalog_output/unthinned (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    /bin/mkdir -p /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/assetcatalog_output/unthinned
+
+MkDir /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/assetcatalog_output/thinned (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    /bin/mkdir -p /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/assetcatalog_output/thinned
+
+CompileAssetCatalogVariant thinned /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app /Users/stocca/Documents/Programmazione/Frigo/Frigo/Assets.xcassets (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    /Applications/Xcode.app/Contents/Developer/usr/bin/actool /Users/stocca/Documents/Programmazione/Frigo/Frigo/Assets.xcassets --compile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/assetcatalog_output/thinned --output-format human-readable-text --notices --warnings --export-dependency-info /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/assetcatalog_dependencies_thinned --output-partial-info-plist /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/assetcatalog_generated_info.plist_thinned --compress-pngs --enable-on-demand-resources YES --filter-for-thinning-device-configuration iPhone18,3 --filter-for-device-os-version 27.0 --development-region en --target-device iphone --target-device ipad --minimum-deployment-target 27.0 --platform iphonesimulator
+/* com.apple.actool.compilation-results */
+/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/assetcatalog_generated_info.plist_thinned
+/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/assetcatalog_output/thinned/Assets.car
+
+
+SwiftDriver Frigo normal arm64 com.apple.xcode.tools.swift.compiler (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftDriver -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name Frigo -Onone @/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo.SwiftFileList -DDEBUG -default-isolation\=MainActor -enable-bare-slash-regex -enable-upcoming-feature DisableOutwardActorInference -enable-upcoming-feature InferSendableFromCaptures -enable-upcoming-feature GlobalActorIsolatedTypesUsability -enable-upcoming-feature MemberImportVisibility -enable-upcoming-feature InferIsolatedConformances -enable-upcoming-feature NonisolatedNonsendingByDefault -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator27.0.sdk -target arm64-apple-ios27.0-simulator -g -module-cache-path /Users/stocca/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -profile-coverage-mapping -profile-generate -enable-testing -index-store-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator -F /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator -emit-localized-strings -emit-localized-strings-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64 -c -j10 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/stocca/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator27.0-24A430-8dc58220667be655e1bcc261a7455254.sdkstatcache -output-file-map /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo-OutputFileMap.json -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/stocca/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/stocca/Library/Developer/Xcode/DerivedData/SDKExplicitPrecompiledModules -emit-dependencies -emit-module -emit-module-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo.swiftmodule -serialize-diagnostics -dependency-scan-serialize-diagnostics-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo-dependency-scan.dia -validate-clang-modules-once -clang-build-session-file /Users/stocca/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -fmodules-prune-interval\=86400 -Xcc -fmodules-prune-after\=345600 -emit-const-values -const-gather-protocols-list /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo_const_extract_protocols.json -Xcc -iquote -Xcc /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo-generated-files.hmap -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo-own-target-headers.hmap -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo-all-target-headers.hmap -Xcc -iquote -Xcc /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo-project-headers.hmap -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/include -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/DerivedSources-normal/arm64 -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/DerivedSources/arm64 -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo-Swift.h -working-directory /Users/stocca/Documents/Programmazione/Frigo -experimental-emit-module-separately -disable-cmo
+
+SwiftDriverJobDiscovery normal arm64 Compiling FrigoWidgetBundle.swift (in target 'FrigoWidgetExtension' from project 'Frigo')
+
+SwiftDriverJobDiscovery normal arm64 Compiling GeneratedAssetSymbols.swift (in target 'FrigoWidgetExtension' from project 'Frigo')
+
+SwiftDriverJobDiscovery normal arm64 Compiling WorkoutTimerAttributes.swift (in target 'FrigoWidgetExtension' from project 'Frigo')
+
+SwiftDriverJobDiscovery normal arm64 Compiling FrigoWidget.swift (in target 'FrigoWidgetExtension' from project 'Frigo')
+
+SwiftDriver\ Compilation FrigoWidgetExtension normal arm64 com.apple.xcode.tools.swift.compiler (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-Swift-Compilation -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name FrigoWidgetExtension -Onone @/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension.SwiftFileList -DDEBUG -enable-bare-slash-regex -enable-upcoming-feature DisableOutwardActorInference -enable-upcoming-feature InferSendableFromCaptures -enable-upcoming-feature GlobalActorIsolatedTypesUsability -enable-upcoming-feature MemberImportVisibility -enable-upcoming-feature InferIsolatedConformances -enable-upcoming-feature NonisolatedNonsendingByDefault -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator27.0.sdk -target arm64-apple-ios27.0-simulator -g -module-cache-path /Users/stocca/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -application-extension -profile-coverage-mapping -profile-generate -enable-testing -index-store-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator -F /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator -emit-localized-strings -emit-localized-strings-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64 -c -j10 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/stocca/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator27.0-24A430-8dc58220667be655e1bcc261a7455254.sdkstatcache -output-file-map /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension-OutputFileMap.json -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/stocca/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/stocca/Library/Developer/Xcode/DerivedData/SDKExplicitPrecompiledModules -emit-dependencies -emit-module -emit-module-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension.swiftmodule -serialize-diagnostics -dependency-scan-serialize-diagnostics-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension-dependency-scan.dia -validate-clang-modules-once -clang-build-session-file /Users/stocca/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -fmodules-prune-interval\=86400 -Xcc -fmodules-prune-after\=345600 -emit-const-values -const-gather-protocols-list /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension_const_extract_protocols.json -Xcc -iquote -Xcc /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-generated-files.hmap -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-own-target-headers.hmap -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-all-target-headers.hmap -Xcc -iquote -Xcc /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-project-headers.hmap -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/include -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/DerivedSources-normal/arm64 -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/DerivedSources/arm64 -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension-Swift.h -working-directory /Users/stocca/Documents/Programmazione/Frigo -experimental-emit-module-separately -disable-cmo
+
+Ld /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.appex/FrigoWidgetExtension.debug.dylib normal (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios27.0-simulator -dynamiclib -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator27.0.sdk -O0 -Xlinker -no_warn_duplicate_libraries -L/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator -L/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator -F/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator -F/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator -filelist /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension.LinkFileList -install_name @rpath/FrigoWidgetExtension.debug.dylib -Xlinker -rpath -Xlinker @executable_path/Frameworks -Xlinker -rpath -Xlinker @executable_path/../../Frameworks -Xlinker -dead_strip -Xlinker -object_path_lto -Xlinker /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension_lto.o -rdynamic -Xlinker -no_deduplicate -Xlinker -objc_abi_version -Xlinker 2 -Xlinker -debug_variant -Xlinker -dependency_info -Xlinker /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension_dependency_info.dat -fapplication-extension -fobjc-link-runtime -fprofile-instr-generate -L/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator -L/usr/lib/swift -Xlinker -add_ast_path -Xlinker /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension.swiftmodule -Xlinker -alias -Xlinker _NSExtensionMain -Xlinker ___debug_main_executable_dylib_entry_point -framework SwiftUI -framework WidgetKit -Xlinker -no_adhoc_codesign -o /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.appex/FrigoWidgetExtension.debug.dylib
+
+SwiftCompile normal arm64 Compiling\ StoricoView.swift,\ WorkoutActiveView.swift,\ WorkoutCreatorView.swift,\ WorkoutSessionDetailView.swift,\ GymView.swift,\ InventoryMapper.swift,\ CiboMigrationPlan.swift,\ CiboSchemaV1.swift,\ CiboSchemaV2.swift,\ CiboSchemaV3.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Views/Screens/StoricoView.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Views/Screens/WorkoutActiveView.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Views/Screens/WorkoutCreatorView.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Views/Screens/WorkoutSessionDetailView.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/GymView.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Data/SwiftData/Mappers/InventoryMapper.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Data/SwiftData/Schema/CiboMigrationPlan.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Data/SwiftData/Schema/CiboSchemaV1.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Data/SwiftData/Schema/CiboSchemaV2.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Data/SwiftData/Schema/CiboSchemaV3.swift (in target 'Frigo' from project 'Frigo')
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Views/Screens/StoricoView.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile StoricoView.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Views/Screens/WorkoutActiveView.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile WorkoutActiveView.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Views/Screens/WorkoutCreatorView.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile WorkoutCreatorView.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Views/Screens/WorkoutSessionDetailView.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile WorkoutSessionDetailView.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/GymView.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile GymView.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Data/SwiftData/Mappers/InventoryMapper.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile InventoryMapper.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Data/SwiftData/Schema/CiboMigrationPlan.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile CiboMigrationPlan.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Data/SwiftData/Schema/CiboSchemaV1.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile CiboSchemaV1.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Data/SwiftData/Schema/CiboSchemaV2.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile CiboSchemaV2.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Data/SwiftData/Schema/CiboSchemaV3.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile CiboSchemaV3.swift
+
+SwiftCompile normal arm64 Compiling\ HeroWorkoutBanner.swift,\ MuscleHeatmapView.swift,\ PlateCalculatorView.swift,\ ProgressChartView.swift,\ StreakWidgetView.swift,\ VolumeWidgetView.swift,\ WorkoutPlanCard.swift,\ ExercisePickerView.swift,\ ExerciseProgressView.swift,\ GymCalendarView.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Views/Components/HeroWorkoutBanner.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Views/Components/MuscleHeatmapView.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Views/Components/PlateCalculatorView.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Views/Components/ProgressChartView.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Views/Components/StreakWidgetView.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Views/Components/VolumeWidgetView.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Views/Components/WorkoutPlanCard.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Views/Screens/ExercisePickerView.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Views/Screens/ExerciseProgressView.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Views/Screens/GymCalendarView.swift (in target 'Frigo' from project 'Frigo')
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Views/Components/HeroWorkoutBanner.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile HeroWorkoutBanner.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Views/Components/MuscleHeatmapView.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile MuscleHeatmapView.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Views/Components/PlateCalculatorView.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile PlateCalculatorView.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Views/Components/ProgressChartView.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile ProgressChartView.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Views/Components/StreakWidgetView.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile StreakWidgetView.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Views/Components/VolumeWidgetView.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile VolumeWidgetView.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Views/Components/WorkoutPlanCard.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile WorkoutPlanCard.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Views/Screens/ExercisePickerView.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile ExercisePickerView.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Views/Screens/ExerciseProgressView.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile ExerciseProgressView.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Views/Screens/GymCalendarView.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile GymCalendarView.swift
+
+SwiftCompile normal arm64 Compiling\ WorkoutManager.swift,\ WorkoutProgressAnalytics.swift,\ ExerciseModel.swift,\ OngoingWorkoutState.swift,\ WorkoutExercise.swift,\ WorkoutPlan.swift,\ WorkoutSession.swift,\ WorkoutSet.swift,\ CaloriesWidgetView.swift,\ ExerciseRowView.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Manager/WorkoutManager.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Manager/WorkoutProgressAnalytics.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Models/ExerciseModel.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Models/OngoingWorkoutState.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Models/WorkoutExercise.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Models/WorkoutPlan.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Models/WorkoutSession.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Models/WorkoutSet.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Views/Components/CaloriesWidgetView.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Views/Components/ExerciseRowView.swift (in target 'Frigo' from project 'Frigo')
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Manager/WorkoutManager.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile WorkoutManager.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Manager/WorkoutProgressAnalytics.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile WorkoutProgressAnalytics.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Models/ExerciseModel.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile ExerciseModel.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Models/OngoingWorkoutState.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile OngoingWorkoutState.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Models/WorkoutExercise.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile WorkoutExercise.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Models/WorkoutPlan.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile WorkoutPlan.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Models/WorkoutSession.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile WorkoutSession.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Models/WorkoutSet.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile WorkoutSet.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Views/Components/CaloriesWidgetView.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile CaloriesWidgetView.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Allenamento/Views/Components/ExerciseRowView.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile ExerciseRowView.swift
+
+SwiftEmitModule normal arm64 Emitting\ module\ for\ Frigo (in target 'Frigo' from project 'Frigo')
+
+SwiftCompile normal arm64 (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    
+
+SwiftCompile normal arm64 Compiling\ CookedMealDraft.swift,\ CookedMealSnapshot.swift,\ InventoryError.swift,\ InventorySnapshot.swift,\ NewProductDraft.swift,\ ProductCategory.swift,\ ProductID.swift,\ ProductSnapshot.swift,\ RecipeID.swift,\ RecipeSnapshot.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/CookedMealDraft.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/CookedMealSnapshot.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/InventoryError.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/InventorySnapshot.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/NewProductDraft.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/ProductCategory.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/ProductID.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/ProductSnapshot.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/RecipeID.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/RecipeSnapshot.swift (in target 'Frigo' from project 'Frigo')
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/CookedMealDraft.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile CookedMealDraft.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/CookedMealSnapshot.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile CookedMealSnapshot.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/InventoryError.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile InventoryError.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/InventorySnapshot.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile InventorySnapshot.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/NewProductDraft.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile NewProductDraft.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/ProductCategory.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile ProductCategory.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/ProductID.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile ProductID.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/ProductSnapshot.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile ProductSnapshot.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/RecipeID.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile RecipeID.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/RecipeSnapshot.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile RecipeSnapshot.swift
+
+SwiftCompile normal arm64 Compiling\ InventoryRepository.swift,\ SubjectExtracting.swift,\ ExpirationPolicy.swift,\ FoodCalendarMonth.swift,\ FreshnessState.swift,\ ShelfGrouping.swift,\ ShelfPlacementPolicy.swift,\ StockGroup.swift,\ AddProductView.swift,\ CameraPicker.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Ports/InventoryRepository.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Ports/SubjectExtracting.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Rules/ExpirationPolicy.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Rules/FoodCalendarMonth.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Rules/FreshnessState.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Rules/ShelfGrouping.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Rules/ShelfPlacementPolicy.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Rules/StockGroup.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Features/AddProduct/AddProductView.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Features/AddProduct/CameraPicker.swift (in target 'Frigo' from project 'Frigo')
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Ports/InventoryRepository.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile InventoryRepository.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Ports/SubjectExtracting.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile SubjectExtracting.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Rules/ExpirationPolicy.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile ExpirationPolicy.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Rules/FoodCalendarMonth.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile FoodCalendarMonth.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Rules/FreshnessState.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile FreshnessState.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Rules/ShelfGrouping.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile ShelfGrouping.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Rules/ShelfPlacementPolicy.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile ShelfPlacementPolicy.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Rules/StockGroup.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile StockGroup.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Features/AddProduct/AddProductView.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile AddProductView.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Features/AddProduct/CameraPicker.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile CameraPicker.swift
+
+SwiftCompile normal arm64 Compiling\ FoodCalendarView.swift,\ FoodMonthGrid.swift,\ CookingHubView.swift,\ CookingView.swift,\ FoodLocationTile.swift,\ QuantitySelectorView.swift,\ ShelfGeometry.swift,\ InteractiveFoodNode.swift,\ ProductThumbnailView.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Features/Calendar/FoodCalendarView.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Features/Calendar/FoodMonthGrid.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Features/Cooking/CookingHubView.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Features/Cooking/CookingView.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Features/DesignSystem/FoodLocationTile.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Features/DesignSystem/QuantitySelectorView.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Features/Fridge/Layout/ShelfGeometry.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Features/Fridge/Node/InteractiveFoodNode.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Features/Fridge/Node/ProductThumbnailView.swift (in target 'Frigo' from project 'Frigo')
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Features/Calendar/FoodCalendarView.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile FoodCalendarView.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Features/Calendar/FoodMonthGrid.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile FoodMonthGrid.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Features/Cooking/CookingHubView.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile CookingHubView.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Features/Cooking/CookingView.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile CookingView.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Features/DesignSystem/FoodLocationTile.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile FoodLocationTile.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Features/DesignSystem/QuantitySelectorView.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile QuantitySelectorView.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Features/Fridge/Layout/ShelfGeometry.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile ShelfGeometry.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Features/Fridge/Node/InteractiveFoodNode.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile InteractiveFoodNode.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Features/Fridge/Node/ProductThumbnailView.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile ProductThumbnailView.swift
+
+SwiftCompile normal arm64 Compiling\ CiboSchemaV4.swift,\ CookedMealIngredientRecord.swift,\ CookedMealRecord.swift,\ ProductRecord.swift,\ RecipeIngredientRecord.swift,\ RecipeRecord.swift,\ StockItemRecord.swift,\ CiboContainerFactory.swift,\ StockPackageMigration.swift,\ SwiftDataInventoryStore.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Data/SwiftData/Schema/CiboSchemaV4.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Data/SwiftData/Schema/CookedMealIngredientRecord.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Data/SwiftData/Schema/CookedMealRecord.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Data/SwiftData/Schema/ProductRecord.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Data/SwiftData/Schema/RecipeIngredientRecord.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Data/SwiftData/Schema/RecipeRecord.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Data/SwiftData/Schema/StockItemRecord.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Data/SwiftData/Store/CiboContainerFactory.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Data/SwiftData/Store/StockPackageMigration.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Data/SwiftData/Store/SwiftDataInventoryStore.swift (in target 'Frigo' from project 'Frigo')
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Data/SwiftData/Schema/CiboSchemaV4.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile CiboSchemaV4.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Data/SwiftData/Schema/CookedMealIngredientRecord.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile CookedMealIngredientRecord.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Data/SwiftData/Schema/CookedMealRecord.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile CookedMealRecord.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Data/SwiftData/Schema/ProductRecord.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile ProductRecord.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Data/SwiftData/Schema/RecipeIngredientRecord.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile RecipeIngredientRecord.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Data/SwiftData/Schema/RecipeRecord.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile RecipeRecord.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Data/SwiftData/Schema/StockItemRecord.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile StockItemRecord.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Data/SwiftData/Store/CiboContainerFactory.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile CiboContainerFactory.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Data/SwiftData/Store/StockPackageMigration.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile StockPackageMigration.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Data/SwiftData/Store/SwiftDataInventoryStore.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile SwiftDataInventoryStore.swift
+
+SwiftCompile normal arm64 Compiling\ ShelfPlacement.swift,\ StockGroupID.swift,\ StockItemID.swift,\ StockItemSnapshot.swift,\ StockKey.swift,\ StockStatus.swift,\ StorageLocation.swift,\ UnitOfMeasure.swift,\ ValidationIssue.swift,\ DateProviding.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/ShelfPlacement.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/StockGroupID.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/StockItemID.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/StockItemSnapshot.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/StockKey.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/StockStatus.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/StorageLocation.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/UnitOfMeasure.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/ValidationIssue.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Ports/DateProviding.swift (in target 'Frigo' from project 'Frigo')
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/ShelfPlacement.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile ShelfPlacement.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/StockGroupID.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile StockGroupID.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/StockItemID.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile StockItemID.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/StockItemSnapshot.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile StockItemSnapshot.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/StockKey.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile StockKey.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/StockStatus.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile StockStatus.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/StorageLocation.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile StorageLocation.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/UnitOfMeasure.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile UnitOfMeasure.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Model/ValidationIssue.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile ValidationIssue.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Domain/Ports/DateProviding.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile DateProviding.swift
+
+ConstructStubExecutorLinkFileList /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-ExecutorLinkFileList-normal-arm64.txt (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    construct-stub-executor-link-file-list /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.appex/FrigoWidgetExtension.debug.dylib /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/libPreviewsJITStubExecutor_no_swift_entry_point.a /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/libPreviewsJITStubExecutor.a --output /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-ExecutorLinkFileList-normal-arm64.txt
+note: Using stub executor library with Swift entry point. (in target 'FrigoWidgetExtension' from project 'Frigo')
+
+LinkAssetCatalog /Users/stocca/Documents/Programmazione/Frigo/Frigo/Assets.xcassets (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-linkAssetCatalog --thinned /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/assetcatalog_output/thinned --thinned-dependencies /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/assetcatalog_dependencies_thinned --thinned-info-plist-content /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/assetcatalog_generated_info.plist_thinned --unthinned /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/assetcatalog_output/unthinned --unthinned-dependencies /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/assetcatalog_dependencies_unthinned --unthinned-info-plist-content /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/assetcatalog_generated_info.plist_unthinned --output /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app --plist-output /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/assetcatalog_generated_info.plist
+note: Emplaced /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/Assets.car (in target 'Frigo' from project 'Frigo')
+
+Ld /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.appex/FrigoWidgetExtension normal (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios27.0-simulator -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator27.0.sdk -O0 -Xlinker -no_warn_duplicate_libraries -L/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator -F/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator -Xlinker -rpath -Xlinker @executable_path -Xlinker -rpath -Xlinker @executable_path/Frameworks -Xlinker -rpath -Xlinker @executable_path/../../Frameworks -rdynamic -Xlinker -no_deduplicate -Xlinker -objc_abi_version -Xlinker 2 -Xlinker -debug_variant -e ___debug_blank_executor_main -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __debug_dylib -Xlinker /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-DebugDylibPath-normal-arm64.txt -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __debug_entry -Xlinker /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-DebugEntryPoint-normal-arm64.txt -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __debug_instlnm -Xlinker /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-DebugDylibInstallName-normal-arm64.txt -Xlinker -filelist -Xlinker /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension-ExecutorLinkFileList-normal-arm64.txt -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __entitlements -Xlinker /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension.appex-Simulated.xcent -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __ents_der -Xlinker /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension.appex-Simulated.xcent.der /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.appex/FrigoWidgetExtension.debug.dylib -Xlinker -no_adhoc_codesign -o /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.appex/FrigoWidgetExtension
+
+SwiftCompile normal arm64 Compiling\ FoodMainContainer.swift,\ FridgeViewModel.swift,\ StockConsumptionView.swift,\ StockTransferView.swift,\ CiboRootView.swift,\ PassthroughSubjectExtractor.swift,\ ResilientSubjectExtractor.swift,\ VisionSubjectExtractor.swift,\ CiboLog.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Features/Fridge/FoodMainContainer.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Features/Fridge/FridgeViewModel.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Features/Fridge/StockConsumptionView.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Features/Fridge/StockTransferView.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Features/Shell/CiboRootView.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Services/Imaging/PassthroughSubjectExtractor.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Services/Vision/ResilientSubjectExtractor.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Services/Vision/VisionSubjectExtractor.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Support/CiboLog.swift (in target 'Frigo' from project 'Frigo')
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Features/Fridge/FoodMainContainer.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile FoodMainContainer.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Features/Fridge/FridgeViewModel.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile FridgeViewModel.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Features/Fridge/StockConsumptionView.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile StockConsumptionView.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Features/Fridge/StockTransferView.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile StockTransferView.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Features/Shell/CiboRootView.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile CiboRootView.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Services/Imaging/PassthroughSubjectExtractor.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile PassthroughSubjectExtractor.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Services/Vision/ResilientSubjectExtractor.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile ResilientSubjectExtractor.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Services/Vision/VisionSubjectExtractor.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile VisionSubjectExtractor.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Support/CiboLog.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile CiboLog.swift
+
+SwiftDriverJobDiscovery normal arm64 Compiling ShelfPlacement.swift, StockGroupID.swift, StockItemID.swift, StockItemSnapshot.swift, StockKey.swift, StockStatus.swift, StorageLocation.swift, UnitOfMeasure.swift, ValidationIssue.swift, DateProviding.swift (in target 'Frigo' from project 'Frigo')
+
+SwiftCompile normal arm64 Compiling\ FoodView.swift,\ HomeView.swift,\ WorkoutTimerAttributes.swift,\ ProfileView.swift,\ AppTheme.swift,\ ThemeManager.swift,\ ContentView.swift,\ MyApp.swift,\ GeneratedAssetSymbols.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/FoodView.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Home/HomeView.swift /Users/stocca/Documents/Programmazione/Frigo/FrigoWidget/WorkoutTimerAttributes.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Profilo/ProfileView.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Theme/AppTheme.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/Theme/ThemeManager.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/ContentView.swift /Users/stocca/Documents/Programmazione/Frigo/Frigo/MyApp.swift /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/DerivedSources/GeneratedAssetSymbols.swift (in target 'Frigo' from project 'Frigo')
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/FoodView.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile FoodView.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Home/HomeView.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile HomeView.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/FrigoWidget/WorkoutTimerAttributes.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile WorkoutTimerAttributes.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Profilo/ProfileView.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile ProfileView.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Theme/AppTheme.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile AppTheme.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/Theme/ThemeManager.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile ThemeManager.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/ContentView.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile ContentView.swift
+
+SwiftCompile normal arm64 /Users/stocca/Documents/Programmazione/Frigo/Frigo/MyApp.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile MyApp.swift
+
+SwiftCompile normal arm64 /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/DerivedSources/GeneratedAssetSymbols.swift (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-SwiftPerFileCompile GeneratedAssetSymbols.swift
+
+SwiftDriverJobDiscovery normal arm64 Compiling CookedMealDraft.swift, CookedMealSnapshot.swift, InventoryError.swift, InventorySnapshot.swift, NewProductDraft.swift, ProductCategory.swift, ProductID.swift, ProductSnapshot.swift, RecipeID.swift, RecipeSnapshot.swift (in target 'Frigo' from project 'Frigo')
+
+ExtractAppIntentsMetadata (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsmetadataprocessor --toolchain-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --module-name FrigoWidgetExtension --sdk-root /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator27.0.sdk --xcode-version 27A266a --platform-family iOS --deployment-target 27.0 --bundle-identifier com.lucaraonapersonalteam.Frigo.WidgetExtension --output /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.appex --target-triple arm64-apple-ios27.0-simulator --binary-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.appex/FrigoWidgetExtension --dependency-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension_dependency_info.dat --stringsdata-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/ExtractedAppShortcutsMetadata.stringsdata --source-file-list /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension.SwiftFileList --metadata-file-list /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension.DependencyMetadataFileList --static-metadata-file-list /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension.DependencyStaticMetadataFileList --swift-const-vals-list /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/Objects-normal/arm64/FrigoWidgetExtension.SwiftConstValuesFileList --compile-time-extraction --deployment-aware-processing --no-app-shortcuts-localization
+2026-09-22 20:03:34.166 appintentsmetadataprocessor[24198:11271935] Starting appintentsmetadataprocessor export
+2026-09-22 20:03:34.339 appintentsmetadataprocessor[24198:11271935] Extracted no relevant App Intents symbols, skipping writing output
+
+AppIntentsSSUTraining (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsnltrainingprocessor --infoplist-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.appex/Info.plist --temp-dir-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/ssu --bundle-id com.lucaraonapersonalteam.Frigo.WidgetExtension --product-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.appex --extracted-metadata-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.appex/Metadata.appintents --metadata-file-list /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/FrigoWidgetExtension.build/FrigoWidgetExtension.DependencyMetadataFileList --source-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.appex/Info.plist --archive-ssu-assets
+2026-09-22 20:03:34.413 appintentsnltrainingprocessor[24199:11271946] Parsing options for appintentsnltrainingprocessor
+2026-09-22 20:03:34.416 appintentsnltrainingprocessor[24199:11271946] Starting AppIntents SSU YAML Generation
+2026-09-22 20:03:34.421 appintentsnltrainingprocessor[24199:11271946] No AppShortcuts found - Skipping.
+
+CodeSign /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.appex/FrigoWidgetExtension.debug.dylib (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    
+    Signing Identity:     "Sign to Run Locally"
+    
+    /usr/bin/codesign --force --sign - --timestamp\=none --generate-entitlement-der /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.appex/FrigoWidgetExtension.debug.dylib
+
+CodeSign /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.appex/__preview.dylib (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    
+    Signing Identity:     "Sign to Run Locally"
+    
+    /usr/bin/codesign --force --sign - --timestamp\=none --generate-entitlement-der /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.appex/__preview.dylib
+
+CodeSign /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.appex (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    
+    Signing Identity:     "Sign to Run Locally"
+    
+    /usr/bin/codesign --force --sign - --timestamp\=none --generate-entitlement-der /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.appex
+
+RegisterExecutionPolicyException /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.appex (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-RegisterExecutionPolicyException /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.appex
+
+Touch /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.appex (in target 'FrigoWidgetExtension' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    /usr/bin/touch -c /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.appex
+
+CpResource /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/check_architecture.sh /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Tools/check_architecture.sh (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Tools/check_architecture.sh /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app
+
+Ld /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/__preview.dylib normal (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios27.0-simulator -dynamiclib -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator27.0.sdk -O0 -Xlinker -no_warn_duplicate_libraries -L/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator -F/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator -install_name @rpath/Frigo.debug.dylib -Xlinker -dead_strip -rdynamic -Xlinker -no_deduplicate -Xlinker -objc_abi_version -Xlinker 2 -Xlinker -debug_variant -Xlinker -dependency_info -Xlinker /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo_dependency_info.dat -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __entitlements -Xlinker /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo.app-Simulated.xcent -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __ents_der -Xlinker /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo.app-Simulated.xcent.der -Xlinker -no_adhoc_codesign -o /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/__preview.dylib
+
+CpResource /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/INTEGRATION.md /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Docs/INTEGRATION.md (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Docs/INTEGRATION.md /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app
+
+CpResource /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/DECISIONS.md /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Docs/DECISIONS.md (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Docs/DECISIONS.md /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app
+
+CpResource /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/ARCHITECTURE.md /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Docs/ARCHITECTURE.md (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/stocca/Documents/Programmazione/Frigo/Frigo/Cibo/Docs/ARCHITECTURE.md /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app
+
+SwiftDriverJobDiscovery normal arm64 Compiling CiboSchemaV4.swift, CookedMealIngredientRecord.swift, CookedMealRecord.swift, ProductRecord.swift, RecipeIngredientRecord.swift, RecipeRecord.swift, StockItemRecord.swift, CiboContainerFactory.swift, StockPackageMigration.swift, SwiftDataInventoryStore.swift (in target 'Frigo' from project 'Frigo')
+
+SwiftDriverJobDiscovery normal arm64 Compiling WorkoutManager.swift, WorkoutProgressAnalytics.swift, ExerciseModel.swift, OngoingWorkoutState.swift, WorkoutExercise.swift, WorkoutPlan.swift, WorkoutSession.swift, WorkoutSet.swift, CaloriesWidgetView.swift, ExerciseRowView.swift (in target 'Frigo' from project 'Frigo')
+
+SwiftDriverJobDiscovery normal arm64 Compiling InventoryRepository.swift, SubjectExtracting.swift, ExpirationPolicy.swift, FoodCalendarMonth.swift, FreshnessState.swift, ShelfGrouping.swift, ShelfPlacementPolicy.swift, StockGroup.swift, AddProductView.swift, CameraPicker.swift (in target 'Frigo' from project 'Frigo')
+
+SwiftDriverJobDiscovery normal arm64 Compiling FoodView.swift, HomeView.swift, WorkoutTimerAttributes.swift, ProfileView.swift, AppTheme.swift, ThemeManager.swift, ContentView.swift, MyApp.swift, GeneratedAssetSymbols.swift (in target 'Frigo' from project 'Frigo')
+
+SwiftDriverJobDiscovery normal arm64 Emitting module for Frigo (in target 'Frigo' from project 'Frigo')
+
+SwiftDriver\ Compilation\ Requirements Frigo normal arm64 com.apple.xcode.tools.swift.compiler (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-Swift-Compilation-Requirements -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name Frigo -Onone @/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo.SwiftFileList -DDEBUG -default-isolation\=MainActor -enable-bare-slash-regex -enable-upcoming-feature DisableOutwardActorInference -enable-upcoming-feature InferSendableFromCaptures -enable-upcoming-feature GlobalActorIsolatedTypesUsability -enable-upcoming-feature MemberImportVisibility -enable-upcoming-feature InferIsolatedConformances -enable-upcoming-feature NonisolatedNonsendingByDefault -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator27.0.sdk -target arm64-apple-ios27.0-simulator -g -module-cache-path /Users/stocca/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -profile-coverage-mapping -profile-generate -enable-testing -index-store-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator -F /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator -emit-localized-strings -emit-localized-strings-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64 -c -j10 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/stocca/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator27.0-24A430-8dc58220667be655e1bcc261a7455254.sdkstatcache -output-file-map /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo-OutputFileMap.json -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/stocca/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/stocca/Library/Developer/Xcode/DerivedData/SDKExplicitPrecompiledModules -emit-dependencies -emit-module -emit-module-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo.swiftmodule -serialize-diagnostics -dependency-scan-serialize-diagnostics-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo-dependency-scan.dia -validate-clang-modules-once -clang-build-session-file /Users/stocca/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -fmodules-prune-interval\=86400 -Xcc -fmodules-prune-after\=345600 -emit-const-values -const-gather-protocols-list /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo_const_extract_protocols.json -Xcc -iquote -Xcc /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo-generated-files.hmap -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo-own-target-headers.hmap -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo-all-target-headers.hmap -Xcc -iquote -Xcc /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo-project-headers.hmap -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/include -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/DerivedSources-normal/arm64 -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/DerivedSources/arm64 -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo-Swift.h -working-directory /Users/stocca/Documents/Programmazione/Frigo -experimental-emit-module-separately -disable-cmo
+
+SwiftMergeGeneratedHeaders /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/DerivedSources/Frigo-Swift.h /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo-Swift.h (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-swiftHeaderTool -arch arm64 /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo-Swift.h -o /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/DerivedSources/Frigo-Swift.h
+
+Copy /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.swiftmodule/arm64-apple-ios-simulator.swiftdoc /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo.swiftdoc (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo.swiftdoc /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.swiftmodule/arm64-apple-ios-simulator.swiftdoc
+
+Copy /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.swiftmodule/arm64-apple-ios-simulator.abi.json /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo.abi.json (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo.abi.json /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.swiftmodule/arm64-apple-ios-simulator.abi.json
+
+Copy /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.swiftmodule/arm64-apple-ios-simulator.swiftmodule /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo.swiftmodule (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo.swiftmodule /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.swiftmodule/arm64-apple-ios-simulator.swiftmodule
+
+Copy /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo.swiftsourceinfo (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo.swiftsourceinfo /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo
+
+SwiftDriverJobDiscovery normal arm64 Compiling FoodMainContainer.swift, FridgeViewModel.swift, StockConsumptionView.swift, StockTransferView.swift, CiboRootView.swift, PassthroughSubjectExtractor.swift, ResilientSubjectExtractor.swift, VisionSubjectExtractor.swift, CiboLog.swift (in target 'Frigo' from project 'Frigo')
+
+SwiftDriverJobDiscovery normal arm64 Compiling FoodCalendarView.swift, FoodMonthGrid.swift, CookingHubView.swift, CookingView.swift, FoodLocationTile.swift, QuantitySelectorView.swift, ShelfGeometry.swift, InteractiveFoodNode.swift, ProductThumbnailView.swift (in target 'Frigo' from project 'Frigo')
+
+SwiftDriverJobDiscovery normal arm64 Compiling HeroWorkoutBanner.swift, MuscleHeatmapView.swift, PlateCalculatorView.swift, ProgressChartView.swift, StreakWidgetView.swift, VolumeWidgetView.swift, WorkoutPlanCard.swift, ExercisePickerView.swift, ExerciseProgressView.swift, GymCalendarView.swift (in target 'Frigo' from project 'Frigo')
+
+SwiftDriverJobDiscovery normal arm64 Compiling StoricoView.swift, WorkoutActiveView.swift, WorkoutCreatorView.swift, WorkoutSessionDetailView.swift, GymView.swift, InventoryMapper.swift, CiboMigrationPlan.swift, CiboSchemaV1.swift, CiboSchemaV2.swift, CiboSchemaV3.swift (in target 'Frigo' from project 'Frigo')
+
+SwiftDriver\ Compilation Frigo normal arm64 com.apple.xcode.tools.swift.compiler (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-Swift-Compilation -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name Frigo -Onone @/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo.SwiftFileList -DDEBUG -default-isolation\=MainActor -enable-bare-slash-regex -enable-upcoming-feature DisableOutwardActorInference -enable-upcoming-feature InferSendableFromCaptures -enable-upcoming-feature GlobalActorIsolatedTypesUsability -enable-upcoming-feature MemberImportVisibility -enable-upcoming-feature InferIsolatedConformances -enable-upcoming-feature NonisolatedNonsendingByDefault -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator27.0.sdk -target arm64-apple-ios27.0-simulator -g -module-cache-path /Users/stocca/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -Xfrontend -serialize-debugging-options -profile-coverage-mapping -profile-generate -enable-testing -index-store-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator -F /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator -emit-localized-strings -emit-localized-strings-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64 -c -j10 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/stocca/Library/Developer/Xcode/DerivedData/SDKStatCaches.noindex/iphonesimulator27.0-24A430-8dc58220667be655e1bcc261a7455254.sdkstatcache -output-file-map /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo-OutputFileMap.json -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/stocca/Library/Developer/Xcode/DerivedData/ModuleCache.noindex -sdk-module-cache-path /Users/stocca/Library/Developer/Xcode/DerivedData/SDKExplicitPrecompiledModules -emit-dependencies -emit-module -emit-module-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo.swiftmodule -serialize-diagnostics -dependency-scan-serialize-diagnostics-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo-dependency-scan.dia -validate-clang-modules-once -clang-build-session-file /Users/stocca/Library/Developer/Xcode/DerivedData/ModuleCache.noindex/Session.modulevalidation -Xcc -fmodules-prune-interval\=86400 -Xcc -fmodules-prune-after\=345600 -emit-const-values -const-gather-protocols-list /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo_const_extract_protocols.json -Xcc -iquote -Xcc /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo-generated-files.hmap -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo-own-target-headers.hmap -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo-all-target-headers.hmap -Xcc -iquote -Xcc /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo-project-headers.hmap -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/include -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/DerivedSources-normal/arm64 -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/DerivedSources/arm64 -Xcc -I/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo-Swift.h -working-directory /Users/stocca/Documents/Programmazione/Frigo -experimental-emit-module-separately -disable-cmo
+
+Ld /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/Frigo.debug.dylib normal (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios27.0-simulator -dynamiclib -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator27.0.sdk -O0 -Xlinker -no_warn_duplicate_libraries -L/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator -L/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator -F/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator -F/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator -filelist /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo.LinkFileList -install_name @rpath/Frigo.debug.dylib -Xlinker -rpath -Xlinker @executable_path/Frameworks -Xlinker -dead_strip -Xlinker -object_path_lto -Xlinker /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo_lto.o -rdynamic -Xlinker -no_deduplicate -Xlinker -objc_abi_version -Xlinker 2 -Xlinker -debug_variant -Xlinker -dependency_info -Xlinker /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo_dependency_info.dat -fobjc-link-runtime -fprofile-instr-generate -L/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator -L/usr/lib/swift -Xlinker -add_ast_path -Xlinker /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo.swiftmodule -Xlinker -alias -Xlinker _main -Xlinker ___debug_main_executable_dylib_entry_point -Xlinker -no_adhoc_codesign -o /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/Frigo.debug.dylib
+
+ConstructStubExecutorLinkFileList /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo-ExecutorLinkFileList-normal-arm64.txt (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    construct-stub-executor-link-file-list /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/Frigo.debug.dylib /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/libPreviewsJITStubExecutor_no_swift_entry_point.a /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/libPreviewsJITStubExecutor.a --output /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo-ExecutorLinkFileList-normal-arm64.txt
+note: Using stub executor library with Swift entry point. (in target 'Frigo' from project 'Frigo')
+
+Ld /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/Frigo normal (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios27.0-simulator -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator27.0.sdk -O0 -Xlinker -no_warn_duplicate_libraries -L/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator -F/Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator -Xlinker -rpath -Xlinker @executable_path -Xlinker -rpath -Xlinker @executable_path/Frameworks -rdynamic -Xlinker -no_deduplicate -Xlinker -objc_abi_version -Xlinker 2 -Xlinker -debug_variant -e ___debug_blank_executor_main -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __debug_dylib -Xlinker /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo-DebugDylibPath-normal-arm64.txt -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __debug_instlnm -Xlinker /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo-DebugDylibInstallName-normal-arm64.txt -Xlinker -filelist -Xlinker /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo-ExecutorLinkFileList-normal-arm64.txt -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __entitlements -Xlinker /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo.app-Simulated.xcent -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __ents_der -Xlinker /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo.app-Simulated.xcent.der /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/Frigo.debug.dylib -Xlinker -no_adhoc_codesign -o /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/Frigo
+
+Copy /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/PlugIns/FrigoWidgetExtension.appex /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.appex (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks -remove-static-executable /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/FrigoWidgetExtension.appex /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/PlugIns
+
+ProcessInfoPlistFile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/Info.plist /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/empty-Frigo.plist (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-infoPlistUtility /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/empty-Frigo.plist -producttype com.apple.product-type.application -genpkginfo /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/PkgInfo -expandbuildsettings -format binary -platform iphonesimulator -additionalcontentfile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/assetcatalog_generated_info.plist -scanforprivacyfile /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/PlugIns/FrigoWidgetExtension.appex -o /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/Info.plist
+
+CopySwiftLibs /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-swiftStdLibTool --copy --verbose --sign - --scan-executable /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/Frigo.debug.dylib --scan-folder /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/Frameworks --scan-folder /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/PlugIns --scan-folder /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/SystemExtensions --scan-folder /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/Extensions --platform iphonesimulator --toolchain /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --destination /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/Frameworks --strip-bitcode --strip-bitcode-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip --emit-dependency-info /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/SwiftStdLibToolInputDependencies.dep --filter-for-swift-os
+
+ExtractAppIntentsMetadata (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsmetadataprocessor --toolchain-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --module-name Frigo --sdk-root /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator27.0.sdk --xcode-version 27A266a --platform-family iOS --deployment-target 27.0 --bundle-identifier com.lucaraonapersonalteam.Frigo --output /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app --target-triple arm64-apple-ios27.0-simulator --binary-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/Frigo --dependency-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo_dependency_info.dat --stringsdata-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/ExtractedAppShortcutsMetadata.stringsdata --source-file-list /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo.SwiftFileList --metadata-file-list /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo.DependencyMetadataFileList --static-metadata-file-list /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo.DependencyStaticMetadataFileList --swift-const-vals-list /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Objects-normal/arm64/Frigo.SwiftConstValuesFileList --compile-time-extraction --deployment-aware-processing --no-app-shortcuts-localization
+2026-09-22 20:03:41.545 appintentsmetadataprocessor[24252:11272701] Starting appintentsmetadataprocessor export
+2026-09-22 20:03:41.548 appintentsmetadataprocessor[24252:11272701] warning: Metadata extraction skipped, no AppIntents.framework dependency found
+
+AppIntentsSSUTraining (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsnltrainingprocessor --infoplist-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/Info.plist --temp-dir-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/ssu --bundle-id com.lucaraonapersonalteam.Frigo --product-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app --extracted-metadata-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/Metadata.appintents --metadata-file-list /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/Frigo.build/Debug-iphonesimulator/Frigo.build/Frigo.DependencyMetadataFileList --source-file /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/Info.plist --archive-ssu-assets
+2026-09-22 20:03:41.578 appintentsnltrainingprocessor[24253:11272709] Parsing options for appintentsnltrainingprocessor
+2026-09-22 20:03:41.579 appintentsnltrainingprocessor[24253:11272709] Starting AppIntents SSU YAML Generation
+2026-09-22 20:03:41.579 appintentsnltrainingprocessor[24253:11272709] No AppShortcuts found - Skipping.
+
+CodeSign /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/Frigo.debug.dylib (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    
+    Signing Identity:     "Sign to Run Locally"
+    
+    /usr/bin/codesign --force --sign - --timestamp\=none --generate-entitlement-der /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/Frigo.debug.dylib
+
+CodeSign /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/__preview.dylib (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    
+    Signing Identity:     "Sign to Run Locally"
+    
+    /usr/bin/codesign --force --sign - --timestamp\=none --generate-entitlement-der /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/__preview.dylib
+
+CodeSign /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    
+    Signing Identity:     "Sign to Run Locally"
+    
+    /usr/bin/codesign --force --sign - --timestamp\=none --generate-entitlement-der /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app
+
+ValidateEmbeddedBinary /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/PlugIns/FrigoWidgetExtension.appex (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    /Applications/Xcode.app/Contents/Developer/usr/bin/embeddedBinaryValidationUtility /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/PlugIns/FrigoWidgetExtension.appex -signing-cert - -info-plist-path /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app/Info.plist
+
+RegisterExecutionPolicyException /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-RegisterExecutionPolicyException /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app
+
+Validate /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    builtin-validationUtility /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app -shallow-bundle -infoplist-subpath Info.plist
+
+Touch /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app (in target 'Frigo' from project 'Frigo')
+    cd /Users/stocca/Documents/Programmazione/Frigo
+    /usr/bin/touch -c /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Products/Debug-iphonesimulator/Frigo.app
+
+PruneExplicitPrecompiledModules /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/ExplicitPrecompiledModules
+
+PruneExplicitPrecompiledModules /Users/stocca/Library/Developer/Xcode/DerivedData/Frigo-gvwvnnnirrpzwndtbyyilmjoxlpc/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules
+
+PruneExplicitPrecompiledModules /Users/stocca/Library/Developer/Xcode/DerivedData/SDKExplicitPrecompiledModules
+
+** BUILD SUCCEEDED **
+

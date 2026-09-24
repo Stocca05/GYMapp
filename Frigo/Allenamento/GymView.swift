@@ -87,23 +87,22 @@ struct GymView: View {
     }
     
     @ViewBuilder private var contentView: some View {
-        if selectedTab == .storico {
+        switch selectedTab {
+        case .storico:
             StoricoView()
-        } else {
+        case .schede:
             ScrollView {
-                VStack(spacing: 16) {
-                    switch selectedTab {
-                    case .schede:
-                        startZone
-                    case .mieSchede:
-                        eserciziZone
-                    case .storico:
-                        EmptyView()
-                    }
-                }
-                .padding(.horizontal)
-                .padding(.top, 8)
-                .padding(.bottom, 32)
+                startZone
+                    .padding(.horizontal)
+                    .padding(.top, 8)
+                    .padding(.bottom, 32)
+            }
+        case .mieSchede:
+            ScrollView {
+                eserciziZone
+                    .padding(.horizontal)
+                    .padding(.top, 8)
+                    .padding(.bottom, 32)
             }
         }
     }
@@ -113,8 +112,14 @@ struct GymView: View {
     
     private var startZone: some View {
         VStack(spacing: 24) {
-            // Il banner logico che abbiamo appena creato
-            HeroWorkoutBanner()
+            // Il banner logico
+            HeroWorkoutBanner(
+                onCreate: { showCreator = true },
+                onPlay: { plan in
+                    workoutManager.startOrResumeWorkout(plan: plan)
+                    planToPlay = plan
+                }
+            )
             
             HStack(spacing: 16) {
                 StreakWidgetView()
@@ -123,6 +128,7 @@ struct GymView: View {
             .frame(height: 170)
             
             VolumeWidgetView()
+            MuscleHeatmapView()
             
             Spacer()
         }

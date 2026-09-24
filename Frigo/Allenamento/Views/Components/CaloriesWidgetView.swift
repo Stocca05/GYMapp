@@ -2,11 +2,11 @@ import SwiftUI
 
 struct CaloriesWidgetView: View {
     @Environment(ThemeManager.self) private var themeManager
-    @Environment(WorkoutManager.self) private var workoutManager
+    @Environment(HealthManager.self) private var healthManager
     
     // Il goal potremmo renderlo configurabile, per ora fisso a 500 kcal
     let goal: Int = 500
-    var calories: Int { workoutManager.caloriesBurnedToday }
+    var calories: Int { healthManager.caloriesBurnedToday }
     
     var progress: CGFloat {
         min(CGFloat(calories) / CGFloat(goal), 1.0)
@@ -64,6 +64,7 @@ struct CaloriesWidgetView: View {
 #Preview {
     CaloriesWidgetView()
         .environment(ThemeManager())
+        .environment(HealthManager())
         .frame(width: 170, height: 170)
         .padding()
         .background(Color(uiColor: .systemGroupedBackground))

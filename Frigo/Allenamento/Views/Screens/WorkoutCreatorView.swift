@@ -17,7 +17,6 @@ struct WorkoutCreatorView: View {
         _planExercises = State(initialValue: planToEdit?.exercises ?? [])
     }
     
-    // DRY: Sfruttiamo la logica già presente nel modello WorkoutPlan
     private var liveEstimatedDurationInMinutes: Int {
         WorkoutPlan(title: "Temp", exercises: planExercises).estimatedDurationInMinutes
     }
@@ -40,6 +39,9 @@ struct WorkoutCreatorView: View {
                     }
                     .onDelete { offsets in
                         planExercises.remove(atOffsets: offsets)
+                    }
+                    .onMove { source, destination in
+                        planExercises.move(fromOffsets: source, toOffset: destination)
                     }
                 } header: {
                     if !planExercises.isEmpty { Text("Esercizi") }
@@ -101,6 +103,13 @@ struct EditableExerciseRow: View {
         VStack(alignment: .leading, spacing: 16) {
             
             ExerciseRowView(exercise: exercise)
+            
+            TextField("Note (es. Focus sulla discesa)", text: $exercise.notes, axis: .vertical)
+                .font(.footnote)
+                .padding(8)
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(8)
+            
             Divider()
             
             Grid(alignment: .center, horizontalSpacing: 8, verticalSpacing: 12) {
@@ -175,6 +184,14 @@ struct EditableExerciseRow: View {
             }
             .buttonStyle(.borderless)
             .padding(.top, 4)
+            
+            Toggle(isOn: $exercise.isLinkedToNext) {
+                Label("Esegui come Superset con il prossimo", systemImage: "link")
+                    .font(.footnote)
+                    .foregroundStyle(.purple)
+            }
+            .tint(.purple)
+            .padding(.top, 8)
         }
         .padding(.vertical, 8)
     }

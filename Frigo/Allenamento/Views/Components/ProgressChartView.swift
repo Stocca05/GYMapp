@@ -50,6 +50,7 @@ struct ProgressChartView: View {
 
   private var color: Color {
     switch metric {
+    case .estimated1RM: return .red
     case .maxWeight: return themeManager.currentTheme.primaryColor
     case .volume: return .teal
     case .repsAtWeight: return .purple

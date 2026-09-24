@@ -1,6 +1,6 @@
 import Foundation
 
-struct WorkoutExercise: Identifiable, Codable, Hashable {
+struct WorkoutExercise: Identifiable, Codable, Hashable, Sendable {
     let id: UUID
     let baseExercise: ExerciseModel
     var sets: [WorkoutSet]

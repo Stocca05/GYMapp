@@ -1,0 +1,80 @@
+Frigo/ContentView.swift:4:struct ContentView: View {
+Frigo/Home/HomeView.swift:3:struct HomeView: View {
+Frigo/Profilo/ProfileView.swift:3:struct ProfileView: View {
+Frigo/Allenamento/GymView.swift:3:enum GymTab: String, CaseIterable {
+Frigo/Allenamento/GymView.swift:7:struct GymView: View {
+Frigo/Theme/ThemeManager.swift:5:final class ThemeManager {
+Frigo/Theme/AppTheme.swift:3:struct AppTheme: Equatable {
+Frigo/Cibo/FoodView.swift:3:struct FoodView: View {
+Frigo/Allenamento/Models/WorkoutSession.swift:3:struct WorkoutSession: Identifiable, Codable {
+Frigo/Allenamento/Models/WorkoutSession.swift:23:    private enum CodingKeys: String, CodingKey {
+Frigo/Allenamento/Models/WorkoutSet.swift:5:enum SetType: String, Codable, CaseIterable, Hashable, Identifiable {
+Frigo/Allenamento/Models/WorkoutSet.swift:33:struct WorkoutSet: Identifiable, Codable, Hashable {
+Frigo/Allenamento/Models/WorkoutSet.swift:60:    private enum CodingKeys: String, CodingKey {
+Frigo/Allenamento/Models/ExerciseModel.swift:10:enum MuscleGroup: String, Codable, CaseIterable {
+Frigo/Allenamento/Models/ExerciseModel.swift:48:struct ExerciseModel: Identifiable, Codable, Hashable {
+Frigo/Allenamento/Models/WorkoutExercise.swift:12:struct WorkoutExercise: Identifiable, Codable, Hashable {
+Frigo/Allenamento/Models/WorkoutExercise.swift:42:    private enum CodingKeys: String, CodingKey {
+Frigo/Allenamento/Models/WorkoutPlan.swift:3:struct WorkoutPlan: Identifiable, Codable, Hashable {
+Frigo/Allenamento/Models/OngoingWorkoutState.swift:3:struct OngoingWorkoutState: Codable {
+Frigo/Allenamento/Manager/WorkoutManager.swift:12:class WorkoutManager {
+Frigo/Allenamento/Manager/WorkoutManager.swift:121:  struct HistoricalVolume: Identifiable {
+Frigo/Allenamento/Manager/WorkoutProgressAnalytics.swift:3:enum ProgressPeriod: String, CaseIterable, Identifiable {
+Frigo/Allenamento/Manager/WorkoutProgressAnalytics.swift:24:struct ExerciseProgressSession: Identifiable {
+Frigo/Allenamento/Manager/WorkoutProgressAnalytics.swift:30:struct ExerciseProgressDay: Identifiable {
+Frigo/Allenamento/Manager/WorkoutProgressAnalytics.swift:57:struct ExerciseProgressHistory: Identifiable {
+Frigo/Allenamento/Manager/WorkoutProgressAnalytics.swift:73:enum ProgressMetric: String, CaseIterable, Identifiable {
+Frigo/Allenamento/Views/Screens/ExerciseProgressView.swift:3:struct ExerciseProgressView: View {
+Frigo/Allenamento/Views/Screens/ExerciseProgressView.swift:166:private struct ExerciseDayComparisonView: View {
+Frigo/Allenamento/Views/Screens/GymCalendarView.swift:3:struct GymCalendarView: View {
+Frigo/Allenamento/Views/Screens/ExercisePickerView.swift:3:struct ExercisePickerView: View {
+Frigo/Allenamento/Views/Screens/ExercisePickerView.swift:78:struct AddCustomExerciseView: View {
+Frigo/Allenamento/Views/Screens/ExercisePickerView.swift:135:struct CatalogExerciseRow: View {
+Frigo/Allenamento/Views/Screens/ExercisePickerView.swift:191:struct CatalogButtonStyle: ButtonStyle {
+Frigo/Allenamento/Views/Screens/WorkoutActiveView.swift:3:struct WorkoutActiveView: View {
+Frigo/Allenamento/Views/Screens/WorkoutCreatorView.swift:3:struct WorkoutCreatorView: View {
+Frigo/Allenamento/Views/Screens/WorkoutCreatorView.swift:95:struct EditableExerciseRow: View {
+Frigo/Allenamento/Views/Screens/StoricoView.swift:4:struct StoricoView: View {
+Frigo/Allenamento/Views/Screens/StoricoView.swift:228:private struct ExerciseHistoryCard: View {
+Frigo/Allenamento/Views/Screens/WorkoutSessionDetailView.swift:3:struct WorkoutSessionDetailView: View {
+Frigo/Allenamento/Views/Screens/WorkoutSessionDetailView.swift:37:struct WorkoutSetHistoryRows: View {
+Frigo/Allenamento/Views/Components/ExerciseRowView.swift:5:struct ExerciseRowView: View {
+Frigo/Allenamento/Views/Components/CaloriesWidgetView.swift:3:struct CaloriesWidgetView: View {
+Frigo/Allenamento/Views/Components/WorkoutPlanCard.swift:3:struct WorkoutPlanCard: View {
+Frigo/Allenamento/Views/Components/StreakWidgetView.swift:3:struct StreakWidgetView: View {
+Frigo/Allenamento/Views/Components/PlateCalculatorView.swift:3:struct PlateCalculatorView: View {
+Frigo/Allenamento/Views/Components/HeroWorkoutBanner.swift:6:struct HeroWorkoutBanner: View {
+Frigo/Allenamento/Views/Components/VolumeWidgetView.swift:4:struct VolumeWidgetView: View {
+Frigo/Allenamento/Views/Components/MuscleHeatmapView.swift:3:struct MuscleHeatmapView: View {
+Frigo/Allenamento/Views/Components/ProgressChartView.swift:4:struct ProgressPeriodPicker: View {
+Frigo/Allenamento/Views/Components/ProgressChartView.swift:17:private struct ProgressCardStyle: ViewModifier {
+Frigo/Allenamento/Views/Components/ProgressChartView.swift:35:struct ProgressChartPoint: Identifiable {
+Frigo/Allenamento/Views/Components/ProgressChartView.swift:41:struct ProgressChartView: View {
+Frigo/Cibo/Features/DesignSystem/QuantitySelectorView.swift:4:struct QuantitySelectorView: View {
+Frigo/Cibo/Features/DesignSystem/FoodLocationTile.swift:4:struct FoodLocationTile: View {
+Frigo/Cibo/Features/Cooking/CookingView.swift:5:struct CookingView: View {
+Frigo/Cibo/Features/Cooking/CookingView.swift:164:private struct CookingIngredientRow: View {
+Frigo/Cibo/Features/Cooking/CookingView.swift:198:private struct CookingLotRow: View {
+Frigo/Cibo/Features/Cooking/CookingView.swift:247:private struct RecipeRow: View {
+Frigo/Cibo/Features/Cooking/CookingHubView.swift:4:struct CookingHubView: View {
+Frigo/Cibo/Features/Cooking/CookingHubView.swift:132:private enum CookingSection: String, CaseIterable, Identifiable {
+Frigo/Cibo/Features/Cooking/CookingHubView.swift:148:private struct RecipeCard: View {
+Frigo/Cibo/Features/Cooking/CookingHubView.swift:173:private struct CookedMealRow: View {
+Frigo/Cibo/Features/Calendar/FoodCalendarView.swift:4:struct FoodCalendarView: View {
+Frigo/Cibo/Features/Calendar/FoodMonthGrid.swift:4:struct FoodMonthGrid: View {
+Frigo/Cibo/Features/Shell/CiboRootView.swift:4:struct CiboRootView: View {
+Frigo/Cibo/Features/Fridge/StockTransferView.swift:4:struct StockTransferView: View {
+Frigo/Cibo/Features/Fridge/StockConsumptionView.swift:4:struct StockConsumptionView: View {
+Frigo/Cibo/Features/Fridge/FoodMainContainer.swift:4:struct FoodMainContainer: View {
+Frigo/Cibo/Features/AddProduct/AddProductView.swift:5:struct AddProductView: View {
+Frigo/Cibo/Features/AddProduct/CameraPicker.swift:5:struct CameraPicker: UIViewControllerRepresentable {
+Frigo/Cibo/Features/AddProduct/CameraPicker.swift:18:    final class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+Frigo/Cibo/Features/Fridge/Backdrop/LocationBackdrop.swift:4:struct LocationBackdrop: View {
+Frigo/Cibo/Features/Fridge/Node/InteractiveFoodNode.swift:4:struct InteractiveFoodNode: View {
+Frigo/Cibo/Features/Fridge/Node/ProductThumbnailView.swift:5:struct ProductThumbnailView: View {
+Frigo/Cibo/Data/SwiftData/Schema/CiboMigrationPlan.swift:4:enum CiboMigrationPlan: SchemaMigrationPlan {
+Frigo/Cibo/Data/SwiftData/Schema/CiboSchemaV3.swift:4:enum CiboSchemaV3: VersionedSchema {
+Frigo/Cibo/Data/SwiftData/Schema/CiboSchemaV1.swift:5:enum CiboSchemaV1: VersionedSchema {
+Frigo/Cibo/Data/SwiftData/Schema/CiboSchemaV2.swift:4:enum CiboSchemaV2: VersionedSchema {
+Frigo/Cibo/Data/SwiftData/Schema/CiboSchemaV4.swift:4:enum CiboSchemaV4: VersionedSchema {
+Frigo/Cibo/Data/SwiftData/Store/CiboContainerFactory.swift:4:enum CiboContainerFactory {

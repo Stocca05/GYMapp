@@ -104,20 +104,35 @@ class HealthManager {
         let today = calendar.startOfDay(for: Date())
         
         var dateToCheck = today
-        if !dates.contains(today) {
-            if let yesterday = calendar.date(byAdding: .day, value: -1, to: today), dates.contains(yesterday) {
-                dateToCheck = yesterday
-            } else {
-                self.workoutStreak = 0
-                return
-            }
+        // If we didn't workout today, we check if we worked out yesterday. 
+        // If not, maybe we allow up to 3 days of rest without breaking the streak? 
+        // Let's implement a forgiving streak: a streak doesn't break unless you go full 4 days without working out.
+        
+        // Actually, let's just make it count the consecutive days where the gap is <= 3 days.
+        let sortedDates = Array(dates).sorted(by: >)
+        
+        if sortedDates.isEmpty {
+            self.workoutStreak = 0
+            return
         }
         
-        var streak = 0
-        while dates.contains(dateToCheck) {
-            streak += 1
-            guard let previousDay = calendar.date(byAdding: .day, value: -1, to: dateToCheck) else { break }
-            dateToCheck = previousDay
+        let daysSinceLastWorkout = calendar.dateComponents([.day], from: sortedDates[0], to: today).day ?? 0
+        if daysSinceLastWorkout > 3 {
+            self.workoutStreak = 0
+            return
+        }
+        
+        var streak = 1
+        var previousDate = sortedDates[0]
+        
+        for i in 1..<sortedDates.count {
+            let gap = calendar.dateComponents([.day], from: sortedDates[i], to: previousDate).day ?? 0
+            if gap <= 3 {
+                streak += 1
+                previousDate = sortedDates[i]
+            } else {
+                break
+            }
         }
         
         self.workoutStreak = streak
