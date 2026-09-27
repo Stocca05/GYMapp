@@ -9,6 +9,7 @@ struct WorkoutActiveView: View {
   @State private var progressExercise: ExerciseModel?
   @State private var showConcludeAlert = false
   @State private var showPlateCalculator = false
+  @State private var showExerciseList = false
 
   @ViewBuilder
   var body: some View {
@@ -29,20 +30,28 @@ struct WorkoutActiveView: View {
         VStack(spacing: 0) {
           headerView(ongoing: ongoing)
 
-          Spacer()
+          WorkoutNavigationBar(ongoing: ongoing,
+            onShowExercises: { showExerciseList = true },
+            onDefer: { viewModel?.deferCurrentExercise() })
 
-          if ongoing.isResting {
-            restView(ongoing: ongoing)
-          } else {
-            zenSetView(
-              ongoing: ongoing, exercise: currentExercise, set: currentSet, setIndex: setIndex,
-              totalSets: currentExercise.sets.count)
+          ScrollView {
+            if ongoing.isResting {
+              restView(ongoing: ongoing)
+                .padding(.vertical, 24)
+            } else {
+              zenSetView(
+                ongoing: ongoing, exercise: currentExercise, set: currentSet, setIndex: setIndex,
+                totalSets: currentExercise.sets.count)
+                .padding(.vertical, 16)
+            }
           }
-
-          Spacer()
+          .frame(maxWidth: .infinity, maxHeight: .infinity)
 
           footerCTA(ongoing: ongoing, currentSet: currentSet)
         }
+      }
+      .sheet(isPresented: $showExerciseList) {
+        WorkoutExerciseListView(onSelect: { viewModel?.selectExercise(id: $0) ?? false })
       }
       .sheet(item: $progressExercise) { exercise in
         NavigationStack {
@@ -358,8 +367,12 @@ struct WorkoutActiveView: View {
           .rotationEffect(.degrees(-90))
           .animation(.linear(duration: 1.0), value: ongoing.remainingRestSeconds)
 
-        Text("\(ongoing.remainingRestSeconds)")
-          .font(.system(size: 90, weight: .bold, design: .rounded))
+        let minutes = ongoing.remainingRestSeconds / 60
+        let seconds = ongoing.remainingRestSeconds % 60
+        Text(String(format: "%d:%02d", minutes, seconds))
+          .font(.system(size: 70, weight: .bold, design: .rounded))
+          .minimumScaleFactor(0.5)
+          .lineLimit(1)
           .monospacedDigit()
           .foregroundColor(themeManager.currentTheme.textColor)
       }
@@ -403,9 +416,9 @@ struct WorkoutActiveView: View {
     let nextPos = (viewModel?.findNextSequencePosition(fromEx: ongoing.currentExIndex, fromSet: ongoing.currentSetIndex, ongoing: ongoing) ?? nil)
     let isAbsoluteLast = (nextPos == nil)
 
-    // Se fa parte di un superset ed è linked, non si salta il riposo, NON C'È PROPRIO IL RIPOSO!
-    // Salta a pie' pari al prossimo ex
-    let isSupersetLink = ongoing.activeExercises[ongoing.currentExIndex].isLinkedToNext
+    let isSupersetLink = WorkoutSequence.isSupersetTransition(
+      fromExercise: ongoing.currentExIndex, set: ongoing.currentSetIndex,
+      to: nextPos, exercises: ongoing.activeExercises)
 
     let buttonLabel =
       ongoing.isResting
@@ -421,7 +434,7 @@ struct WorkoutActiveView: View {
         let generator = UIImpactFeedbackGenerator(style: .heavy)
         generator.impactOccurred()
         viewModel?.completeCurrentSetAndRest(
-          setId: currentSet.id, restSeconds: currentSet.restTimeInSeconds, isLast: isAbsoluteLast, isSupersetLink: isSupersetLink, nextPos: nextPos, onConclude: {
+          setId: currentSet.id, restSeconds: currentSet.restTimeInSeconds, onConclude: {
               if let ongoing = workoutManager.ongoingWorkout {
                   viewModel?.concludeWorkout(ongoing: ongoing) { dismiss() }
               }
