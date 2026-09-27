@@ -86,7 +86,10 @@ struct StockConsumptionView: View {
                                 .font(.footnote)
                                 .foregroundStyle(.secondary)
                         }
-                        Button("Terminato · usa tutto", systemImage: "checkmark.circle") { quantity = item.currentQuantity }
+                        Button("Terminato · usa tutto", systemImage: "checkmark.circle") {
+                            entryMode = .quantity
+                            quantity = item.currentQuantity
+                        }
                         LabeledContent("Rimane", value: "\(max(item.currentQuantity - consumedQuantity, 0)) \(item.key.unit.abbreviation)")
                             .foregroundStyle(.secondary)
                     } header: { Text("Quanto hai consumato?") } footer: {

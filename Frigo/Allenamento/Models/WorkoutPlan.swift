@@ -5,6 +5,12 @@ struct WorkoutPlan: Identifiable, Codable, Hashable, Sendable {
     var title: String
     var exercises: [WorkoutExercise]
     
+    var isValid: Bool {
+        !title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+            && !exercises.isEmpty
+            && exercises.allSatisfy { !$0.sets.isEmpty }
+    }
+
     var estimatedDurationInMinutes: Int {
         let allSets = exercises.flatMap { $0.sets }
         guard !allSets.isEmpty else { return 0 }

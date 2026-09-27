@@ -107,10 +107,7 @@ struct ProfileView: View {
     }
     
     private var totalSetsCompleted: Int {
-        // Semplice aggregazione
-        // Nelle tue versioni avanzate potresti tracciare il numero di serie effettivamente chiuse
-        // Per ora mostriamo un mockup che cresce con le sessioni
-        return workoutManager.completedSessions.reduce(0) { $0 + $1.totalVolume / 50 }
+        workoutManager.completedSessions.reduce(0) { $0 + $1.completedSetCount }
     }
     
     private func statCard(title: String, value: String, icon: String, color: Color) -> some View {
@@ -160,21 +157,25 @@ struct ProfileView: View {
                         Text("Apple Health")
                             .font(.subheadline.weight(.semibold))
                             .foregroundColor(themeManager.currentTheme.textColor)
-                        Text("Sincronizza e leggi i dati vitali")
+                        Text("Allenamenti e calorie · lettura gestita da Salute")
                             .font(.caption)
                             .foregroundColor(themeManager.currentTheme.secondaryColor)
                     }
                     
                     Spacer()
                     
-                    if healthManager.isAuthorized {
+                    if healthManager.canSaveWorkouts {
                         HStack(spacing: 4) {
-                            Text("Connesso")
+                            Text("Salvataggio attivo")
                                 .font(.caption.weight(.bold))
                                 .foregroundColor(.green)
                             Image(systemName: "checkmark.circle.fill")
                                 .foregroundColor(.green)
                         }
+                    } else if healthManager.workoutAuthorizationStatus == .sharingDenied {
+                        Text("Permesso negato")
+                            .font(.caption.weight(.bold))
+                            .foregroundStyle(.secondary)
                     } else {
                         Button(action: {
                             Task {
@@ -192,6 +193,12 @@ struct ProfileView: View {
                     }
                 }
                 .padding(16)
+                if healthManager.workoutAuthorizationStatus == .sharingDenied {
+                    Text("Consenti a Frigo di salvare gli allenamenti nelle autorizzazioni di Salute.")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .padding([.horizontal, .bottom], 16)
+                }
             }
             .background(Color(uiColor: .secondarySystemGroupedBackground))
             .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
@@ -220,9 +227,9 @@ struct ProfileView: View {
                 
                 Divider().padding(.leading, 60)
                 
-                // Dark mode override (mock)
+                // Preferenza applicata alla scena principale
                 Toggle(isOn: $darkModeOverride) {
-                    settingsRow(icon: "moon.fill", iconColor: .indigo, title: "Sforza Modalità Scura")
+                    settingsRow(icon: "moon.fill", iconColor: .indigo, title: "Forza modalità scura")
                 }
                 .tint(themeManager.currentTheme.primaryColor)
                 .padding(.horizontal, 16)

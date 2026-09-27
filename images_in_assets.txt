@@ -1,2 +1,0 @@
-bench_press_anim
-squat_anim

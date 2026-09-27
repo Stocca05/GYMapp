@@ -17,6 +17,33 @@ struct WorkoutCreatorView: View {
         _planExercises = State(initialValue: planToEdit?.exercises ?? [])
     }
     
+    private func reorderControls(for exercise: WorkoutExercise) -> some View {
+        let index = planExercises.firstIndex(where: { $0.id == exercise.id }) ?? 0
+        return HStack {
+            Text("Esercizio \(index + 1)").font(.caption.weight(.semibold)).foregroundStyle(.secondary)
+            Spacer()
+            Button {
+                withAnimation { planExercises = WorkoutExerciseOrder.move(exercise.id, by: -1, in: planExercises) }
+            } label: {
+                Image(systemName: "arrow.up").frame(width: 44, height: 44)
+            }
+            .disabled(index == 0)
+            .accessibilityLabel("Sposta \(exercise.baseExercise.name) sopra")
+            Button {
+                withAnimation { planExercises = WorkoutExerciseOrder.move(exercise.id, by: 1, in: planExercises) }
+            } label: {
+                Image(systemName: "arrow.down").frame(width: 44, height: 44)
+            }
+            .disabled(index == planExercises.count - 1)
+            .accessibilityLabel("Sposta \(exercise.baseExercise.name) sotto")
+        }
+        .buttonStyle(.borderless)
+    }
+
+    private var canSave: Bool {
+        WorkoutPlan(title: planTitle, exercises: planExercises).isValid
+    }
+
     private var liveEstimatedDurationInMinutes: Int {
         WorkoutPlan(title: "Temp", exercises: planExercises).estimatedDurationInMinutes
     }
@@ -35,16 +62,21 @@ struct WorkoutCreatorView: View {
                 
                 Section {
                     ForEach($planExercises) { $exercise in
-                        EditableExerciseRow(exercise: $exercise)
+                        VStack(alignment: .leading, spacing: 8) {
+                            reorderControls(for: exercise)
+                            EditableExerciseRow(exercise: $exercise)
+                        }
                     }
                     .onDelete { offsets in
                         planExercises.remove(atOffsets: offsets)
                     }
-                    .onMove { source, destination in
-                        planExercises.move(fromOffsets: source, toOffset: destination)
-                    }
                 } header: {
                     if !planExercises.isEmpty { Text("Esercizi") }
+                } footer: {
+                    Text("Usa le frecce per cambiare ordine. I collegamenti superset separati dallo spostamento vengono rimossi.")
+                    if planExercises.contains(where: { $0.sets.isEmpty }) {
+                        Text("Aggiungi almeno una serie a ogni esercizio oppure rimuovi l’esercizio vuoto.")
+                    }
                 }
                 
                 Section {
@@ -78,7 +110,7 @@ struct WorkoutCreatorView: View {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Salva") {
                         let trimmedTitle = planTitle.trimmingCharacters(in: .whitespacesAndNewlines)
-                        guard !trimmedTitle.isEmpty, !planExercises.isEmpty else { return }
+                        guard canSave else { return }
                         let newPlan = WorkoutPlan(
                             id: planToEdit?.id ?? UUID(),
                             title: trimmedTitle,
@@ -88,7 +120,7 @@ struct WorkoutCreatorView: View {
                         dismiss()
                     }
                     .bold()
-                    .disabled(planTitle.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || planExercises.isEmpty)
+                    .disabled(!canSave)
                 }
             }
         }

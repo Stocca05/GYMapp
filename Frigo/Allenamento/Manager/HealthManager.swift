@@ -4,10 +4,25 @@ import HealthKit
 @Observable
 @MainActor
 class HealthManager {
-    let healthStore = HKHealthStore()
-    
-    // Authorization state
-    var isAuthorized: Bool = false
+    let healthStore: HKHealthStore
+    private let authorizationStatus: (HKObjectType) -> HKAuthorizationStatus
+
+    // HealthKit only exposes write permissions; read access is intentionally private.
+    private(set) var workoutAuthorizationStatus: HKAuthorizationStatus = .notDetermined
+    var canSaveWorkouts: Bool { workoutAuthorizationStatus == .sharingAuthorized }
+    private(set) var canSaveEnergy = false
+
+    init(healthStore: HKHealthStore = HKHealthStore(),
+         authorizationStatus: ((HKObjectType) -> HKAuthorizationStatus)? = nil) {
+        self.healthStore = healthStore
+        self.authorizationStatus = authorizationStatus ?? { healthStore.authorizationStatus(for: $0) }
+    }
+
+    func refreshAuthorization() {
+        workoutAuthorizationStatus = authorizationStatus(HKObjectType.workoutType())
+        canSaveEnergy = HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)
+            .map { authorizationStatus($0) == .sharingAuthorized } ?? false
+    }
     
     // Cached values for UI
     var caloriesBurnedToday: Int = 0
@@ -31,10 +46,11 @@ class HealthManager {
         
         do {
             try await healthStore.requestAuthorization(toShare: typesToShare, read: typesToRead)
-            self.isAuthorized = true
+            refreshAuthorization()
             await fetchTodayCalories()
             await fetchWorkoutsAndCalculateStreak()
         } catch {
+            refreshAuthorization()
             print("HealthKit authorization failed: \(error.localizedDescription)")
         }
     }
@@ -153,7 +169,8 @@ class HealthManager {
     }
     
     func saveAppWorkout(duration: TimeInterval, totalVolume: Int, date: Date) async {
-        guard isAuthorized else { return }
+        refreshAuthorization()
+        guard canSaveWorkouts else { return }
         
         // Convert to HKWorkout
         let endDate = date.addingTimeInterval(duration)
@@ -164,7 +181,7 @@ class HealthManager {
             start: date,
             end: endDate,
             workoutEvents: nil,
-            totalEnergyBurned: calories,
+            totalEnergyBurned: canSaveEnergy ? calories : nil,
             totalDistance: nil,
             metadata: ["TotalVolume": totalVolume]
         )

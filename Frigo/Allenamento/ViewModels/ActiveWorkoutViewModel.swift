@@ -45,99 +45,96 @@ final class ActiveWorkoutViewModel {
         }
         
         workoutManager.updateWorkoutLiveActivity(for: ongoing)
+
+        if let restingEndTime = ongoing.restingEndTime {
+            workoutManager.scheduleRestCompletionNotification(at: restingEndTime)
+        }
     }
     
     func findNextSequencePosition(fromEx: Int, fromSet: Int, ongoing: OngoingWorkoutState) -> (Int, Int)? {
-        if ongoing.activeExercises[fromEx].isLinkedToNext {
-            let nextExIndex = fromEx + 1
-            if nextExIndex < ongoing.activeExercises.count {
-                if fromSet < ongoing.activeExercises[nextExIndex].sets.count {
-                    return (nextExIndex, fromSet)
-                }
-            }
-        }
-        
-        var startGroupEx = fromEx
-        while startGroupEx > 0 && ongoing.activeExercises[startGroupEx - 1].isLinkedToNext {
-            startGroupEx -= 1
-        }
-        
-        let nextSetIndex = fromSet + 1
-        
-        var groupHasMoreSets = false
-        var curr = startGroupEx
-        while curr <= fromEx {
-            if nextSetIndex < ongoing.activeExercises[curr].sets.count {
-                groupHasMoreSets = true
-                break
-            }
-            curr += 1
-        }
-        
-        if groupHasMoreSets {
-            var attemptEx = startGroupEx
-            while attemptEx <= fromEx {
-                if nextSetIndex < ongoing.activeExercises[attemptEx].sets.count {
-                    return (attemptEx, nextSetIndex)
-                }
-                attemptEx += 1
-            }
-        }
-        
-        let nextNormalExIndex = fromEx + 1
-        if nextNormalExIndex < ongoing.activeExercises.count {
-            return (nextNormalExIndex, 0)
-        }
-        
-        return nil
+        WorkoutSequence.nextPending(afterExercise: fromEx, set: fromSet, ongoing: ongoing)
     }
     
-    func completeCurrentSetAndRest(setId: UUID, restSeconds: Int, isLast: Bool, isSupersetLink: Bool, nextPos: (Int, Int)?, onConclude: () -> Void) {
+    func completeCurrentSetAndRest(setId: UUID, restSeconds: Int, onConclude: () -> Void) {
         workoutManager.registerInteraction()
-        guard var ongoing = workoutManager.ongoingWorkout else { return }
+        guard var ongoing = workoutManager.ongoingWorkout,
+              ongoing.activeExercises.indices.contains(ongoing.currentExIndex),
+              ongoing.activeExercises[ongoing.currentExIndex].sets.indices.contains(ongoing.currentSetIndex),
+              ongoing.activeExercises[ongoing.currentExIndex].sets[ongoing.currentSetIndex].id == setId,
+              !ongoing.isResting, !ongoing.completedSetIDs.contains(setId) else { return }
 
         ongoing.completedSetIDs.insert(setId)
-
-        if isLast {
+        let next = findNextSequencePosition(fromEx: ongoing.currentExIndex, fromSet: ongoing.currentSetIndex, ongoing: ongoing)
+        guard let next else {
+            workoutManager.ongoingWorkout = ongoing
             onConclude()
-        } else if isSupersetLink {
-            if let nextPos = nextPos {
-                ongoing.currentExIndex = nextPos.0
-                ongoing.currentSetIndex = nextPos.1
-            }
-            withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) {
-                workoutManager.ongoingWorkout = ongoing
-            }
+            return
+        }
+        let isSupersetLink = WorkoutSequence.isSupersetTransition(
+            fromExercise: ongoing.currentExIndex, set: ongoing.currentSetIndex,
+            to: next, exercises: ongoing.activeExercises)
+        if isSupersetLink || restSeconds <= 0 {
+            ongoing.currentExIndex = next.0
+            ongoing.currentSetIndex = next.1
+            ongoing.isResting = false
+            ongoing.restingEndTime = nil
         } else {
             ongoing.totalRestSeconds = restSeconds
             ongoing.remainingRestSeconds = restSeconds
             ongoing.isResting = true
             ongoing.restingEndTime = Date().addingTimeInterval(TimeInterval(restSeconds))
-            withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
-                workoutManager.ongoingWorkout = ongoing
-            }
-            workoutManager.startGlobalRestTimer()
-            workoutManager.updateWorkoutLiveActivity(for: ongoing)
         }
-    }
-    
-    func advanceWorkoutState() {
-        workoutManager.registerInteraction()
-        guard var ongoing = workoutManager.ongoingWorkout else { return }
-
-        ongoing.isResting = false
-
-        if let nextPos = findNextSequencePosition(fromEx: ongoing.currentExIndex, fromSet: ongoing.currentSetIndex, ongoing: ongoing) {
-            ongoing.currentExIndex = nextPos.0
-            ongoing.currentSetIndex = nextPos.1
-        }
-
-        withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) {
-            workoutManager.ongoingWorkout = ongoing
-        }
+        withAnimation(.spring()) { workoutManager.ongoingWorkout = ongoing }
+        if ongoing.isResting { workoutManager.startGlobalRestTimer() }
         workoutManager.updateWorkoutLiveActivity(for: ongoing)
     }
-    
+
+    @discardableResult
+    func selectExercise(id: UUID) -> Bool {
+        guard var ongoing = workoutManager.ongoingWorkout,
+              let index = ongoing.activeExercises.firstIndex(where: { $0.id == id }),
+              let set = ongoing.pendingSetIndex(for: index) else { return false }
+        workoutManager.registerInteraction()
+        workoutManager.stopGlobalRestTimer()
+        var deferred = ongoing.deferredExerciseIDs ?? []
+        if index != ongoing.currentExIndex, ongoing.pendingSetIndex(for: ongoing.currentExIndex) != nil {
+            deferred.insert(ongoing.activeExercises[ongoing.currentExIndex].id)
+        }
+        deferred.remove(id)
+        ongoing.deferredExerciseIDs = deferred
+        ongoing.currentExIndex = index
+        ongoing.currentSetIndex = set
+        ongoing.isResting = false
+        ongoing.restingEndTime = nil
+        ongoing.remainingRestSeconds = 0
+        ongoing.totalRestSeconds = 0
+        withAnimation(.spring()) { workoutManager.ongoingWorkout = ongoing }
+        workoutManager.updateWorkoutLiveActivity(for: ongoing)
+        return true
+    }
+
+    @discardableResult
+    func deferCurrentExercise() -> Bool {
+        guard let id = workoutManager.ongoingWorkout?.nextAlternativeExerciseID else { return false }
+        return selectExercise(id: id)
+    }
+
+    func advanceWorkoutState() {
+        // A delayed timer event after manual selection must not skip the selected set.
+        guard var ongoing = workoutManager.ongoingWorkout, ongoing.isResting else { return }
+        workoutManager.registerInteraction()
+        workoutManager.stopGlobalRestTimer()
+        ongoing.isResting = false
+        ongoing.restingEndTime = nil
+        ongoing.remainingRestSeconds = 0
+        if let next = findNextSequencePosition(fromEx: ongoing.currentExIndex, fromSet: ongoing.currentSetIndex, ongoing: ongoing) {
+            ongoing.currentExIndex = next.0
+            ongoing.currentSetIndex = next.1
+        }
+        withAnimation(.spring()) { workoutManager.ongoingWorkout = ongoing }
+        workoutManager.updateWorkoutLiveActivity(for: ongoing)
+    }
+
     func concludeWorkout(ongoing: OngoingWorkoutState, onDismiss: () -> Void) {
         workoutManager.stopGlobalRestTimer()
         workoutManager.endWorkoutLiveActivity()

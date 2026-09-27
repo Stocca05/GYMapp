@@ -141,15 +141,15 @@ nonisolated enum MealRoutinePlanner {
     }
 }
 
-private extension MealRoutineShortage {
+nonisolated private extension MealRoutineShortage {
     /// La tolleranza resta intenzionalmente piccola: massimo il 15% e mai oltre 30 g.
     var isAdaptable: Bool {
-        guard unit == .grams, missingQuantity > 0 else { return false }
+        guard unit == .grams, availableQuantity > 0, missingQuantity > 0 else { return false }
         return missingQuantity <= min(30, max(10, requestedQuantity * 15 / 100))
     }
 }
 
-private extension MealSlot {
+nonisolated private extension MealSlot {
     static func forPlanning(on date: Date, calendar: Calendar) -> MealSlot {
         calendar.component(.hour, from: date) >= 17 ? .dinner : .lunch
     }

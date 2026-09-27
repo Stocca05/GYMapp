@@ -20,6 +20,11 @@ struct WorkoutSession: Identifiable, Codable, Equatable, Hashable {
         self.completedExercises = completedExercises
     }
 
+    /// Le sessioni storiche senza dettagli non permettono di ricostruire le serie.
+    var completedSetCount: Int {
+        completedExercises.reduce(0) { $0 + $1.sets.filter(\.isCompleted).count }
+    }
+
     private enum CodingKeys: String, CodingKey {
         case id, planId, date, totalVolume, durationSeconds, completedExercises
     }

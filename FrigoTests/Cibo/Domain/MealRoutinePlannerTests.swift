@@ -76,6 +76,23 @@ struct MealRoutinePlannerTests {
         #expect(MealRoutinePlanner.make(from: snapshot, startingOn: today, calendar: calendar).isEmpty)
     }
 
+    @Test func smallGramRecipeStopsAfterStockIsExhausted() {
+        let product = ProductID()
+        let smallRecipe = recipe(name: "Condimento", ingredient: ingredient(productID: product, name: "Erbe", quantity: 10))
+        let snapshot = InventorySnapshot(revision: 1, products: [],
+            items: [item(productID: product, quantity: 15, expiration: .now)], recipes: [smallRecipe])
+        let routine = MealRoutinePlanner.make(from: snapshot)
+        #expect(routine.count == 2)
+        #expect(routine.last?.adaptableShortages.first?.availableQuantity == 5)
+    }
+
+    @Test func missingSmallIngredientCannotProduceMealsFromNothing() {
+        let product = ProductID()
+        let smallRecipe = recipe(name: "Condimento", ingredient: ingredient(productID: product, name: "Erbe", quantity: 10))
+        let snapshot = InventorySnapshot(revision: 1, products: [], items: [], recipes: [smallRecipe])
+        #expect(MealRoutinePlanner.make(from: snapshot).isEmpty)
+    }
+
     private func recipe(name: String, ingredient: RecipeIngredientSnapshot) -> RecipeSnapshot {
         RecipeSnapshot(id: RecipeID(rawValue: UUID()), name: name, servings: 1, ingredients: [ingredient], thumbnailPNG: nil, createdAt: .now, lastCookedAt: .now, timesCooked: 1)
     }

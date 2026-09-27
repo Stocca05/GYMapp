@@ -10,6 +10,7 @@ struct GymView: View {
     
     @State private var selectedTab: GymTab = .schede
     @State private var showCalendar = false
+    @State private var showEmptyPlanAlert = false
     
     // Gestione editor schede
     @State private var showCreator = false
@@ -32,16 +33,24 @@ struct GymView: View {
         .fullScreenCover(item: $planToEdit) { plan in
             WorkoutCreatorView(planToEdit: plan)
         }
-        .fullScreenCover(item: $planToPlay) { plan in
+        .fullScreenCover(item: $planToPlay) { _ in
             WorkoutActiveView()
-                .onAppear {
-                    if workoutManager.ongoingWorkout?.plan.id != plan.id {
-                        workoutManager.startOrResumeWorkout(plan: plan)
-                    }
-                }
+        }
+        .alert("Scheda senza serie", isPresented: $showEmptyPlanAlert) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text("Modifica la scheda e aggiungi almeno una serie prima di avviarla.")
         }
     }
     
+    private func play(_ plan: WorkoutPlan) {
+        if workoutManager.startOrResumeWorkout(plan: plan) {
+            planToPlay = plan
+        } else {
+            showEmptyPlanAlert = true
+        }
+    }
+
     // MARK: - UI Components
     
     private var headerView: some View {
@@ -116,8 +125,7 @@ struct GymView: View {
             HeroWorkoutBanner(
                 onCreate: { showCreator = true },
                 onPlay: { plan in
-                    workoutManager.startOrResumeWorkout(plan: plan)
-                    planToPlay = plan
+                    play(plan)
                 }
             )
             
@@ -158,7 +166,7 @@ struct GymView: View {
                         .padding(.top, 24)
                 } else {
                     ForEach(workoutManager.myPlans) { plan in
-                        WorkoutPlanCard(plan: plan, onEdit: { planToEdit = plan }, onPlay: { workoutManager.startOrResumeWorkout(plan: plan); planToPlay = plan })
+                        WorkoutPlanCard(plan: plan, onEdit: { planToEdit = plan }, onPlay: { play(plan) })
                     }
                 }
             }

@@ -10,6 +10,7 @@ struct HomeView: View {
     @State private var showingAddShoppingItem = false
     @State private var showingActiveWorkout = false
     @State private var showingWorkoutCreator = false
+    @State private var showingEmptyPlanAlert = false
 
     private let calendar = Calendar.current
 
@@ -56,6 +57,11 @@ struct HomeView: View {
                 Button("Aggiungi") { addShoppingItem() }
             } message: {
                 Text("Lo ritroverai nella tua lista della spesa.")
+            }
+            .alert("Scheda senza serie", isPresented: $showingEmptyPlanAlert) {
+                Button("OK", role: .cancel) {}
+            } message: {
+                Text("Apri Palestra e modifica la scheda aggiungendo almeno una serie.")
             }
             .task { loadShoppingItems() }
         }
@@ -339,8 +345,8 @@ struct HomeView: View {
         if workoutManager.ongoingWorkout != nil {
             showingActiveWorkout = true
         } else if let plan = workoutManager.suggestedWorkoutForToday() {
-            workoutManager.startOrResumeWorkout(plan: plan)
-            showingActiveWorkout = true
+            showingActiveWorkout = workoutManager.startOrResumeWorkout(plan: plan)
+            showingEmptyPlanAlert = !showingActiveWorkout
         } else {
             showingWorkoutCreator = true
         }
